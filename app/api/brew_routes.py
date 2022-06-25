@@ -8,7 +8,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 brew_routes = Blueprint('brews', __name__)
 
 
-@brew_routes.route("/")
+@brew_routes.route("/", methods=["POST"])
 @login_required
 def add_brew():
     form = CreateBrew()
