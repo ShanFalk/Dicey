@@ -7,6 +7,7 @@ function CreateBrew() {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector(state => state.session.user);
+  const allTags = useSelector(state => state.session.tags);
   const [errors, setErrors] = useState([]);
 
   if(!sessionUser) {
@@ -28,7 +29,7 @@ function CreateBrew() {
   const updatePdfUrl = (e) => setPdfUrl(e.target.value);
   const updatePrice = (e) => setPrice(e.target.value);
   const updateImgUrl = (e) => setImgUrl(e.target.value);
-  const updateTags = (e) => setTags(e.target.value);
+  const updateTags = (e) => setTags(...tags, e.target.value);
 
 
   const handleSubmit = async (e) => {
@@ -105,15 +106,17 @@ const handleCancelClick = (e) => {
         required
         className='input'
         onChange={updatePrice} />
-        <input
-        type="text"
-        placeholder="Price"
-        value={price}
-        min="0"
-        required
-        className='input'
-        onChange={updatePrice} />
-      <button className='' type="submit">Create Room</button>
+        {allTags.map((tag) => {
+            return (
+            <input 
+            value={tag.name}
+            type="radio"
+            id={tag.id}
+            onChange={updateTags}
+            />
+            )
+          })}
+      <button className='' type="submit">Create Brew</button>
       <button className='' type="button" onClick={handleCancelClick}>Cancel</button>
     </form>
   </div>
