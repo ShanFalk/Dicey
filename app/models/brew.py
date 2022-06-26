@@ -1,4 +1,5 @@
 from .db import db
+from datetime import datetime
 
 class Brew(db.Model):
     __tablename__ = 'brews'
@@ -25,6 +26,18 @@ class Brew(db.Model):
                                 # unsure about cascade
                                 cascade="all, delete"
                                 )
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "description": self.description,
+            "pdf_url": self.pdf_url,
+            "price": self.for_sale,
+            "for_sale": self.for_sale,
+            "user_id": self.user_id,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at
+        }
 
     @validates('title')
     def validate_title(self, key, title):
