@@ -1,5 +1,7 @@
 from .db import db
 from datetime import datetime
+from .brewtags import brewtags
+from sqlalchemy.orm import validates
 
 class Brew(db.Model):
     __tablename__ = 'brews'
@@ -20,11 +22,12 @@ class Brew(db.Model):
     images = db.relationship("Image", back_populates="brew")
     reviews = db.relationship("Review", back_populates="brew")
     purchases = db.relationship("Purchase", back_populates="brew")
-    brew_tags = db.relationship("Brew",
+    # the tags that belong to a brew
+    brew_tags = db.relationship("Tag",
                                 secondary=brewtags,
-                                back_populates="tag_tags",
+                                back_populates="tag_brews",
                                 # unsure about cascade
-                                cascade="all, delete"
+                                # cascade="all, delete"
                                 )
     def to_dict(self):
         return {
