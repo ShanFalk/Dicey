@@ -1,5 +1,6 @@
 from .db import db
 from datetime import datetime
+from .brewtags import brewtags
 
 
 class Tag(db.Model):
@@ -8,11 +9,12 @@ class Tag(db.Model):
     name = db.Column(db.String(50), nullable=False)
 
     # relationships
-    tag_tags = db.relationship("Brew",
+    # the brews that belong to a tag
+    tag_brews = db.relationship("Brew",
                                 secondary=brewtags,
                                 back_populates="brew_tags",
                                 # Question: unsure about cascade
-                                cascade="all, delete"
+                                # cascade="all, delete"
                                 )
     def to_dict(self):
         return {
