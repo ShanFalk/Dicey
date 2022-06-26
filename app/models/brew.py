@@ -30,6 +30,7 @@ class Brew(db.Model):
                                 # cascade="all, delete"
                                 )
     def to_dict(self):
+        print("_"*50,self.reviews)
         return {
             "id": self.id,
             "title": self.title,

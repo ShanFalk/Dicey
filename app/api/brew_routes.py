@@ -3,6 +3,7 @@ from app.models import Brew, db
 from app.forms.brew_form import CreateBrew
 from app.aws_utils import get_unique_filename, upload_file_to_s3
 from flask_login import current_user, login_user, logout_user, login_required
+from sqlalchemy.orm import joinedload
 
 
 brew_routes = Blueprint('brews', __name__)
@@ -22,3 +23,9 @@ def add_brew():
         if file:
             file.filename = get_unique_filename(file.filename)
             upload_file_to_s3(file)
+
+@brew_routes.route("/", methods=["GET"])
+def get_brews():
+    brews = Brew.query.options(joinedload('reviews'),joinedload('images'),joinedload('brew_tags')).all()
+    print({"brews": [brew.to_dict() for brew in brews]})
+    return {"brews": [brew.to_dict() for brew in brews]}
