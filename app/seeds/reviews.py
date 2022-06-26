@@ -44,13 +44,13 @@ def seed_reviews():
         rating=4,
         content='sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         userId=2,
-        brewId=4
+        brewId=3
         ),
             Review(
         rating=1,
         content='Ut enim ad minim veniam',
         userId=3,
-        brewId=4
+        brewId=2
         ),
             Review(
         rating=3,
@@ -62,13 +62,13 @@ def seed_reviews():
         rating=2,
         content='Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
         userId=1,
-        brewId=4
+        brewId=2
         ),
             Review(
         rating=3,
         content='quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
         userId=1,
-        brewId=5
+        brewId=3
         ),
 
         ]
@@ -76,5 +76,5 @@ def seed_reviews():
     db.session.commit()
 
 def undo_reviews():
-    db.session.execute('TRUNCATE reviews RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE reviews RESTART IDENTITY;')
     db.session.commit()
