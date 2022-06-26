@@ -5,5 +5,5 @@ def seed_purchases():
     pass
 
 def undo_purchases():
-    db.session.execute('TRUNCATE purchases (RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE purchases RESTART IDENTITY CASCADE;')
     db.session.commit()

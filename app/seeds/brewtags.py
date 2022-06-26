@@ -1,4 +1,4 @@
-from app.models import db, Brewtag
+from app.models import db, brewtags
 
 def seed_brewtags():
     pass
