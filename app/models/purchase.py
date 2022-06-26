@@ -1,3 +1,6 @@
+from .db import db
+from datetime import datetime
+
 class Purchase(db.Model):
     __tablename__ = 'purchases'
 
@@ -10,3 +13,12 @@ class Purchase(db.Model):
     # relationships
     user = db.relationship("User", back_populates="purchases")
     brew = db.relationship("Brew", back_populates="purchases")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "brew_id": self.brew_id,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at
+        }

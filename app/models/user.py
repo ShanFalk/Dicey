@@ -1,6 +1,7 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from datetime import datetime
 
 
 class User(db.Model, UserMixin):
@@ -19,6 +20,15 @@ class User(db.Model, UserMixin):
     brews = db.relationship("Brew", back_populates="user")
     reviews = db.relationship("Review", back_populates="user")
     purchases = db.relationship("Purchase", back_populates="user")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            "email": self.email,
+            "image_url": self.image_url,
+            "bio": self.bio
+        }
 
     @validates('username')
     def validate_username(self, key, username):
