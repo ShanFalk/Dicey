@@ -1,3 +1,7 @@
+from .db import db
+from datetime import datetime
+
+
 class Review(db.Model):
     __tablename__ = 'reviews'
 
@@ -12,6 +16,17 @@ class Review(db.Model):
     # relationships
     user = db.relationship("User", back_populates="reviews")
     brew = db.relationship("Brew", back_populates="reviews")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "rating": self.rating,
+            "content": self.content,
+            "user_id": self.user_id,
+            "brew_id": self.brew_id,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at
+        }
 
     @validates('rating')
     def validate_rating(self, key, rating):
