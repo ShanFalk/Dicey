@@ -1,10 +1,16 @@
 const CREATE_BREW = 'brews/CREATE_BREW';
+const SEARCH_BREW = 'brews/SEARCH_BREW';
 
 
 const createBrew = (brew) => ({
   type: CREATE_BREW,
   brew
 });
+
+const getBrews = (term) => ({
+  type: SEARCH_BREW,
+  term
+})
 
 
 export const creation = (payload) => async (dispatch) => {
@@ -32,8 +38,8 @@ export const creation = (payload) => async (dispatch) => {
     const response = await fetch('/api/brews/', {
       headers: {
         'Content-Type': 'application/json'
-      }, 
-      method: "POST", 
+      },
+      method: "POST",
       body: form
     });
     if (response.ok) {
@@ -41,10 +47,22 @@ export const creation = (payload) => async (dispatch) => {
       if (data.errors) {
         return;
       }
-    
+
       dispatch(createBrew(data));
     }
   }
+
+const searchBrews = (term) => async (dispatch) => {
+  const response = await fetch(`/api/brews/${term}`)
+
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return;
+    }
+    dispatch(getBrews(data));
+  }
+}
 
 const initialState = { brew: null };
 
