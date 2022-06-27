@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, session, request
 from app.models import Brew, db, Image
-from app.forms.brew_form import CreateBrew
+from app.forms.brew_form import CreateBrew, UpdateBrew
 from app.utils import upload, format_errors
 from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy.orm import joinedload
@@ -43,6 +43,7 @@ def add_brew():
         return new_brew.to_dict()
     return {'errors': format_errors(form.errors)}, 401
 
+
 @brew_routes.route("", methods=["PUT"])
 def update_brew():
     # print(request.files)
@@ -53,7 +54,7 @@ def update_brew():
     # img_url = upload(image)
     # pdf_url = upload(pdf)
 
-    form = CreateBrew()
+    form = UpdateBrew()
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
@@ -62,9 +63,7 @@ def update_brew():
 
         brew.title = form.data['title']
         brew.description = form.data['description']
-        brew.price= form.data['price']
-
-        db.session.update(brew)
+        brew.price = form.data['price']
         db.session.commit()
         # new_image = Image(
         #     img_url=img_url,
