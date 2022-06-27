@@ -36,6 +36,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
+      <Search />
       <Switch>
 
         <Route path='/login' exact={true}>
