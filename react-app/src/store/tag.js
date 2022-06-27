@@ -21,6 +21,9 @@ const initialState = {};
 
 export default function tagReducer(state = initialState, action) {
     switch (action.type) {
+        case GET_TAGS:
+            const tags = action.tags
+            return {...state, ...tags}
         default:
             return state;
     }
