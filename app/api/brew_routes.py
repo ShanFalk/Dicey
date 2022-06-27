@@ -9,7 +9,7 @@ from sqlalchemy.orm import joinedload
 brew_routes = Blueprint('brews', __name__)
 
 
-@brew_routes.route("/", methods=["POST"])
+@brew_routes.route("", methods=["POST"])
 @login_required
 def add_brew():
     form = CreateBrew()
@@ -42,10 +42,10 @@ def add_brew():
     return {'errors': format_errors(form.errors)}, 401
 
 
-@brew_routes.route("/", methods=["GET"])
+@brew_routes.route("", methods=["GET"])
 def get_brews():
     brews = Brew.query.options(joinedload('reviews'), joinedload(
         'images'), joinedload('brew_tags')).all()
     print({"brews": [brew.to_dict(reviews=brew.reviews,
-          images=brew.images, brew_tags=brew.berw_tags) for brew in brews]})
-    return {"brews": [brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.berw_tags) for brew in brews]}
+          images=brew.images, brew_tags=brew.brew_tags) for brew in brews]})
+    return {"brews": [brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.brew_tags) for brew in brews]}
