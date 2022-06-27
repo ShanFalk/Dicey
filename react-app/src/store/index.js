@@ -2,10 +2,12 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import brewReducer from './brew';
 import session from './session'
+import tagReducer from './tag';
 
 const rootReducer = combineReducers({
   session,
-  brews: brewReducer
+  brews: brewReducer,
+  tags: tagReducer,
 });
 
 

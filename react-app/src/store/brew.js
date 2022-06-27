@@ -4,6 +4,7 @@ const MODIFY_BREW = 'brews/MODIFY_BREW';
 
 
 
+
 const creation = (brew) => ({
   type: CREATE_BREW,
   brew
@@ -45,19 +46,20 @@ export const createBrew = (payload) => async (dispatch) => {
 
 
 
-    const response = await fetch('/api/brews', {
-      method: "POST",
-      body: form
-    });
-    if (response.ok) {
-      const data = await response.json();
-      if (data.errors) {
-        return;
-      }
 
-      dispatch(creation(data));
+  const response = await fetch('/api/brews', {
+    method: "POST",
+    body: form
+  });
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return;
     }
+
+    dispatch(creation(data));
   }
+}
 
 
 
@@ -69,9 +71,10 @@ export const getAllBrews = () => async (dispatch) => {
     if (data.errors) {
       return;
     }
-      dispatch(retrieveAll(data));
-    }
+    dispatch(retrieveAll(data));
   }
+}
+
 
 
 export const updateBrew = (payload) => async (dispatch) => {
@@ -127,4 +130,6 @@ export default function brewReducer(state = initialState, action) {
       default:
         return state;
     }
+
   }
+}

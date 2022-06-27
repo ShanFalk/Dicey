@@ -18,6 +18,7 @@ import BrewPage from './components/BrewSingleComponents/BrewPage';
 import BrewCreateForm from './components/BrewSingleComponents/BrewCreateForm/index'
 import { authenticate } from './store/session';
 import { getAllBrews } from './store/brew';
+import { getAllTags } from './store/tag';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
   useEffect(() => {
 
     dispatch(getAllBrews());
+    dispatch(getAllTags());
 
   }, [dispatch]);
 
