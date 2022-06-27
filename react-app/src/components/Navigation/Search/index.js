@@ -15,15 +15,17 @@ function Search() {
     return (
         <>
             <form className="search-form" onSubmit={onSubmit}>
-                <input className="search-input"
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    type="search"
-                    name="term"
-                    placeholder="Search for anything">
-                </input>
-                <button className="search-button">
-                    Search
-                </button>
+                <div className="search-wrapper">
+                    <input className="search-input"
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        type="search"
+                        name="term"
+                        placeholder="Search for anything">
+                    </input>
+                    <button className="search-button">
+                        <i className="fa-solid fa-magnifying-glass fa-2x"></i>
+                    </button>
+                </div>
             </form>
         </>
     )
