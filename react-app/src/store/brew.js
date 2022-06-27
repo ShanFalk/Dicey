@@ -20,7 +20,6 @@ const getBrews = (term) => ({
 
 
 export const createBrew = (payload) => async (dispatch) => {
-
     const {
       description,
       title,
@@ -40,11 +39,10 @@ export const createBrew = (payload) => async (dispatch) => {
     form.append('tags', tags)
     form.append('user_id', user_id)
 
+  
 
+    
     const response = await fetch('/api/brews', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
       method: "POST",
       body: form
     });
@@ -84,7 +82,7 @@ export const searchBrews = (term) => async (dispatch) => {
 }
 
 
-const initialState = { brew: null };
+const initialState = {  };
 
 
 export default function brewReducer(state = initialState, action) {

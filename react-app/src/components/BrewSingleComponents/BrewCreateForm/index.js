@@ -7,7 +7,7 @@ import {createBrew} from'../../../store/brew'
 function BrewCreateForm() {
   const dispatch = useDispatch();
   const history = useHistory();
-  // const sessionUser = useSelector(state => state.session.user);
+  const sessionUser = useSelector(state => state.session.user);
   // const allTags = useSelector(state => state.session.tags);
   const [errors, setErrors] = useState([]);
 
@@ -20,7 +20,7 @@ function BrewCreateForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [pdfUrl, setPdfUrl] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
+  const [imgUrl, setImgUrl] = useState(null);
   const [price, setPrice] = useState("");
   const [tags, setTags] = useState("");
 
@@ -28,9 +28,7 @@ function BrewCreateForm() {
 
   const updateTitle = (e) => setTitle(e.target.value);
   const updateDescription = (e) => setDescription(e.target.value);
-  const updatePdfUrl = (e) => setPdfUrl(e.target.value);
   const updatePrice = (e) => setPrice(e.target.value);
-  const updateImgUrl = (e) => setImgUrl(e.target.value);
   const updateTags = (e) => setTags(...tags, e.target.value);
 
 
@@ -45,16 +43,36 @@ function BrewCreateForm() {
       price,
       img_url: imgUrl,
       tags,
-      //user_id: sessionUser.id
+      user_id: sessionUser.id
 };
 
-let createdBrew = await dispatch(createBrew(payload, /*sessionUser?.id*/)).catch(async (res) => {
+// const payload = {
+//   description: "really sweet",
+//   title: "sweet brew",
+//   pdf_url: "",
+//   price: 25.00,
+//   img_url: "",
+//   tags,
+//   user_id: sessionUser.id
+// };
+
+let createdBrew = await dispatch(createBrew(payload)).catch(async (res) => {
   const data = await res.json();
   if (data && data.errors) setErrors(data.errors);
 });
 if (createdBrew) {
   history.push(`/${createdBrew.id}`)
 }
+}
+
+const updateImage = (e) => {
+  const file = e.target.files[0]
+  setImgUrl(file)
+}
+
+const updatePdf = (e) => {
+  const pdf = e.target.files[0]
+  setPdfUrl(pdf)
 }
 
 const handleCancelClick = (e) => {
@@ -88,18 +106,17 @@ const handleCancelClick = (e) => {
         <input
         type="file"
         placeholder="Pdf Upload"
-        required
+        // required
         accept='application/pdf'
         className='input'
-        value={pdfUrl}
-        onChange={updatePdfUrl} />
+        onChange={updatePdf} />
         <input
         type="file"
         placeholder="Image Upload"
-        required
+        // required
+        accept='image/*'
         className='input'
-        value={imgUrl}
-        onChange={updateImgUrl} />
+        onChange={updateImage} />
         <input
         type="number"
         placeholder="Price"

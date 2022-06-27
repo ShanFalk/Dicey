@@ -15,6 +15,7 @@ import AboutPage from './components/AboutComponents/AboutPage';
 import ProfilePage from './components/ProfileComponents/ProfilePage';
 import ShoppingCartPage from './components/ShoppingCartComponents/ShoppingCartPage';
 import BrewPage from './components/BrewSingleComponents/BrewPage';
+import BrewCreateForm from './components/BrewSingleComponents/BrewCreateForm/index'
 import { authenticate } from './store/session';
 
 
@@ -59,7 +60,7 @@ function App() {
           <ProfilePage />
         </ProtectedRoute>
 
-        <Route path='/brew/:id' exact={true} >
+        <Route path='/brew/:brewId' exact={true} >
           <BrewPage/>
         </Route>
 
@@ -78,6 +79,10 @@ function App() {
 
         <Route path='/about' exact={true} >
           <AboutPage/>
+        </Route>
+
+        <Route path="/brew" exact={true}>
+          <BrewCreateForm/>
         </Route>
 
 
