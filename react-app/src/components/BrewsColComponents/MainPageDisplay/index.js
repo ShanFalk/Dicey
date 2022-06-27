@@ -1,11 +1,12 @@
+import FeaturedBrewsCollection from "./FeaturedBrewsCollection";
 import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllBrews} from '../store/brew';
 import { NavLink } from 'react-router-dom';
-import BrewCard from './BrewCard';
 
 
-function HomePage() {
+function MainPageDisplay () {
+
     const dispatch = useDispatch();
   
     useEffect(() => {
@@ -15,16 +16,17 @@ function HomePage() {
     const brews = useSelector(state => state.brews?.brews)
 
     if (!brews) return null;
-    
-  return (
-    <div className='home-page'>
+    return (
+        <div>
+        <h2>This is the BrewsColComponents - MainPageDisplay Component</h2>
+        <div className='home-page'>
 
     <div className='room-section'>
       {brews.map((brew) => {
       return (
         <div className='room-card-link'>
          <NavLink   to={`/brew/${brew.id}`} brew={brew} className="room-nav-link">
-        <BrewCard key={brew.id} brew={brew} />
+        <FeaturedBrewsCollection key={brew.id} brew={brew} />
         </NavLink>
         </div>
       );
@@ -32,7 +34,8 @@ function HomePage() {
     </div>
     ))
 </div>
-  )
+        </div>
+    )
 }
 
-export default HomePage
+export default MainPageDisplay;

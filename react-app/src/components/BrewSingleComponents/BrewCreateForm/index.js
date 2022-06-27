@@ -2,9 +2,9 @@ import React from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState} from 'react'
-import {createBrew} from'../store/brew'
+import {createBrew} from'../../../store/brew'
 
-function CreateBrew() {
+function BrewCreateForm() {
   const dispatch = useDispatch();
   const history = useHistory();
   // const sessionUser = useSelector(state => state.session.user);
@@ -128,4 +128,4 @@ const handleCancelClick = (e) => {
   )
 }
 
-export default CreateBrew
+export default BrewCreateForm
