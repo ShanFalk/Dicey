@@ -1,7 +1,7 @@
 import FeaturedBrewsCollection from "./FeaturedBrewsCollection";
 import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllBrews} from '../store/brew';
+import { getAllBrews} from '../../../store/brew';
 import { NavLink } from 'react-router-dom';
 
 
