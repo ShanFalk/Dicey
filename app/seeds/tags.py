@@ -12,6 +12,7 @@ def seed_tags():
         Tag(name='Regency'),
         Tag(name='Noir'),
     ])
+    db.session.commit()
 
 def undo_tags():
     db.session.execute('TRUNCATE tags RESTART IDENTITY CASCADE;')

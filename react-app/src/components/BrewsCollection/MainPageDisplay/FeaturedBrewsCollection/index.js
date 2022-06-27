@@ -11,7 +11,7 @@ function FeaturedBrewsCollection ({brew}) {
         alt="" /> 
           <div className='card-info'>
               <h2>{brew.title}</h2>
-              <p>${brew.price}</p>
+              <p>$ {brew.price}</p>
               
           </div>
       </div>
