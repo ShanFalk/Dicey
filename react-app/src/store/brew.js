@@ -1,5 +1,6 @@
 const CREATE_BREW = 'brews/CREATE_BREW';
 const GET_BREWS = 'brews/GET_BREWS'
+const SEARCH_BREW = 'brews/SEARCH_BREW';
 
 
 const creation = (brew) => ({
@@ -11,6 +12,11 @@ const retrieveAll = (brews) => ({
   type: GET_BREWS,
   brews
 });
+const getBrews = (term) => ({
+  type: SEARCH_BREW,
+  term
+})
+
 
 
 export const createBrew = (payload) => async (dispatch) => {
@@ -38,8 +44,8 @@ export const createBrew = (payload) => async (dispatch) => {
     const response = await fetch('/api/brews/', {
       headers: {
         'Content-Type': 'application/json'
-      }, 
-      method: "POST", 
+      },
+      method: "POST",
       body: form
     });
     if (response.ok) {
@@ -53,18 +59,32 @@ export const createBrew = (payload) => async (dispatch) => {
   }
 
 
-export const getBrews = () => async (dispatch) => {
+export const getAllBrews = () => async (dispatch) => {
   const response = await fetch('/api/brews/');
+
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
       return;
     }
-    dispatch(retrieveAll(data));
+      dispatch(retrieveAll(data));
+    }
+  }
+
+export const searchBrews = (term) => async (dispatch) => {
+  const response = await fetch(`/api/brews/${term}`)
+
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return;
+    }
+    dispatch(getBrews(data));
   }
 }
 
-const initialState = { brews: null };
+
+const initialState = { brew: null };
 
 
 export default function brewReducer(state = initialState, action) {

@@ -7,6 +7,7 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
+import Search from './components/Search';
 import { authenticate } from './store/session';
 import CreateBrew from './components/CreateBrew';
 import HomePage from './components/HomePage';
@@ -31,6 +32,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
+      <Search />
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getBrews } from '../store/brew';
+import { getAllBrews} from '../store/brew';
 import { NavLink } from 'react-router-dom';
 import BrewCard from './BrewCard';
 
@@ -9,7 +9,7 @@ function HomePage() {
     const dispatch = useDispatch();
   
     useEffect(() => {
-      dispatch(getBrews());
+      dispatch(getAllBrews());
     }, [dispatch]);
 
     const brews = useSelector(state => state.brews?.brews)
