@@ -27,5 +27,5 @@ def add_brew():
 @brew_routes.route("/", methods=["GET"])
 def get_brews():
     brews = Brew.query.options(joinedload('reviews'),joinedload('images'),joinedload('brew_tags')).all()
-    print({"brews": [brew.to_dict() for brew in brews]})
-    return {"brews": [brew.to_dict() for brew in brews]}
+    print({"brews": [brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.berw_tags) for brew in brews]})
+    return {"brews": [brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.berw_tags) for brew in brews]}

@@ -29,9 +29,9 @@ class Brew(db.Model):
                                 # unsure about cascade
                                 # cascade="all, delete"
                                 )
-    def to_dict(self):
-        print("_"*50,self.reviews)
-        return {
+    def to_dict(self, **kwargs):
+            
+        out = {
             "id": self.id,
             "title": self.title,
             "description": self.description,
@@ -42,6 +42,12 @@ class Brew(db.Model):
             "created_at": self.created_at,
             "updated_at": self.updated_at
         }
+
+        for key, collection in kwargs.items():
+            # might neeed to import the to_dict methods for the associated models
+            out[key] = [ele.to_dict() for ele in collection]
+
+        return out
 
     @validates('title')
     def validate_title(self, key, title):
