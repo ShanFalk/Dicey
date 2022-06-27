@@ -1,13 +1,19 @@
 const CREATE_BREW = 'brews/CREATE_BREW';
+const GET_BREWS = 'brews/GET_BREWS'
 
 
-const createBrew = (brew) => ({
+const creation = (brew) => ({
   type: CREATE_BREW,
   brew
 });
 
+const retrieveAll = (brews) => ({
+  type: GET_BREWS,
+  brews
+});
 
-export const creation = (payload) => async (dispatch) => {
+
+export const createBrew = (payload) => async (dispatch) => {
 
     const {
       description,
@@ -42,17 +48,33 @@ export const creation = (payload) => async (dispatch) => {
         return;
       }
     
-      dispatch(createBrew(data));
+      dispatch(creation(data));
     }
   }
 
-const initialState = { brew: null };
+
+export const getBrews = () => async (dispatch) => {
+  const response = await fetch('/api/brews/');
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return;
+    }
+    console.log(data)
+    dispatch(retrieveAll(data));
+  }
+}
+
+const initialState = { brew: null, brews: null };
 
 
-export default function reducer(state = initialState, action) {
+export default function brewReducer(state = initialState, action) {
     switch (action.type) {
       case CREATE_BREW:
-        return {...state, [action.brew.id] : action.payload }
+        return {...state, [action.brew.id] : action.brew }
+      case GET_BREWS:
+        const brews = action.brews
+        return {...state, ...brews}
       default:
         return state;
     }

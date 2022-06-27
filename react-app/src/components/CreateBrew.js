@@ -7,13 +7,13 @@ import {createBrew} from'../store/brew'
 function CreateBrew() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const sessionUser = useSelector(state => state.session.user);
-  const allTags = useSelector(state => state.session.tags);
+  // const sessionUser = useSelector(state => state.session.user);
+  // const allTags = useSelector(state => state.session.tags);
   const [errors, setErrors] = useState([]);
 
-  if(!sessionUser) {
-    history.push("/login")
-  }
+  // if(!sessionUser) {
+  //   history.push("/login")
+  // }
 
 
   const [title, setTitle] = useState("");
@@ -44,10 +44,10 @@ function CreateBrew() {
       price,
       img_url: imgUrl,
       tags,
-      user_id: sessionUser.id
+      //user_id: sessionUser.id
 };
 
-let createdBrew = await dispatch(createBrew(payload, sessionUser?.id)).catch(async (res) => {
+let createdBrew = await dispatch(createBrew(payload, /*sessionUser?.id*/)).catch(async (res) => {
   const data = await res.json();
   if (data && data.errors) setErrors(data.errors);
 });
@@ -107,7 +107,7 @@ const handleCancelClick = (e) => {
         required
         className='input'
         onChange={updatePrice} />
-        {allTags.map((tag) => {
+        {/* {allTags.map((tag) => {
             return (
             <input 
             value={tag.name}
@@ -116,7 +116,7 @@ const handleCancelClick = (e) => {
             onChange={updateTags}
             />
             )
-          })}
+          })} */}
       <button className='' type="submit">Create Brew</button>
       <button className='' type="button" onClick={handleCancelClick}>Cancel</button>
     </form>

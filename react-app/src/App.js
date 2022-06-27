@@ -8,6 +8,10 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
+import CreateBrew from './components/CreateBrew';
+import HomePage from './components/HomePage';
+import BrewCard from './components/BrewCard';
+import BrewPage from './components/BrewPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -42,6 +46,13 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/' exact={true} >
           <h1>My Home Page</h1>
+          <HomePage/>
+        </ProtectedRoute>
+        <ProtectedRoute path='/brew' exact={true} >
+          <CreateBrew/>
+        </ProtectedRoute>
+        <ProtectedRoute path="/brew/:brewId" exact={true}>
+          <BrewPage/>
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
