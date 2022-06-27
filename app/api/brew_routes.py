@@ -44,7 +44,7 @@ def add_brew():
     return {'errors': format_errors(form.errors)}, 401
 
 @brew_routes.route("", methods=["PUT"])
-def add_brew():
+def update_brew():
     # print(request.files)
 
     # image = request.files["img_url"]
