@@ -23,7 +23,7 @@ function Search() {
                         placeholder="Search for anything">
                     </input>
                     <button className="search-button">
-                        <i className="fa-solid fa-magnifying-glass fa-2x"></i>
+                        <i className="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </div>
             </form>

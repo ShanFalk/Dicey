@@ -9,6 +9,7 @@
     justify-content: space-between;
     border: 2px solid #2C2F33;
     border-radius: 22px;
+    height: 40px;
 }
 
 .search-input:focus {
@@ -29,14 +30,11 @@
     transition: all 500ms;
     border-top-right-radius: 22px;
     border-bottom-right-radius: 22px;
-    padding: 4px 10px 4px 10px;
+    height: 100%;
+    padding: 0px 10px 0px 15px;
 }
 
 .search-button:hover {
     background-color: white;
     color: #A589FB;
-}
-
-.search-input::-webkit-search-cancel-button {
-    color: red;
 }

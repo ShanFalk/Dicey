@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: space-between;
     width: 60%;
+    gap: 10px;
 }
 
 .nav-logo {
