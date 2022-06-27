@@ -13,7 +13,6 @@ brew_routes = Blueprint('brews', __name__)
 def add_brew():
     print(request.files)
 
-    print("*********Line 18*************** ")
     image = request.files["img_url"]
     pdf = request.files["pdf_url"]
 
@@ -23,10 +22,7 @@ def add_brew():
     form = CreateBrew()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    print("*********Line 25*************** ", img_url, pdf_url)
-
     if form.validate_on_submit():
-        print("*********Line 28*************** ")
 
         new_brew = Brew(
             title=form.data['title'],
@@ -36,7 +32,6 @@ def add_brew():
             price=form.data['price'],
             user_id=form.data['user_id'],
         )
-        print("*********Line 38*************** ")
 
         db.session.add(new_brew)
         db.session.commit()
