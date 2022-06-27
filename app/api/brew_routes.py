@@ -46,6 +46,4 @@ def add_brew():
 def get_brews():
     brews = Brew.query.options(joinedload('reviews'), joinedload(
         'images'), joinedload('brew_tags')).all()
-    print({"brews": [brew.to_dict(reviews=brew.reviews,
-          images=brew.images, brew_tags=brew.brew_tags) for brew in brews]})
-    return {"brews": [brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.brew_tags) for brew in brews]}
+    return {brew.id: brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.brew_tags) for brew in brews}

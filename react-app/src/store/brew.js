@@ -15,7 +15,7 @@ const retrieveAll = (brews) => ({
 const getBrews = (term) => ({
   type: SEARCH_BREW,
   term
-})
+});
 
 
 
@@ -84,7 +84,7 @@ export const searchBrews = (term) => async (dispatch) => {
 }
 
 
-const initialState = { brew: null };
+const initialState = {  };
 
 
 export default function brewReducer(state = initialState, action) {
