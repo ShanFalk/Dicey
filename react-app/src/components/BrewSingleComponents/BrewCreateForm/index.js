@@ -2,19 +2,20 @@ import React from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState} from 'react'
-import {createBrew} from'../store/brew'
+import {createBrew} from'../../../store/brew'
 
-function CreateBrew() {
+function BrewCreateForm() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const sessionUser = useSelector(state => state.session.user);
-  const allTags = useSelector(state => state.session.tags);
+  // const sessionUser = useSelector(state => state.session.user);
+  // const allTags = useSelector(state => state.session.tags);
   const [errors, setErrors] = useState([]);
 
-  if(!sessionUser) {
-    history.push("/login")
-  }
+  // if(!sessionUser) {
+  //   history.push("/login")
+  // }
 
+  const allTags = [{id: 1, name: 'Classic'}, {id: 2, name: 'Sci-fi'}, {id: 3, name: 'Comedy'}]
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -44,10 +45,10 @@ function CreateBrew() {
       price,
       img_url: imgUrl,
       tags,
-      user_id: sessionUser.id
+      //user_id: sessionUser.id
 };
 
-let createdBrew = await dispatch(createBrew(payload, sessionUser?.id)).catch(async (res) => {
+let createdBrew = await dispatch(createBrew(payload, /*sessionUser?.id*/)).catch(async (res) => {
   const data = await res.json();
   if (data && data.errors) setErrors(data.errors);
 });
@@ -109,12 +110,15 @@ const handleCancelClick = (e) => {
         onChange={updatePrice} />
         {allTags.map((tag) => {
             return (
+              <>
+              <label>{tag.name}</label>
             <input 
             value={tag.name}
             type="radio"
             id={tag.id}
-            onChange={updateTags}
+            onClick={updateTags}
             />
+            </>
             )
           })}
       <button className='' type="submit">Create Brew</button>
@@ -124,4 +128,4 @@ const handleCancelClick = (e) => {
   )
 }
 
-export default CreateBrew
+export default BrewCreateForm
