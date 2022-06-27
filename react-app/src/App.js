@@ -17,6 +17,9 @@ import ShoppingCartPage from './components/ShoppingCartComponents/ShoppingCartPa
 import BrewPage from './components/BrewSingleComponents/BrewPage';
 
 import { authenticate } from './store/session';
+import CreateBrew from './components/CreateBrew';
+import HomePage from './components/HomePage';
+import BrewCard from './components/BrewCard';
 
 
 function App() {
