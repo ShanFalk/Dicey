@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
@@ -16,12 +16,13 @@ import ProfilePage from './components/ProfileComponents/ProfilePage';
 import ShoppingCartPage from './components/ShoppingCartComponents/ShoppingCartPage';
 import BrewPage from './components/BrewSingleComponents/BrewPage';
 import { authenticate } from './store/session';
+import { getAllBrews } from './store/brew';
 
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-
+  const brews = useSelector(state => state.brews)
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
@@ -29,7 +30,14 @@ function App() {
     })();
   }, [dispatch]);
 
-  if (!loaded) {
+  useEffect(() => {
+
+    dispatch(getAllBrews());
+
+  }, [dispatch]);
+
+
+  if (!loaded || !brews) {
     return null;
   }
 

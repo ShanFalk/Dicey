@@ -78,6 +78,7 @@ export default function brewReducer(state = initialState, action) {
         return {...state, [action.brew.id] : action.brew }
       case GET_BREWS:
         const brews = action.brews
+        console.log('THESE ARE THE BREWS', brews)
         return {...state, ...brews}
       default:
         return state;
