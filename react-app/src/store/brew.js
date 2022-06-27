@@ -1,5 +1,6 @@
 const CREATE_BREW = 'brews/CREATE_BREW';
 const GET_BREWS = 'brews/GET_BREWS'
+const MODIFY_BREW = 'brews/MODIFY_BREW';
 
 
 
@@ -11,6 +12,11 @@ const creation = (brew) => ({
 const retrieveAll = (brews) => ({
   type: GET_BREWS,
   brews
+});
+
+const update = (brew) => ({
+  type: MODIFY_BREW,
+  brew
 });
 
 
@@ -36,9 +42,9 @@ export const createBrew = (payload) => async (dispatch) => {
     form.append('tags', tags)
     form.append('user_id', user_id)
 
-  
 
-    
+
+
     const response = await fetch('/api/brews', {
       method: "POST",
       body: form
@@ -54,6 +60,7 @@ export const createBrew = (payload) => async (dispatch) => {
   }
 
 
+
 export const getAllBrews = () => async (dispatch) => {
   const response = await fetch('/api/brews');
 
@@ -67,6 +74,44 @@ export const getAllBrews = () => async (dispatch) => {
   }
 
 
+export const updateBrew = (payload) => async (dispatch) => {
+  const {
+    description,
+    title,
+    // pdf_url,
+    price,
+    id,
+    // img_url,
+    // tags
+  } = payload
+
+  const form = new FormData();
+  form.append('title', title)
+  form.append('description', description)
+  // form.append('pdf_url', pdf_url)
+  // form.append('img_url', img_url)
+  form.append('price', price)
+  // form.append('tags', tags)
+
+
+
+
+
+  const response = await fetch('/api/brews', {
+    method: "PUT",
+    body: form
+  });
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return;
+    }
+
+    dispatch(creation(data));
+  }
+}
+
+
 const initialState = {  };
 
 
@@ -77,6 +122,8 @@ export default function brewReducer(state = initialState, action) {
       case GET_BREWS:
         const brews = action.brews
         return {...state, ...brews}
+        case MODIFY_BREW:
+          return {...state, [action.brew.id] : action.brew }
       default:
         return state;
     }

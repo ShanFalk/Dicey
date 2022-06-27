@@ -6,6 +6,7 @@ import re
 
 
 class CreateBrew(FlaskForm):
+    id = IntegerField("id")
     title = StringField('title', validators=[DataRequired()])
     description = TextAreaField('description', validators=[DataRequired()])
     price = FloatField('price', validators=[DataRequired()])

@@ -30,13 +30,13 @@ class Brew(db.Model):
                                 # cascade="all, delete"
                                 )
     def to_dict(self, **kwargs):
-            
+
         out = {
             "id": self.id,
             "title": self.title,
             "description": self.description,
             "pdf_url": self.pdf_url,
-            "price": self.for_sale,
+            "price": self.price,
             "for_sale": self.for_sale,
             "user_id": self.user_id,
             "created_at": self.created_at,
