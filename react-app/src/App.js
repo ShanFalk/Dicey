@@ -15,11 +15,7 @@ import AboutPage from './components/AboutComponents/AboutPage';
 import ProfilePage from './components/ProfileComponents/ProfilePage';
 import ShoppingCartPage from './components/ShoppingCartComponents/ShoppingCartPage';
 import BrewPage from './components/BrewSingleComponents/BrewPage';
-
 import { authenticate } from './store/session';
-import CreateBrew from './components/CreateBrew';
-import HomePage from './components/HomePage';
-import BrewCard from './components/BrewCard';
 
 
 function App() {

@@ -41,7 +41,7 @@ export const createBrew = (payload) => async (dispatch) => {
     form.append('user_id', user_id)
 
 
-    const response = await fetch('/api/brews/', {
+    const response = await fetch('/api/brews', {
       headers: {
         'Content-Type': 'application/json'
       },
@@ -60,7 +60,7 @@ export const createBrew = (payload) => async (dispatch) => {
 
 
 export const getAllBrews = () => async (dispatch) => {
-  const response = await fetch('/api/brews/');
+  const response = await fetch('/api/brews');
 
   if (response.ok) {
     const data = await response.json();
