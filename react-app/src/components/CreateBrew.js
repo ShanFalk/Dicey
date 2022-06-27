@@ -15,6 +15,7 @@ function CreateBrew() {
   //   history.push("/login")
   // }
 
+  const allTags = [{id: 1, name: 'Classic'}, {id: 2, name: 'Sci-fi'}, {id: 3, name: 'Comedy'}]
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -107,16 +108,19 @@ const handleCancelClick = (e) => {
         required
         className='input'
         onChange={updatePrice} />
-        {/* {allTags.map((tag) => {
+        {allTags.map((tag) => {
             return (
+              <>
+              <label>{tag.name}</label>
             <input 
             value={tag.name}
             type="radio"
             id={tag.id}
-            onChange={updateTags}
+            onClick={updateTags}
             />
+            </>
             )
-          })} */}
+          })}
       <button className='' type="submit">Create Brew</button>
       <button className='' type="button" onClick={handleCancelClick}>Cancel</button>
     </form>

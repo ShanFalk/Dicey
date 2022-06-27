@@ -60,12 +60,11 @@ export const getBrews = () => async (dispatch) => {
     if (data.errors) {
       return;
     }
-    console.log(data)
     dispatch(retrieveAll(data));
   }
 }
 
-const initialState = { brew: null, brews: null };
+const initialState = { brews: null };
 
 
 export default function brewReducer(state = initialState, action) {

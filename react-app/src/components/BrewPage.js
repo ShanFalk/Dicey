@@ -10,7 +10,6 @@ function BrewPage() {
 
     const brew = brews[brewId - 1]
 
-    console.log(brew)
     
     return (
     <div>

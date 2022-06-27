@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import Brew, db
+from app.models import Brew, db, Image
 from app.forms.brew_form import CreateBrew
-from app.aws_utils import get_unique_filename, upload_file_to_s3
+from app.utils import upload, format_errors
 from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy.orm import joinedload
 
@@ -13,16 +13,33 @@ brew_routes = Blueprint('brews', __name__)
 @login_required
 def add_brew():
     form = CreateBrew()
-
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    file = request.files[form.image.name]
+    image = request.files["img_url"]
+    pdf = request.files["pdf_url"]
+
+    img_url = upload(image)
+    pdf_url = upload(pdf)
+
     if form.validate_on_submit():
-        if file.filename == "":
-            return "Please select a file"
-        if file:
-            file.filename = get_unique_filename(file.filename)
-            upload_file_to_s3(file)
+        new_brew = Brew(
+            title=form.data['title'],
+            description=form.data['description'],
+            pdf_url=pdf_url,
+            price=form.data['price'],
+            for_sale=True,
+            user_id=form.data['user_id'],
+        )
+
+        db.session.add(new_brew)
+        db.session.commit()
+        new_image = Image(
+            img_url=img_url,
+            brew_id=new_brew.id)
+        db.session.add(new_image)
+        db.session.commit()
+        return new_brew.to_dict()
+    return {'errors': format_errors(form.errors)}, 401
 
 
 @brew_routes.route("/", methods=["GET"])
