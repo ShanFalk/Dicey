@@ -1,0 +1,11 @@
+.nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
+}
+
+.nav-logo {
+    text-decoration: none;
+}

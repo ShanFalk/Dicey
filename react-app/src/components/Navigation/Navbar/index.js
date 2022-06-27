@@ -1,16 +1,17 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import LogoutButton from '../../auth/LogoutButton';
+import Search from '../Search';
+import "./navbar.css";
 
 const NavBar = () => {
   return (
-    <nav>
+    <nav className='nav'>
+      <Link className='nav-logo' to='/'>
+        <h2>Dicey</h2>
+      </Link>
+      <Search />
       <ul>
-        <li>
-          <NavLink to='/' exact={true} activeClassName='active'>
-            Home
-          </NavLink>
-        </li>
         <li>
           <NavLink to='/login' exact={true} activeClassName='active'>
             Login

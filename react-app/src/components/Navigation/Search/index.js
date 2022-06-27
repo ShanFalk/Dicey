@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { useHistory } from 'react-router-dom';
+import "./search.css"
 
 function Search() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -13,19 +14,17 @@ function Search() {
 
     return (
         <>
-            <div className="search-bar">
-                <form className="search-form" onSubmit={onSubmit}>
-                    <input className="search-input"
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        type="search"
-                        name="term"
-                        placeholder="Search for anything">
-                    </input>
-                    <button className="search-button">
-                        Search
-                    </button>
-                </form>
-            </div>
+            <form className="search-form" onSubmit={onSubmit}>
+                <input className="search-input"
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    type="search"
+                    name="term"
+                    placeholder="Search for anything">
+                </input>
+                <button className="search-button">
+                    Search
+                </button>
+            </form>
         </>
     )
 }

@@ -15,7 +15,8 @@ import AboutPage from './components/About/AboutPage';
 import ProfilePage from './components/Profile/ProfilePage';
 import ShoppingCartPage from './components/ShoppingCart/ShoppingCartPage';
 import BrewPage from './components/BrewSingle/BrewPage';
-import BrewCreateForm from './components/BrewSingle/BrewCreateForm/index'
+import BrewCreateForm from './components/BrewSingle/BrewCreateForm/index';
+import Footer from './components/Footer';
 import { authenticate } from './store/session';
 import { getAllBrews } from './store/brew';
 import { getAllTags } from './store/tag';
@@ -47,7 +48,6 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
-      <Search />
       <Switch>
 
         <Route path='/login' exact={true}>
@@ -94,9 +94,8 @@ function App() {
           <BrewCreateForm/>
         </Route>
 
-
-
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }
