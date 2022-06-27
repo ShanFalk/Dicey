@@ -1,0 +1,12 @@
+.nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
+    gap: 10px;
+}
+
+.nav-logo {
+    text-decoration: none;
+}

@@ -4,18 +4,19 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
-import NavBar from './components/NavigationComponents/Navbar';
-import Search from './components/NavigationComponents/Search';
+import NavBar from './components/Navigation/Navbar';
+import Search from './components/Navigation/Search';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
-import MainPageDisplay from './components/BrewsColComponents/MainPageDisplay';
-import SearchResultDisplay from './components/BrewsColComponents/SearchResultDisplay';
-import AboutPage from './components/AboutComponents/AboutPage';
-import ProfilePage from './components/ProfileComponents/ProfilePage';
-import ShoppingCartPage from './components/ShoppingCartComponents/ShoppingCartPage';
-import BrewPage from './components/BrewSingleComponents/BrewPage';
-import BrewCreateForm from './components/BrewSingleComponents/BrewCreateForm/index'
+import MainPageDisplay from './components/BrewsCollection/MainPageDisplay';
+import SearchResultDisplay from './components/BrewsCollection/SearchResultDisplay';
+import AboutPage from './components/About/AboutPage';
+import ProfilePage from './components/Profile/ProfilePage';
+import ShoppingCartPage from './components/ShoppingCart/ShoppingCartPage';
+import BrewPage from './components/BrewSingle/BrewPage';
+import BrewCreateForm from './components/BrewSingle/BrewCreateForm/index';
+import Footer from './components/Footer';
 import { authenticate } from './store/session';
 import { getAllBrews } from './store/brew';
 import { getAllTags } from './store/tag';
@@ -47,7 +48,6 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
-      <Search />
       <Switch>
 
         <Route path='/login' exact={true}>
@@ -94,9 +94,8 @@ function App() {
           <BrewCreateForm/>
         </Route>
 
-
-
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }

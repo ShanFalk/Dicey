@@ -1,0 +1,86 @@
+button,
+input {
+    font-family: 'Montserrat';
+}
+
+.buttons-holder {
+    display: flex;
+    gap: 20px;
+}
+
+.button {
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+    transition: all 500ms;
+}
+
+.button.purple:hover {
+    background-color: transparent;
+    color: #A589FB;
+}
+
+.purple {
+    border: 2px solid #A589FB;
+    background-color: #A589FB;
+}
+
+.red {
+    border: 2px solid #D03341;
+    background-color: #D03341;
+}
+
+.button.red:hover {
+    background-color: transparent;
+    color: #D03341;
+}
+
+.button.white {
+    font-size: 16px;
+    color: #A589FB;
+    border: 2px solid white;
+    background-color: white;
+}
+
+.button.white:hover {
+    background-color: transparent;
+    color: white;
+}
+
+.cancel {
+    border: 2px solid #97A9B4;
+    background-color: #97A9B4;
+}
+
+.button.cancel:hover {
+    background-color: transparent;
+    color: #97A9B4;
+}
+
+.link {
+    transition: all 500ms;
+    color: black;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    font-size: 16px;
+    position: relative;
+    top: 1px;
+}
+
+.link:hover {
+    border-bottom: 2px solid black;
+}
+
+.link-large {
+    transition: all 500ms;
+    color: black;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    font-size: 22px;
+    padding: 0px 5px;
+}
+
+.link-large:hover {
+    border-bottom: 2px solid black;
+}
