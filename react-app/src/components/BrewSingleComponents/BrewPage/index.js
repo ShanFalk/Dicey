@@ -1,5 +1,6 @@
 import BrewDetails from "../BrewDetails";
 import ReviewsSection from "../../ReviewComponents/ReviewsSection";
+import BrewUpdateForm from "../BrewUpdateForm";
 import React, { useEffect, useState }  from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,23 +9,25 @@ import { useSelector, useDispatch } from 'react-redux';
 function BrewPage () {
     const sessionUser = useSelector(state => state.session.user);
     const { brewId } = useParams();
+    const [showEditForm, setShowEditForm] = useState(false)
 
-    const brews = useSelector(state => state.brews?.brews)
+    const brew = useSelector(state => state.brews[brewId])
 
-    const brew = brews[brewId - 1]
-
-    
-    return (
-        <div>
-            <h2>This is the BrewSingleComponents - BrewPage Component</h2>
+    if (showEditForm === false) {
+        return (
             <div>
-        <h1>{brew?.title}</h1>
-        <p>{brew?.description}</p>
-    </div>
-            <BrewDetails />
-            <ReviewsSection />
-        </div>
-
+                <BrewDetails setShowEditForm={setShowEditForm} brew={brew} />
+                <ReviewsSection />
+            </div>
+        )
+    } else {
+        return (
+        <>
+        {sessionUser?.id === brew?.user_id &&
+            <BrewUpdateForm setShowEditForm={setShowEditForm} brew={brew}/>
+            }
+        </>
     )
+}
 }
 export default BrewPage;
