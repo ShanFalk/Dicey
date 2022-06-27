@@ -1,6 +1,6 @@
 const CREATE_BREW = 'brews/CREATE_BREW';
 const GET_BREWS = 'brews/GET_BREWS'
-const SEARCH_BREW = 'brews/SEARCH_BREW';
+
 
 
 const creation = (brew) => ({
@@ -12,10 +12,7 @@ const retrieveAll = (brews) => ({
   type: GET_BREWS,
   brews
 });
-const getBrews = (term) => ({
-  type: SEARCH_BREW,
-  term
-});
+
 
 
 
@@ -53,7 +50,7 @@ export const createBrew = (payload) => async (dispatch) => {
       if (data.errors) {
         return;
       }
-    
+
       dispatch(creation(data));
     }
   }
@@ -70,18 +67,6 @@ export const getAllBrews = () => async (dispatch) => {
       dispatch(retrieveAll(data));
     }
   }
-
-export const searchBrews = (term) => async (dispatch) => {
-  const response = await fetch(`/api/brews/${term}`)
-
-  if (response.ok) {
-    const data = await response.json();
-    if (data.errors) {
-      return;
-    }
-    dispatch(getBrews(data));
-  }
-}
 
 
 const initialState = {  };

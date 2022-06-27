@@ -63,8 +63,7 @@ function App() {
           <BrewPage/>
         </Route>
 
-        <Route path='/search?q=:userInput' exact={true} >
-          <Search />
+        <Route path='/search' >
           <SearchResultDisplay />
         </Route>
 
