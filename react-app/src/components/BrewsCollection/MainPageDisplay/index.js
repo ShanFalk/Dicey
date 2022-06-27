@@ -7,13 +7,7 @@ import { NavLink } from 'react-router-dom';
 
 function MainPageDisplay () {
 
-    const dispatch = useDispatch();
-  
-    useEffect(() => {
-      dispatch(getAllBrews());
-    }, [dispatch]);
-
-    const brews = useSelector(state => state.brews?.brews)
+    const brews = Object.values(useSelector(state => state.brews))
 
     if (!brews) return null;
     return (
@@ -32,7 +26,6 @@ function MainPageDisplay () {
       );
     })}
     </div>
-    ))
 </div>
         </div>
     )

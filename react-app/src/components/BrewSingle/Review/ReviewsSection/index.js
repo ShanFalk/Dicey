@@ -1,4 +1,4 @@
-import Review from "../Review";
+import Review from "../index";
 import ReviewForm from "../ReviewForm";
 
 function ReviewsSection () {
