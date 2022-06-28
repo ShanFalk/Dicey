@@ -1,7 +1,18 @@
+import React from "react";
+import { useSelector } from "react-redux";
 
-function Review () {
+function Review ({review, setReviewEdit}) {
+    const sessionUser = useSelector(state => state.session.user);
+
     return (
-        <h3>This is the ReviewComponents - Review Component</h3>
+        <div>
+            <h3></h3>
+            <p>Comment: {review.content}</p>
+            <p>Rating: {review.rating}</p>
+            {sessionUser.id === review.user_id && (
+                <button onClick={() => setReviewEdit(true)}>Edit Review</button>
+            )}
+        </div>
     )
 }
 

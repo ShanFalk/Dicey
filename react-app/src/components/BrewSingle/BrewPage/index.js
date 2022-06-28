@@ -23,7 +23,7 @@ function BrewPage () {
 return (
     <div>
         <BrewDetails setShowEditForm={setShowEditForm} brew={brew} />
-        <ReviewsSection />
+        <ReviewsSection brew={brew} />
     </div>
 )
 }

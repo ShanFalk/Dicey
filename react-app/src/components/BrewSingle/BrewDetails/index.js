@@ -9,6 +9,8 @@ function BrewDetails ({brew, setShowEditForm}) {
     //TODO: optional chaining
     const image = brew?.images[0]
 
+    //console.log(brew?.images)
+
     useEffect(()=> {
         localStorage.setItem('cart', JSON.stringify(cart))
     }, [cart]);
@@ -21,6 +23,8 @@ function BrewDetails ({brew, setShowEditForm}) {
         key.includes('description') ||
         key.includes('images') ||
         key.includes('price')))
+
+        console.log(brewObj)
 
     return (
         <div className="brew-block">
@@ -35,7 +39,7 @@ function BrewDetails ({brew, setShowEditForm}) {
             <a href={brew?.pdf_url} download="true">Download</a>
             <p>User: {brew?.user_id}</p>
             <p>Price: {brew?.price}</p>
-            <p>Tags: {brew?.brew_tags}</p>
+            {/* <p>Tags: {brew?.brew_tags}</p> */}
             <button onClick={() => setCart(brewObj)}>
                 Add to Cart
             </button>

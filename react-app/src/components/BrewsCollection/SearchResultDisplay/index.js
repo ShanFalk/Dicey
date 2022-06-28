@@ -6,6 +6,8 @@ function SearchResultDisplay () {
     const brews = useSelector(state => state.brews);
     let { search } = useLocation();
     search = search.slice(6).toLowerCase()
+    // const search = useLocation().search;
+    // const tagId = new URLSearchParams(search).get('tag');
 
     const results = Object.values(brews).filter((brew) => {
         //TODO check if search in tags (loop)
