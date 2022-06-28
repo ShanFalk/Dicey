@@ -1,0 +1,30 @@
+.filter-bar-icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filter-block {
+    position: unset;
+    margin: 55px;
+
+}
+
+.filter-icon-button {
+    border: 1px solid lightgray;
+    border-radius: 50px;
+    padding: 20px;
+    cursor: pointer;
+    color: white;
+}
+
+.filter-icon {
+    display: block;
+    margin: 0 auto;
+}

@@ -140,7 +140,6 @@ const handleCancelClick = (e) => {
           })} */}
       <button className='' type="submit">Update Brew</button>
       <button className='' type="button" onClick={handleCancelClick}>Cancel</button>
-      <button onClick={() => setShowEditForm(false)}>Hide Edit Form</button>
     </form>
   </div>
   )
