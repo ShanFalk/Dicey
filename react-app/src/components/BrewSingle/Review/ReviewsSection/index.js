@@ -5,7 +5,7 @@ import EditReview from "../EditReview";
 
 function ReviewsSection ({brew}) {
     const [reviewEdit, setReviewEdit] = useState(false)
-    
+
     if (reviewEdit){
         return (
             <EditReview  setReviewEdit={setReviewEdit}/>
@@ -20,7 +20,7 @@ function ReviewsSection ({brew}) {
                 <Review key={review.id} review={review} setReviewEdit={setReviewEdit} />
                 )
             })}
-            
+
             <ReviewForm />
         </div>
     )
