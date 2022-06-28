@@ -7,6 +7,7 @@ function BrewDetails ({brew, setShowEditForm}) {
     const [cart, setCart] = useState([]);
     console.log('THIS IS A BREW', brew)
     //TODO: optional chaining
+    const image = brew?.images[0]
 
     useEffect(()=> {
         localStorage.setItem('cart', JSON.stringify(cart))
@@ -22,8 +23,13 @@ function BrewDetails ({brew, setShowEditForm}) {
         key.includes('price')))
 
     return (
-        <div>
+        <div className="brew-block">
             <h2>This is the BrewSingleComponents - BrewDetails Component</h2>
+            <div className="brew-image-block">
+            <img className="brew-image" src={image?.img_url}
+        alt="" />
+            </div>
+            <div className="brew-details-block">
             <h3>Title: {brew?.title}</h3>
             <p>Description: {brew?.description}</p>
             <a href={brew?.pdf_url} download="true">Download</a>
@@ -33,7 +39,10 @@ function BrewDetails ({brew, setShowEditForm}) {
             <button onClick={() => setCart(brewObj)}>
                 Add to Cart
             </button>
+            {sessionUser?.id === brew?.user_id && (
             <button onClick={() => setShowEditForm(true)}>Show Edit Form</button>
+            )}
+            </div>
         </div>
 
     )

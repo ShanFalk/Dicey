@@ -13,21 +13,18 @@ function BrewPage () {
 
     const brew = useSelector(state => state.brews[brewId])
 
-    if (showEditForm === false) {
+    if(showEditForm){
         return (
-            <div>
-                <BrewDetails setShowEditForm={setShowEditForm} brew={brew} />
-                <ReviewsSection />
-            </div>
-        )
-    } else {
-        return (
-        <>
-        {sessionUser?.id === brew?.user_id &&
             <BrewUpdateForm setShowEditForm={setShowEditForm} brew={brew}/>
-            }
-        </>
-    )
-}
+        )
+    }
+
+
+return (
+    <div>
+        <BrewDetails setShowEditForm={setShowEditForm} brew={brew} />
+        <ReviewsSection />
+    </div>
+)
 }
 export default BrewPage;
