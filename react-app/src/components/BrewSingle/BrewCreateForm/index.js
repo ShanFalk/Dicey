@@ -8,33 +8,35 @@ function BrewCreateForm() {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector(state => state.session.user);
-  // const allTags = useSelector(state => state.session.tags);
+  const allTags = Object.values(useSelector(state => state.tags));
   const [errors, setErrors] = useState([]);
 
-  // if(!sessionUser) {
-  //   history.push("/login")
-  // }
-
-  const allTags = [{id: 1, name: 'Classic'}, {id: 2, name: 'Sci-fi'}, {id: 3, name: 'Comedy'}]
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [pdfUrl, setPdfUrl] = useState("");
   const [imgUrl, setImgUrl] = useState(null);
   const [price, setPrice] = useState("");
-  const [tags, setTags] = useState("");
+  const [tags, setTags] = useState([]);
 
 
 
   const updateTitle = (e) => setTitle(e.target.value);
   const updateDescription = (e) => setDescription(e.target.value);
   const updatePrice = (e) => setPrice(e.target.value);
-  const updateTags = (e) => setTags(...tags, e.target.value);
+  const updateTags = (e) => {
+    if(tags.indexOf(e.target.value) !== -1) {
+      tags.splice(tags.indexOf(e.target.value), 1)
+      return setTags([...tags])
+    }
+    else return setTags([...tags, e.target.value])
+  }
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
+    console.log(tags)
 
     const payload = {
       description,
@@ -42,26 +44,16 @@ function BrewCreateForm() {
       pdf_url: pdfUrl,
       price,
       img_url: imgUrl,
-      tags,
+      brew_tags: tags,
       user_id: sessionUser.id
 };
-
-// const payload = {
-//   description: "really sweet",
-//   title: "sweet brew",
-//   pdf_url: "",
-//   price: 25.00,
-//   img_url: "",
-//   tags,
-//   user_id: sessionUser.id
-// };
 
 let createdBrew = await dispatch(createBrew(payload)).catch(async (res) => {
   const data = await res.json();
   if (data && data.errors) setErrors(data.errors);
 });
 if (createdBrew) {
-  history.push(`/${createdBrew.id}`)
+  history.push(`/brew/${createdBrew.id}`)
 }
 }
 
@@ -74,6 +66,8 @@ const updatePdf = (e) => {
   const pdf = e.target.files[0]
   setPdfUrl(pdf)
 }
+
+
 
 const handleCancelClick = (e) => {
     e.preventDefault();
@@ -127,15 +121,15 @@ const handleCancelClick = (e) => {
         onChange={updatePrice} />
         {allTags.map((tag) => {
             return (
-              <>
-              <label>{tag.name}</label>
+              <div key={tag.id}>
+            <label>{tag.name}</label>
             <input 
-            value={tag.name}
-            type="radio"
+            value={tag.id}
+            type="checkbox"
             id={tag.id}
             onClick={updateTags}
             />
-            </>
+            </div>
             )
           })}
       <button className='' type="submit">Create Brew</button>
