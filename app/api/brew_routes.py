@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import Brew, db, Image
+from app.models import Brew, db, Image, Tag
 from app.forms.brew_form import CreateBrew, UpdateBrew
 from app.utils import upload, format_errors
 from flask_login import current_user, login_user, logout_user, login_required
@@ -26,9 +26,11 @@ def add_brew():
 
     if form.validate_on_submit():
 
-        tag_arr = form.data["brew_tags"][0].split("")
-        print(tag_arr)
-        tags = form.data
+        tag_id_arr = form.data["brew_tags"].split(",")
+        tag_id_arr = [int(id) for id in tag_id_arr]
+        print("*"*50, tag_id_arr)
+        tags = Tag.query.all()
+        brew_tags = [tag for tag in tags if tag.id in tag_id_arr]
 
         new_brew = Brew(
             title=form.data['title'],
@@ -36,7 +38,7 @@ def add_brew():
             pdf_url=pdf_url,
             price=form.data['price'],
             user_id=form.data['user_id'],
-        )
+            brew_tags=brew_tags)
 
         db.session.add(new_brew)
         db.session.commit()
