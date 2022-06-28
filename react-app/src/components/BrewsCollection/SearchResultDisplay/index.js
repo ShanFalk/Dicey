@@ -21,6 +21,9 @@ function SearchResultDisplay () {
             if (brew.title.toLowerCase().includes(term) || brew.description.toLowerCase().includes(term)) {
                 return true;
             }
+            for (let tag of brew.brew_tags) {
+                if (tag.name.toLowerCase().includes(term)) return true;
+            }
         }
     })
 
