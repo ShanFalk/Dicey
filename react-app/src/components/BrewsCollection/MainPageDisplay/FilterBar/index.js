@@ -13,7 +13,7 @@ function FilterBar({brews}) {
     }
     
   return (
-    <div className='filter-block'>
+    <div className='filter-block' >
         <div className='filter-bar-icons'>
         {tags.map(tag => {
             let content = (<i className="fa-solid fa-spinner"></i>);
@@ -23,7 +23,9 @@ function FilterBar({brews}) {
             if (tag.name === "Science Fantasy") content = (<i className="fa-solid fa-flask"></i>)
             if (tag.name === "Noir") content = (<i className="fa-solid fa-user-secret"></i>)
             if (tag.name === "Horror") content = (<i className="fa-solid fa-ghost" ></i>)
-
+            if (tag.name === "Funny") content = (<i className="fa-solid fa-face-laugh-squint"></i>)
+            if (tag.name === "JRPG") content = (<i className="fa-solid fa-people-group"></i>)
+            
             return (
                 <div className='icon-block' key={tag.id}>
                     <button className='filter-icon-button purple' type= "button" aria-hidden="false" aria-pressed="true" onClick={() => filterResults(tag.name)}>
