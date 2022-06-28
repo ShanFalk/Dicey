@@ -30,9 +30,11 @@ export const createBrew = (payload) => async (dispatch) => {
       pdf_url,
       price,
       img_url,
-      tags,
+      brew_tags,
       user_id
     } = payload
+
+    console.log(brew_tags)
 
     const form = new FormData();
     form.append('title', title)
@@ -40,7 +42,7 @@ export const createBrew = (payload) => async (dispatch) => {
     form.append('pdf_url', pdf_url)
     form.append('img_url', img_url)
     form.append('price', price)
-    form.append('tags', tags)
+    form.append('brew_tags', brew_tags)
     form.append('user_id', user_id)
 
 
@@ -85,7 +87,7 @@ export const updateBrew = (payload) => async (dispatch) => {
     price,
     id,
     // img_url,
-    // tags
+    tags
   } = payload
 
   const form = new FormData();
@@ -95,7 +97,7 @@ export const updateBrew = (payload) => async (dispatch) => {
   // form.append('img_url', img_url)
   form.append('price', price)
   form.append('id', id)
-  // form.append('tags', tags)
+  form.append('brew_tags', tags)
 
   const response = await fetch('/api/brews', {
     method: "PUT",
