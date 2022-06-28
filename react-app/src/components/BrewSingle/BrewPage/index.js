@@ -1,5 +1,5 @@
 import BrewDetails from "../BrewDetails";
-import ReviewsSection from "../../ReviewComponents/ReviewsSection";
+import ReviewsSection from "../Review/ReviewsSection";
 import BrewUpdateForm from "../BrewUpdateForm";
 import React, { useEffect, useState }  from 'react'
 import { useHistory, useParams } from 'react-router-dom';
