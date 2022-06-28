@@ -1,6 +1,5 @@
 import BrewUpdateForm from "../BrewUpdateForm";
 import { useSelector } from "react-redux";
-// import AddToCart from "../AddToCart";
 
 function BrewDetails ({brew, setShowEditForm}) {
     const sessionUser = useSelector(state => state.session.user);
@@ -21,7 +20,6 @@ function BrewDetails ({brew, setShowEditForm}) {
             <p>User: {brew?.user_id}</p>
             <p>Price: {brew?.price}</p>
             <p>Tags: {brew?.brew_tags}</p>
-            {/* <AddToCart brew={brew}/> */}
             {sessionUser?.id === brew?.user_id && (
             <button onClick={() => setShowEditForm(true)}>Show Edit Form</button>
             )}
