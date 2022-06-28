@@ -1,18 +1,12 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import './FilterBar.css'
 
 function FilterBar({brews}) {
     const tags = Object.values(useSelector(state => state.tags))
     
-
-    
-
-    const filterResults = (filterBy) => {
-        // brews.filter(brew => brew.title.toLowerCase().includes(filterBy.toLowerCase()) || brew.description.toLowerCase().includes(filterBy.toLowerCase()))
-    }
-    
-  return (
+    return (
     <div className='filter-block' >
         <div className='filter-bar-icons'>
         {tags.map(tag => {
@@ -28,10 +22,10 @@ function FilterBar({brews}) {
             
             return (
                 <div className='icon-block' key={tag.id}>
-                    <button className='filter-icon-button purple' type= "button" aria-hidden="false" aria-pressed="true" onClick={() => filterResults(tag.name)}>
+                    <Link className='filter-icon-button purple' to={`/search?term=${tag.name}&tagId=${tag.id}`}>
                         <span className='filter-icon'>{content}</span>
                         <span className='filter-name'>{tag.name}</span>
-                    </button>
+                    </Link>
                 </div>
             )
         })}

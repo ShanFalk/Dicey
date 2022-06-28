@@ -4,6 +4,11 @@ from wtforms import FileField, IntegerField, StringField, BooleanField, FloatFie
 from wtforms import validators
 from wtforms.validators import DataRequired
 import re
+from app.models import db, Tag
+
+class DictField(Field):
+    def get_list(self, values):
+        self.data = values
 
 
 class DictField(Field):
@@ -12,6 +17,7 @@ class DictField(Field):
 
 
 class CreateBrew(FlaskForm):
+
     title = StringField('title', validators=[DataRequired()])
     description = TextAreaField('description', validators=[DataRequired()])
     price = FloatField('price', validators=[DataRequired()])

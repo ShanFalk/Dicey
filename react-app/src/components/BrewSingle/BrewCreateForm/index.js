@@ -53,7 +53,7 @@ let createdBrew = await dispatch(createBrew(payload)).catch(async (res) => {
   if (data && data.errors) setErrors(data.errors);
 });
 if (createdBrew) {
-  history.push(`/brew/${createdBrew.id}`)
+  history.push(`/brews/${createdBrew.id}`)
 }
 }
 
@@ -100,14 +100,14 @@ const handleCancelClick = (e) => {
         <input
         type="file"
         placeholder="Pdf Upload"
-        // required
+        required
         accept='application/pdf'
         className='input'
         onChange={updatePdf} />
         <input
         type="file"
         placeholder="Image Upload"
-        // required
+        required
         accept='image/*'
         className='input'
         onChange={updateImage} />
