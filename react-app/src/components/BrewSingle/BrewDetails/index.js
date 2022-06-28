@@ -4,7 +4,19 @@ import { useEffect, useState} from 'react'
 
 function BrewDetails ({brew, setShowEditForm}) {
     const sessionUser = useSelector(state => state.session.user);
+    const [cart, setCart] = useState([]);
 
+    //TODO: optional chaining
+    const brewObj = Object.fromEntries(Object.entries(brew)
+        .filter(([key, value]) =>
+        key.includes('title') ||
+        key.includes('description') ||
+        key.includes('images') ||
+        key.includes('price')))
+
+    useEffect(()=> {
+        localStorage.setItem('cart', JSON.stringify(cart))
+    }, [cart]);
 
     return (
         <div>
@@ -15,6 +27,9 @@ function BrewDetails ({brew, setShowEditForm}) {
             <p>User: {brew?.user_id}</p>
             <p>Price: {brew?.price}</p>
             <p>Tags: {brew?.brew_tags}</p>
+            <button onClick={() => setCart(brewObj)}>
+                Add to Cart
+            </button>
             <button onClick={() => setShowEditForm(true)}>Show Edit Form</button>
         </div>
 
