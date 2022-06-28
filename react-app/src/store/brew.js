@@ -94,11 +94,8 @@ export const updateBrew = (payload) => async (dispatch) => {
   // form.append('pdf_url', pdf_url)
   // form.append('img_url', img_url)
   form.append('price', price)
+  form.append('id', id)
   // form.append('tags', tags)
-
-
-
-
 
   const response = await fetch('/api/brews', {
     method: "PUT",
@@ -111,6 +108,7 @@ export const updateBrew = (payload) => async (dispatch) => {
     }
 
     dispatch(creation(data));
+    return null
   }
 }
 

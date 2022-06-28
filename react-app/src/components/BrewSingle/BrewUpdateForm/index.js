@@ -2,13 +2,11 @@ import React from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState} from 'react'
-import {createBrew} from'../../../store/brew'
+import { updateBrew} from'../../../store/brew'
 
 function BrewUpdateForm({brew, setShowEditForm}) {
   const dispatch = useDispatch();
-  const history = useHistory();
   const sessionUser = useSelector(state => state.session.user);
-  const id = brew?.id
 
   const [errors, setErrors] = useState([]);
 
@@ -35,7 +33,7 @@ function BrewUpdateForm({brew, setShowEditForm}) {
     setErrors([]);
 
     const payload = {
-        id,
+        id: brew.id,
         description,
         title,
         price,
@@ -55,12 +53,12 @@ function BrewUpdateForm({brew, setShowEditForm}) {
 //   user_id: sessionUser.id
 // };
 
-let createdBrew = await dispatch(createBrew(payload)).catch(async (res) => {
+let updatedBrew = await dispatch(updateBrew(payload)).catch(async (res) => {
   const data = await res.json();
   if (data && data.errors) setErrors(data.errors);
 });
-if (createdBrew) {
-  history.push(`/${createdBrew.id}`)
+if (updatedBrew) {
+    setShowEditForm(false)
 }
 }
 
