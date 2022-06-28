@@ -20,12 +20,11 @@ function BrewPage () {
         )
     }
 
-
 return (
     <div>
         <BrewDetails setShowEditForm={setShowEditForm} brew={brew} />
         <AddToCart brew={brew} />
-        <ReviewsSection />
+        <ReviewsSection brew={brew} />
     </div>
 )
 }
