@@ -7,6 +7,7 @@ class Tag(db.Model):
     __tablename__ = 'tags'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
+    # type = db.Column(db.String(20), nullable=False)
 
     # relationships
     # the brews that belong to a tag
