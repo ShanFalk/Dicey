@@ -53,7 +53,7 @@ let createdBrew = await dispatch(createBrew(payload)).catch(async (res) => {
   if (data && data.errors) setErrors(data.errors);
 });
 if (createdBrew) {
-  history.push(`/brew/${createdBrew.id}`)
+  history.push(`/brews/${createdBrew.id}`)
 }
 }
 

@@ -18,6 +18,8 @@ def add_brew():
     img_url = upload(image)
     pdf_url = upload(pdf)
 
+    print('*'*30, img_url)
+
     form = CreateBrew()
     form['csrf_token'].data = request.cookies['csrf_token']
 
@@ -37,15 +39,15 @@ def add_brew():
             brew_tags=brew_tags)
 
         db.session.add(new_brew)
-        print('-'*50, 'NEW AFTER ADD')
         db.session.commit()
-        print('-'*50, 'NEW AFTER COMMIT')
         new_image = Image(
             img_url=img_url,
             brew_id=new_brew.id)
         db.session.add(new_image)
         db.session.commit()
-        return new_brew.to_dict()
+        brew = Brew.query.options(joinedload('reviews'), joinedload(
+        'images'), joinedload('brew_tags')).get(new_brew.id)
+        return brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.brew_tags)
     return {'errors': format_errors(form.errors)}, 401
 
 
