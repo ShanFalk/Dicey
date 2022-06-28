@@ -7,6 +7,11 @@ function ShoppingCartPage () {
     const cartItems = brewIds.map((id) => brews[id]);
     const numItems = cartItems.length;
 
+    const sum = cartItems?.reduce(function(accum, currValue){
+        console.log('THIS IS THE ACCUM PRICE', parseFloat(accum.price))
+        return parseFloat(accum.price) + parseFloat(currValue.price);
+    })
+
     return (
         <div>
             <div>
@@ -19,13 +24,13 @@ function ShoppingCartPage () {
                     <li>{item.title}</li>
                     <li>{item.description}</li>
                     <li>{item.images}</li>
-                    <li>{item.price}</li>
+                    <li>${item.price}</li>
                 </ul>
               );
             })}
             </div>
             <div>
-                <p>Item(s) total</p>
+                <p>Item(s) total ${sum}</p>
                 <p>Coupon Applied!</p>
                 <p>NAT20</p>
                 <p>Total </p>
