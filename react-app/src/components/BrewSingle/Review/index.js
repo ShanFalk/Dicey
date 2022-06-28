@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 function Review ({review, setReviewEdit}) {
     const sessionUser = useSelector(state => state.session.user);
+    console.log(review)
 
     return (
         <div>
