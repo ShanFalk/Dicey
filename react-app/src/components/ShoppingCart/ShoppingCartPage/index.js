@@ -13,7 +13,7 @@ function ShoppingCartPage () {
                 <p>{numItems} item(s) in your cart</p>
             </div>
             <div>
-            {cartItems.map((item) => {
+            {cartItems?.map((item) => {
             return (
                 <ul key={item.id}>
                     <li>{item.title}</li>
