@@ -2,25 +2,27 @@ import BrewUpdateForm from "../BrewUpdateForm";
 import { useSelector } from "react-redux";
 import { useEffect, useState} from 'react'
 
+const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]')
+console.log(cartFromLocalStorage)
+
 function BrewDetails ({brew, setShowEditForm}) {
     const sessionUser = useSelector(state => state.session.user);
-    const [cart, setCart] = useState([]);
-    console.log('THIS IS A BREW', brew)
-    //TODO: optional chaining
+    const [cart, setCart] = useState(cartFromLocalStorage);
+
     const image = brew?.images[0]
 
     useEffect(()=> {
         localStorage.setItem('cart', JSON.stringify(cart))
     }, [cart]);
 
-    if (!brew) return null;
+    const addToCart = () => {
+        if (JSON.parse(localStorage.getItem('cart')).includes(brew?.id)) {
+            return (
+                alert('Item already in cart!')
+            )
+        } else (setCart([...cart, brew?.id]));
 
-    const brewObj = Object.fromEntries(Object.entries(brew)
-        .filter(([key, value]) =>
-        key.includes('title') ||
-        key.includes('description') ||
-        key.includes('images') ||
-        key.includes('price')))
+    };
 
     return (
         <div className="brew-block">
@@ -36,7 +38,7 @@ function BrewDetails ({brew, setShowEditForm}) {
             <p>User: {brew?.user_id}</p>
             <p>Price: {brew?.price}</p>
             <p>Tags: {brew?.brew_tags}</p>
-            <button onClick={() => setCart(brewObj)}>
+            <button onClick={addToCart}>
                 Add to Cart
             </button>
             {sessionUser?.id === brew?.user_id && (
