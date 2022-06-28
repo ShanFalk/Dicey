@@ -24,7 +24,13 @@ function BrewCreateForm() {
   const updateTitle = (e) => setTitle(e.target.value);
   const updateDescription = (e) => setDescription(e.target.value);
   const updatePrice = (e) => setPrice(e.target.value);
-  const updateTags = (e) => setTags([...tags, e.target.value]);
+  const updateTags = (e) => {
+    if(tags.indexOf(e.target.value) !== -1) {
+      tags.splice(tags.indexOf(e.target.value), 1)
+      return setTags([...tags])
+    }
+    else return setTags([...tags, e.target.value])
+  }
 
 
   const handleSubmit = async (e) => {
@@ -47,7 +53,7 @@ let createdBrew = await dispatch(createBrew(payload)).catch(async (res) => {
   if (data && data.errors) setErrors(data.errors);
 });
 if (createdBrew) {
-  history.push(`/${createdBrew.id}`)
+  history.push(`/brew/${createdBrew.id}`)
 }
 }
 
@@ -115,7 +121,7 @@ const handleCancelClick = (e) => {
         onChange={updatePrice} />
         {allTags.map((tag) => {
             return (
-              <>
+              <div key={tag.id}>
             <label>{tag.name}</label>
             <input 
             value={tag.id}
@@ -123,7 +129,7 @@ const handleCancelClick = (e) => {
             id={tag.id}
             onClick={updateTags}
             />
-            </>
+            </div>
             )
           })}
       <button className='' type="submit">Create Brew</button>

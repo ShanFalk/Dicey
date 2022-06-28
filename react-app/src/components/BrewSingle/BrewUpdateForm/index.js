@@ -2,10 +2,11 @@ import React from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState} from 'react'
-import { updateBrew} from'../../../store/brew'
+import { updateBrew, deleteBrew} from'../../../store/brew'
 
 function BrewUpdateForm({brew, setShowEditForm}) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector(state => state.session.user);
 
   const [errors, setErrors] = useState([]);
@@ -43,16 +44,6 @@ function BrewUpdateForm({brew, setShowEditForm}) {
     //   user_id: sessionUser.id
         };
 
-// const payload = {
-//   description: "really sweet",
-//   title: "sweet brew",
-//   pdf_url: "",
-//   price: 25.00,
-//   img_url: "",
-//   tags,
-//   user_id: sessionUser.id
-// };
-
 let updatedBrew = await dispatch(updateBrew(payload)).catch(async (res) => {
   const data = await res.json();
   if (data && data.errors) setErrors(data.errors);
@@ -76,6 +67,11 @@ const handleCancelClick = (e) => {
     e.preventDefault();
     setShowEditForm(false);
   };
+
+const handleDelete = (e) => {
+  const data = dispatch(deleteBrew(brew.id))
+  history.push("/")
+}
 
 
   return (
@@ -140,6 +136,7 @@ const handleCancelClick = (e) => {
           })} */}
       <button className='' type="submit">Update Brew</button>
       <button className='' type="button" onClick={handleCancelClick}>Cancel</button>
+      <button className='' type='button' onClick={handleDelete}>Delete Brew</button>
     </form>
   </div>
   )
