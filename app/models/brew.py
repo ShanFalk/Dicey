@@ -3,23 +3,25 @@ from datetime import datetime
 from .brewtags import brewtags
 from sqlalchemy.orm import validates
 
+
 class Brew(db.Model):
     __tablename__ = 'brews'
 
     # columns
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(255), nullable = False)
+    title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text)
-    pdf_url = db.Column(db.Text, nullable = False)
-    price = db.Column(db.Float, nullable = False)
+    pdf_url = db.Column(db.Text, nullable=False)
+    price = db.Column(db.Float, nullable=False)
     for_sale = db.Column(db.Boolean, default=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.now())
 
     # relationships
     user = db.relationship("User", back_populates="brews")
-    images = db.relationship("Image", back_populates="brew")
+    images = db.relationship(
+        "Image", back_populates="brew", cascade="delete, all")
     reviews = db.relationship("Review", back_populates="brew")
     purchases = db.relationship("Purchase", back_populates="brew")
     # the tags that belong to a brew
@@ -29,6 +31,7 @@ class Brew(db.Model):
                                 # unsure about cascade
                                 # cascade="all, delete"
                                 )
+
     def to_dict(self, **kwargs):
 
         out = {
