@@ -70,7 +70,7 @@ function App() {
           <ProfilePage />
         </ProtectedRoute>
 
-        <Route path='/brew/:brewId' exact={true} >
+        <Route path='/brews/:brewId' exact={true} >
           <BrewPage/>
         </Route>
 

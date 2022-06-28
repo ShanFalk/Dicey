@@ -3,14 +3,14 @@ from app.models import db, Tag
 
 def seed_tags():
     db.session.add_all([
-        Tag(name='Horror', type='genre'),
-        Tag(name='Science Fantasy', type='genre'),
-        Tag(name='Funny', type='genre'),
-        Tag(name='JRPG', type='genre'),
-        Tag(name='Medieval', type='genre'),
-        Tag(name='Western', type='genre'),
-        Tag(name='Regency', type='genre'),
-        Tag(name='Noir', type='genre'),
+        Tag(name='Horror'),
+        Tag(name='Science Fantasy'),
+        Tag(name='Funny'),
+        Tag(name='JRPG'),
+        Tag(name='Medieval'),
+        Tag(name='Western'),
+        Tag(name='Regency'),
+        Tag(name='Noir'),
         # Tag(name='Adventure', type='kind'),
         # Tag(name='Items', type='kind'),
         # Tag(name='NPCs/Monsters', type='kind'),

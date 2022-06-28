@@ -11,7 +11,7 @@ def seed_brews():
             price = 1.00,
             for_sale = True,
             user_id = 3,
-            brew_tags=Tag.query.filter_by(Tag.name.ilike("Medieval"))),
+            brew_tags=Tag.query.filter_by(Tag.name.ilike("Medieval"), Tag.name.ilike("Horror"))),
 
 
             Brew(

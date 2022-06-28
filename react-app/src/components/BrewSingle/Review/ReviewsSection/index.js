@@ -1,19 +1,26 @@
 import Review from "../index";
 import ReviewForm from "../ReviewForm";
+import {useState} from 'react'
+import EditReview from "../EditReview";
 
-function ReviewsSection ({ brew }) {
+function ReviewsSection ({brew}) {
+    const [reviewEdit, setReviewEdit] = useState(false)
 
-    brew?.reviews
+    if (reviewEdit){
+        return (
+            <EditReview  setReviewEdit={setReviewEdit}/>
+        )
+    }
+
     return (
         <div>
-            <div>
-                <button>Add a Review</button>
-            </div>
-            <h3>This is the ReviewComponents - ReviewsSection Component</h3>
-            {brew.reviews}
-            <Review />
-            <Review />
-            <Review />
+            <h3>Reviews</h3>
+            {brew?.reviews.map(review => {
+                return (
+                <Review key={review.id} review={review} setReviewEdit={setReviewEdit} />
+                )
+            })}
+
             <ReviewForm />
         </div>
     )
