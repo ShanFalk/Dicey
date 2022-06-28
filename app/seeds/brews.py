@@ -11,7 +11,7 @@ def seed_brews():
             price = 1.00,
             for_sale = True,
             user_id = 3,
-            brew_tags=Tag.query.filter_by(Tag.name.ilike("Medieval"), Tag.name.ilike("Horror"))),
+            brew_tags=[x for x in tags if x.name == "Fantasy"]),
 
 
             Brew(
@@ -21,7 +21,7 @@ def seed_brews():
             price = 0.01,
             for_sale = True,
             user_id = 2,
-            brew_tags=Tag.query.filter_by(Tag.name.ilike("Medieval"))),
+            brew_tags=[x for x in tags if x.name == "Fantasy"]),
 
             Brew(
             title = 'Poisonous Clover',
@@ -30,7 +30,7 @@ def seed_brews():
             price = 0.20,
             for_sale = True,
             user_id = 1,
-            brew_tags=Tag.query.filter_by(Tag.name.ilike("Medieval"))),
+            brew_tags=[x for x in tags if x.name == "Fantasy"]),
 
             Brew(
             title = 'The Lazy Dungeon Master',
@@ -39,7 +39,7 @@ def seed_brews():
             price = 5.00,
             for_sale = True,
             user_id = 3,
-            brew_tags=Tag.query.filter_by(Tag.name.ilike("Medieval"))),
+            brew_tags=[x for x in tags if x.name == "Fantasy"]),
 
             Brew(
             title = 'Creative Corridors',
@@ -48,7 +48,7 @@ def seed_brews():
             price = 2.00,
             for_sale = True,
             user_id = 2,
-            brew_tags=Tag.query.filter_by(Tag.name.ilike("Medieval"))),
+            brew_tags=[x for x in tags if x.name == "Fantasy"]),
 
             Brew(
             title = 'Menzoberranzan',
@@ -57,7 +57,7 @@ def seed_brews():
             price = 1.00,
             for_sale = True,
             user_id = 1,
-            brew_tags=Tag.query.filter_by(Tag.name.ilike("Medieval"))),
+            brew_tags=[x for x in tags if x.name == "Fantasy"]),
 
             Brew(
             title = '101 Uncommon Magical Items',
@@ -66,7 +66,7 @@ def seed_brews():
             price = 0.01,
             for_sale = True,
             user_id = 3,
-            brew_tags=Tag.query.filter_by(Tag.name.ilike("Medieval"))),
+            brew_tags=[x for x in tags if x.name == "Fantasy"]),
 
             Brew(
             title = 'Trilemma Map Pack',
@@ -75,7 +75,7 @@ def seed_brews():
             price = 1.00,
             for_sale = True,
             user_id = 2,
-            brew_tags=Tag.query.filter_by(Tag.name.ilike("Medieval"))),
+            brew_tags=[x for x in tags if x.name == "Fantasy"]),
 
             Brew(
             title = '20 Uncommon Magic Rings',
@@ -84,7 +84,7 @@ def seed_brews():
             price = 0.50,
             for_sale = True,
             user_id = 1,
-            brew_tags=Tag.query.filter_by(Tag.name.ilike("Medieval"))),
+            brew_tags=[x for x in tags if x.name == "Fantasy"]),
 
             Brew(
             title = 'The Ruins of Olbi',
@@ -93,7 +93,7 @@ def seed_brews():
             price = 2.00,
             for_sale = True,
             user_id = 3,
-            brew_tags=Tag.query.filter_by(Tag.name.ilike("Medieval"))),
+            brew_tags=[x for x in tags if x.name == "Fantasy"]),
 
             Brew(
             title = 'Kidnap the Archpriest',
@@ -102,7 +102,7 @@ def seed_brews():
             price = 5.00,
             for_sale = True,
             user_id = 2,
-            brew_tags=Tag.query.filter_by(Tag.name.ilike("Funny"))),
+            brew_tags=[x for x in tags if x.name == "Fantasy"]),
 
             Brew(
             title = 'Random Encounters',
@@ -111,7 +111,7 @@ def seed_brews():
             price = 0.50,
             for_sale = True,
             user_id = 1,
-            brew_tags=Tag.query.filter_by(Tag.name.ilike("Medieval"))),
+            brew_tags=[x for x in tags if x.name == "Fantasy"]),
 
             Brew(
             title = 'Grimm Encounters',
@@ -120,7 +120,7 @@ def seed_brews():
             price = 0.99,
             for_sale = True,
             user_id = 3,
-            brew_tags=Tag.query.filter_by(Tag.name.ilike("Horror"))),
+            brew_tags=[x for x in tags if x.name == "Horror"]),
 
             Brew(
             title = 'Versatile NPCS',
@@ -129,7 +129,7 @@ def seed_brews():
             price = 0.01,
             for_sale = True,
             user_id = 2,
-            brew_tags=Tag.query.filter_by(Tag.name.ilike("Medieval"))),
+            brew_tags=[x for x in tags if x.name == "Fantasy"]),
 
             Brew(
             title = 'Blood at the Auction',
@@ -138,7 +138,7 @@ def seed_brews():
             price = 0.50,
             for_sale = True,
             user_id = 1,
-            brew_tags=Tag.query.filter_by(Tag.name.ilike("Medieval"))),
+            brew_tags=[x for x in tags if x.name == "Horror"]),
     ])
 
     db.session.commit()
