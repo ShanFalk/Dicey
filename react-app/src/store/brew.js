@@ -30,9 +30,11 @@ export const createBrew = (payload) => async (dispatch) => {
       pdf_url,
       price,
       img_url,
-      tags,
+      brew_tags,
       user_id
     } = payload
+
+    console.log(brew_tags, brew_tags[0])
 
     const form = new FormData();
     form.append('title', title)
@@ -40,7 +42,7 @@ export const createBrew = (payload) => async (dispatch) => {
     form.append('pdf_url', pdf_url)
     form.append('img_url', img_url)
     form.append('price', price)
-    form.append('tags', tags)
+    // form.append('brew_tags', brew_tags[0])
     form.append('user_id', user_id)
 
 

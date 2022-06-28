@@ -16,13 +16,16 @@ function FilterBar({brews}) {
     <div className='filter-block'>
         <div className='filter-bar-icons'>
         {tags.map(tag => {
-            let content = (<i class="fa-solid fa-spinner"></i>);
-            if (tag.name === "Western") content = (<i class="fa-solid fa-hat-cowboy-side"></i>)
-            if (tag.name === "Regency") content = (<i class="fa-solid fa-crown"></i>)
-            if (tag.name === "Medieval") content = (<i class="fa-brands fa-fort-awesome"></i>)
+            let content = (<i className="fa-solid fa-spinner"></i>);
+            if (tag.name === "Western") content = (<i className="fa-solid fa-hat-cowboy-side"></i>)
+            if (tag.name === "Regency") content = (<i className="fa-solid fa-crown"></i>)
+            if (tag.name === "Medieval") content = (<i className="fa-brands fa-fort-awesome"></i>)
+            if (tag.name === "Science Fantasy") content = (<i className="fa-solid fa-flask"></i>)
+            if (tag.name === "Noir") content = (<i className="fa-solid fa-user-secret"></i>)
+            if (tag.name === "Horror") content = (<i className="fa-solid fa-ghost" ></i>)
 
             return (
-                <div className='icon-block'>
+                <div className='icon-block' key={tag.id}>
                     <button className='filter-icon-button purple' type= "button" aria-hidden="false" aria-pressed="true" onClick={() => filterResults(tag.name)}>
                         <span className='filter-icon'>{content}</span>
                         <span className='filter-name'>{tag.name}</span>

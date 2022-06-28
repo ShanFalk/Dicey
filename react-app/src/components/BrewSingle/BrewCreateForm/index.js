@@ -8,28 +8,26 @@ function BrewCreateForm() {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector(state => state.session.user);
-  // const allTags = useSelector(state => state.session.tags);
+  const allTags = Object.values(useSelector(state => state.tags));
   const [errors, setErrors] = useState([]);
 
   // if(!sessionUser) {
   //   history.push("/login")
   // }
 
-  const allTags = [{id: 1, name: 'Classic'}, {id: 2, name: 'Sci-fi'}, {id: 3, name: 'Comedy'}]
-
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [pdfUrl, setPdfUrl] = useState("");
   const [imgUrl, setImgUrl] = useState(null);
   const [price, setPrice] = useState("");
-  const [tags, setTags] = useState("");
+  const [tags, setTags] = useState([]);
 
 
 
   const updateTitle = (e) => setTitle(e.target.value);
   const updateDescription = (e) => setDescription(e.target.value);
   const updatePrice = (e) => setPrice(e.target.value);
-  const updateTags = (e) => setTags(...tags, e.target.value);
+  const updateTags = (e) => setTags([...tags, e.target.value]);
 
 
   const handleSubmit = async (e) => {
@@ -42,7 +40,7 @@ function BrewCreateForm() {
       pdf_url: pdfUrl,
       price,
       img_url: imgUrl,
-      tags,
+      brew_tags: tags,
       user_id: sessionUser.id
 };
 
@@ -106,14 +104,14 @@ const handleCancelClick = (e) => {
         <input
         type="file"
         placeholder="Pdf Upload"
-        // required
+        required
         accept='application/pdf'
         className='input'
         onChange={updatePdf} />
         <input
         type="file"
         placeholder="Image Upload"
-        // required
+        required
         accept='image/*'
         className='input'
         onChange={updateImage} />
@@ -127,15 +125,15 @@ const handleCancelClick = (e) => {
         onChange={updatePrice} />
         {allTags.map((tag) => {
             return (
-              <>
-              <label>{tag.name}</label>
-            <input 
-            value={tag.name}
-            type="radio"
-            id={tag.id}
-            onClick={updateTags}
-            />
-            </>
+              <div key={tag.id}>
+                <label>{tag.name}</label>
+                <input 
+                value={tag.id}
+                type="checkbox"
+                id={tag.id}
+                onClick={updateTags}
+                />
+              </div>
             )
           })}
       <button className='' type="submit">Create Brew</button>
