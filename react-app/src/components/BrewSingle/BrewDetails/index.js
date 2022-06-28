@@ -1,28 +1,11 @@
 import BrewUpdateForm from "../BrewUpdateForm";
 import { useSelector } from "react-redux";
-import { useEffect, useState} from 'react'
-
-const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]')
-console.log(cartFromLocalStorage)
+// import AddToCart from "../AddToCart";
 
 function BrewDetails ({brew, setShowEditForm}) {
     const sessionUser = useSelector(state => state.session.user);
-    const [cart, setCart] = useState(cartFromLocalStorage);
 
     const image = brew?.images[0]
-
-    useEffect(()=> {
-        localStorage.setItem('cart', JSON.stringify(cart))
-    }, [cart]);
-
-    const addToCart = () => {
-        if (JSON.parse(localStorage.getItem('cart')).includes(brew?.id)) {
-            return (
-                alert('Item already in cart!')
-            )
-        } else (setCart([...cart, brew?.id]));
-
-    };
 
     return (
         <div className="brew-block">
@@ -38,9 +21,7 @@ function BrewDetails ({brew, setShowEditForm}) {
             <p>User: {brew?.user_id}</p>
             <p>Price: {brew?.price}</p>
             <p>Tags: {brew?.brew_tags}</p>
-            <button onClick={addToCart}>
-                Add to Cart
-            </button>
+            {/* <AddToCart brew={brew}/> */}
             {sessionUser?.id === brew?.user_id && (
             <button onClick={() => setShowEditForm(true)}>Show Edit Form</button>
             )}

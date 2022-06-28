@@ -21,7 +21,7 @@ function MainPageDisplay () {
       <div className='scroller'>
         {brews.map((brew) => {
           return (
-          <div className='brew-card-link'>
+          <div key={brew.id} className='brew-card-link'>
             <NavLink   to={`/brew/${brew.id}`} brew={brew} className="room-nav-link">
               <FeaturedBrewsCollection key={brew.id} brew={brew} />
             </NavLink>
