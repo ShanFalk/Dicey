@@ -21,7 +21,11 @@ function MainPageDisplay () {
         {brews.map((brew) => {
           return (
           <div className='brew-card-link' key={brew.id}>
+<<<<<<< HEAD
+            <NavLink   to={`/brews/${brew.id}`} brew={brew} className="room-nav-link">
+=======
             <Link to={`/brew/${brew.id}`} brew={brew} className="room-nav-link">
+>>>>>>> main
               <FeaturedBrewsCollection key={brew.id} brew={brew} />
             </Link>
           </div>

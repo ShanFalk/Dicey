@@ -6,6 +6,8 @@ function BrewDetails ({brew, setShowEditForm}) {
 
     const image = brew?.images[0]
 
+    //console.log(brew?.images)
+
     return (
         <div className="brew-block">
             <h2>This is the BrewSingleComponents - BrewDetails Component</h2>
@@ -19,7 +21,7 @@ function BrewDetails ({brew, setShowEditForm}) {
             <a href={brew?.pdf_url} download="true">Download</a>
             <p>User: {brew?.user_id}</p>
             <p>Price: {brew?.price}</p>
-            <p>Tags: {brew?.brew_tags}</p>
+            {/* <p>Tags: {brew?.brew_tags}</p> */}
             {sessionUser?.id === brew?.user_id && (
             <button onClick={() => setShowEditForm(true)}>Show Edit Form</button>
             )}

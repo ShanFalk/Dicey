@@ -1,3 +1,7 @@
+.brew-image {
+    width: 200px;
+    height: 200px;
+}
 .container {
     inline-size: min(100% - 2rem, 70rem);
     margin-inline: auto;

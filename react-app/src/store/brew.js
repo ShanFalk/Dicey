@@ -21,9 +21,9 @@ const update = (brew) => ({
   brew
 });
 
-const deletion = (brew) => ({
+const deletion = (brewId) => ({
   type: DELETE_BREW,
-  brew
+  brewId
 })
 
 
@@ -65,7 +65,8 @@ export const createBrew = (payload) => async (dispatch) => {
       return;
     }
 
-    return dispatch(creation(data));
+    dispatch(creation(data));
+    return data
   }
 }
 
@@ -73,12 +74,14 @@ export const createBrew = (payload) => async (dispatch) => {
 
 export const getAllBrews = () => async (dispatch) => {
   const response = await fetch('/api/brews');
+  console.log("HIT HERE")
 
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
-      return;
+      return data.errors;
     }
+
     dispatch(retrieveAll(data));
   }
 }
@@ -143,8 +146,9 @@ export default function brewReducer(state = initialState, action) {
         case MODIFY_BREW:
           return {...state, [action.brew.id] : action.brew }
         case DELETE_BREW:
-          delete state[action.bookId]
-          return state
+          let newState = {...state}
+          delete newState[action.brewId]
+          return newState
       default:
         return state;
     }
