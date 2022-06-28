@@ -1,6 +1,7 @@
 const CREATE_BREW = 'brews/CREATE_BREW';
 const GET_BREWS = 'brews/GET_BREWS'
 const MODIFY_BREW = 'brews/MODIFY_BREW';
+const DELETE_BREW = 'brews/DELETE_BREW'
 
 
 
@@ -20,6 +21,11 @@ const update = (brew) => ({
   brew
 });
 
+const deletion = (brew) => ({
+  type: DELETE_BREW,
+  brew
+})
+
 
 
 
@@ -30,9 +36,11 @@ export const createBrew = (payload) => async (dispatch) => {
       pdf_url,
       price,
       img_url,
-      tags,
+      brew_tags,
       user_id
     } = payload
+
+    console.log(brew_tags)
 
     const form = new FormData();
     form.append('title', title)
@@ -40,7 +48,7 @@ export const createBrew = (payload) => async (dispatch) => {
     form.append('pdf_url', pdf_url)
     form.append('img_url', img_url)
     form.append('price', price)
-    form.append('tags', tags)
+    form.append('brew_tags', brew_tags)
     form.append('user_id', user_id)
 
 
@@ -57,7 +65,7 @@ export const createBrew = (payload) => async (dispatch) => {
       return;
     }
 
-    dispatch(creation(data));
+    return dispatch(creation(data));
   }
 }
 
@@ -85,7 +93,7 @@ export const updateBrew = (payload) => async (dispatch) => {
     price,
     id,
     // img_url,
-    // tags
+    tags
   } = payload
 
   const form = new FormData();
@@ -95,7 +103,7 @@ export const updateBrew = (payload) => async (dispatch) => {
   // form.append('img_url', img_url)
   form.append('price', price)
   form.append('id', id)
-  // form.append('tags', tags)
+  form.append('brew_tags', tags)
 
   const response = await fetch('/api/brews', {
     method: "PUT",
@@ -112,6 +120,15 @@ export const updateBrew = (payload) => async (dispatch) => {
   }
 }
 
+export const deleteBrew = (brewId) => async dispatch => {
+  const response = await fetch(`/api/brews/${brewId}`, {
+    method: "DELETE"
+  })
+  if (response.ok) {
+    dispatch(deletion(brewId))
+  }
+}
+
 
 const initialState = {  };
 
@@ -125,6 +142,9 @@ export default function brewReducer(state = initialState, action) {
         return {...state, ...brews}
         case MODIFY_BREW:
           return {...state, [action.brew.id] : action.brew }
+        case DELETE_BREW:
+          delete state[action.bookId]
+          return state
       default:
         return state;
     }
