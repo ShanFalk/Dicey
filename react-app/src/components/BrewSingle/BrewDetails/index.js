@@ -5,18 +5,21 @@ import { useEffect, useState} from 'react'
 function BrewDetails ({brew, setShowEditForm}) {
     const sessionUser = useSelector(state => state.session.user);
     const [cart, setCart] = useState([]);
-
+    console.log('THIS IS A BREW', brew)
     //TODO: optional chaining
+
+    useEffect(()=> {
+        localStorage.setItem('cart', JSON.stringify(cart))
+    }, [cart]);
+
+    if (!brew) return null;
+
     const brewObj = Object.fromEntries(Object.entries(brew)
         .filter(([key, value]) =>
         key.includes('title') ||
         key.includes('description') ||
         key.includes('images') ||
         key.includes('price')))
-
-    useEffect(()=> {
-        localStorage.setItem('cart', JSON.stringify(cart))
-    }, [cart]);
 
     return (
         <div>
