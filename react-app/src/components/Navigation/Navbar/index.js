@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import LogoutButton from '../../auth/LogoutButton';
 import Search from '../Search';
 import "./navbar.css";
+import LoginFormModal from '../../LoginForms';
 
 const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user);
@@ -15,9 +16,7 @@ const NavBar = () => {
     );
   } else {
     sessionButton = (
-      <button className='button purple'>
-        Log In
-      </button>
+      <LoginFormModal />
     );
   }
 
