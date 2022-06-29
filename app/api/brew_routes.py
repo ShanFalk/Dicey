@@ -111,11 +111,13 @@ def sentiment():
     #       'reviews'), joinedload('brew_tags')).filter(Brew.user_id == 1).all()
 
     data = pd.read_sql_query('''select * from reviews inner join brews on brews.id = reviews.brew_id inner 
-    join brewtags on brewtags."brewId" = brews.id inner join tags on tags.id = brewtags."tagId" where reviews.user_id = 1''',
+    join brewtags on brewtags."brewId" = brews.id inner join tags on tags.id = brewtags."tagId" where reviews.user_id = 3''',
                              con=db.session.connection())
     # print(data)
 
-    print(data["rating"].value_counts())
+    ratings = data["rating"].value_counts()
+    print(data[["rating", "name"]])
+    print(ratings)
 
     # sentiments = SentimentIntensityAnalyzer()
     # review_data["Positive"] = [sentiments.polarity_scores(
