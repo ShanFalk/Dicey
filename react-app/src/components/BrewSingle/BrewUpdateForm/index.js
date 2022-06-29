@@ -8,25 +8,31 @@ function BrewUpdateForm({brew, setShowEditForm}) {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector(state => state.session.user);
+  const allTags = Object.values(useSelector(state => state.tags));
 
   const [errors, setErrors] = useState([]);
 
 
-//   const allTags = [{id: 1, name: 'Classic'}, {id: 2, name: 'Sci-fi'}, {id: 3, name: 'Comedy'}]
 
   const [title, setTitle] = useState(brew?.title);
   const [description, setDescription] = useState(brew?.description);
-//   const [pdfUrl, setPdfUrl] = useState("");
-//   const [imgUrl, setImgUrl] = useState(null);
+  const [pdfUrl, setPdfUrl] = useState(null);
+  const [imgs, setImgs] = useState(new Object());
   const [price, setPrice] = useState(brew?.price);
-//   const [tags, setTags] = useState("");
+  const [tags, setTags] = useState(brew?.brew_tags.map((tag) => tag.id.toString()));
 
 
 
   const updateTitle = (e) => setTitle(e.target.value);
   const updateDescription = (e) => setDescription(e.target.value);
   const updatePrice = (e) => setPrice(e.target.value);
-//   const updateTags = (e) => setTags(...tags, e.target.value);
+  const updateTags = (e) => {
+    if (tags.indexOf(e.target.value) !== -1) {
+      tags.splice(tags.indexOf(e.target.value), 1)
+      return setTags([...tags])
+    }
+    else return setTags([...tags, e.target.value])
+  }
 
 
   const handleSubmit = async (e) => {
@@ -38,40 +44,46 @@ function BrewUpdateForm({brew, setShowEditForm}) {
         description,
         title,
         price,
-    //   pdf_url: pdfUrl,
-    //   img_url: imgUrl,
-    //   tags,
-    //   user_id: sessionUser.id
-        };
+        pdf_url: pdfUrl,
+        imgs,
+        brew_tags: tags,
+        user_id: sessionUser.id
+    };
 
-let updatedBrew = await dispatch(updateBrew(payload)).catch(async (res) => {
-  const data = await res.json();
-  if (data && data.errors) setErrors(data.errors);
-});
-if (updatedBrew) {
-    setShowEditForm(false)
-}
-}
+    let updatedBrew = await dispatch(updateBrew(payload)).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+    });
+    if (updatedBrew) {
+        setShowEditForm(false)
+    }
+  }
 
-// const updateImage = (e) => {
-//   const file = e.target.files[0]
-//   setImgUrl(file)
-// }
+  const updateImages = (e, i) => {
+    const file = e.target.files[0];
+    if (brew.images[i-1]) {
+      imgs[`E-${brew.images[i-1].id}`] = file;
+    } else {
+      imgs[i.toString()] = file;
+    }
+    console.log(imgs);
+    setImgs({ ...imgs });
+  }
 
-// const updatePdf = (e) => {
-//   const pdf = e.target.files[0]
-//   setPdfUrl(pdf)
-// }
+  const updatePdf = (e) => {
+    const pdf = e.target.files[0]
+    setPdfUrl(pdf)
+  }
 
-const handleCancelClick = (e) => {
+  const handleCancelClick = (e) => {
     e.preventDefault();
     setShowEditForm(false);
   };
 
-const handleDelete = (e) => {
-  const data = dispatch(deleteBrew(brew.id))
-  history.push("/")
-}
+  const handleDelete = (e) => {
+    const data = dispatch(deleteBrew(brew.id))
+    history.push("/")
+  }
 
 
   return (
@@ -82,58 +94,76 @@ const handleDelete = (e) => {
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
         <input
-        type="text"
-        placeholder="Title"
-        required
-        className='input'
-        value={title}
-        onChange={updateTitle} />
+          type="text"
+          placeholder="Title"
+          required
+          className='input'
+          value={title}
+          onChange={updateTitle} />
 
         <input
-        type="text"
-        placeholder="Description"
-        required
-        className='input'
-        value={description}
-        onChange={updateDescription} />
-
-        {/* <input
-        type="file"
-        placeholder="Pdf Upload"
-        // required
-        accept='application/pdf'
-        className='input'
-        onChange={updatePdf} />
+          type="text"
+          placeholder="Description"
+          required
+          className='input'
+          value={description}
+          onChange={updateDescription} />
 
         <input
-        type="file"
-        placeholder="Image Upload"
-        // required
-        accept='image/*'
-        className='input'
-        onChange={updateImage} /> */}
+          type="file"
+          placeholder="Pdf Upload"
+          // required
+          accept='application/pdf'
+          className='input'
+          onChange={updatePdf} />
 
         <input
-        type="number"
-        placeholder="Price"
-        value={price}
-        min="0"
-        required
-        className='input'
-        onChange={updatePrice} />
-        {/* {allTags.map((tag) => {
-            return (
-              <>
+          type="file"
+          placeholder="Image Upload 1"
+          required
+          accept='image/*'
+          className='input'
+          onChange={(e) => updateImages(e, 1)} />
+        <input
+          type="file"
+          placeholder="Image Upload 2"
+          // required
+          accept='image/*'
+          className='input'
+          onChange={(e) => updateImages(e, 2)} />
+        <input
+          type="file"
+          placeholder="Image Upload 3"
+          // required
+          accept='image/*'
+          className='input'
+          onChange={(e) => updateImages(e, 3)} />
+
+        <input
+          type="number"
+          step="0.01"
+          placeholder="Price"
+          value={price}
+          min="0.01"
+          max="9.99"
+          required
+          className='input'
+          onChange={updatePrice} />
+
+        {allTags.map((tag) => {
+          return (
+            <div key={tag.id}>
               <label>{tag.name}</label>
-            <input
-            value={tag.name}
-            type="radio"
-            id={tag.id}
-            onClick={updateTags}
-            />
-            </>
-            )
-          })} */}
+              <input
+                value={tag.id}
+                type="checkbox"
+                id={tag.id}
+                onClick={updateTags}
+                defaultChecked={tags.includes(tag.id.toString())}
+              />
+            </div>
+          )
+        })}
       <button className='' type="submit">Update Brew</button>
       <button className='' type="button" onClick={handleCancelClick}>Cancel</button>
       <button className='' type='button' onClick={handleDelete}>Delete Brew</button>

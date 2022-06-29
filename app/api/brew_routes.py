@@ -5,10 +5,10 @@ from app.forms.brew_form import CreateBrew, UpdateBrew
 from app.utils import upload, format_errors
 from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy.orm import joinedload
-import pandas as pd
-import nltk
-import plotly.express as px
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
+# import pandas as pd
+# import nltk
+# import plotly.express as px
+# from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 
 brew_routes = Blueprint('brews', __name__)
@@ -17,19 +17,21 @@ brew_routes = Blueprint('brews', __name__)
 @brew_routes.route("", methods=["POST"])
 def add_brew():
 
-    image = request.files["img_url"]
+    image_urls = []
+
+    for key in request.files.keys():
+        if key != "pdf_url":
+            image = request.files[key]
+            image_url = upload(image)
+            image_urls.append(image_url)
+
     pdf = request.files["pdf_url"]
-
-    img_url = upload(image)
     pdf_url = upload(pdf)
-
-    print('*'*30, img_url)
 
     form = CreateBrew()
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-
         tag_id_arr = form.data["brew_tags"].split(",")
         tag_id_arr = [int(id) for id in tag_id_arr]
         tags = Tag.query.all()
@@ -45,10 +47,11 @@ def add_brew():
 
         db.session.add(new_brew)
         db.session.commit()
-        new_image = Image(
-            img_url=img_url,
-            brew_id=new_brew.id)
-        db.session.add(new_image)
+        for img_url in image_urls:
+            new_image = Image(
+                img_url=img_url,
+                brew_id=new_brew.id)
+            db.session.add(new_image)
         db.session.commit()
         brew = Brew.query.options(joinedload('reviews'), joinedload(
             'images'), joinedload('brew_tags')).get(new_brew.id)
@@ -58,30 +61,47 @@ def add_brew():
 
 @brew_routes.route("", methods=["PUT"])
 def update_brew():
-    # print(request.files)
 
-    if request.files["img_url"]:
-        image = request.files["img_url"]
-        img_url = upload(image)
+    image_urls = {}
+    pdf_url = None
 
-    if request.files["pdf_url"]:
-        pdf = request.files["pdf_url"]
-        pdf_url = upload(pdf)
+    for key in request.files.keys():
+        if key == "pdf_url":
+            pdf = request.files["pdf_url"]
+            pdf_url = upload(pdf)
+        else:
+            image = request.files[key]
+            image_url = upload(image)
+            image_urls[key] = image_url
 
     form = UpdateBrew()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    if form.validate_on_submit():
 
+    if form.validate_on_submit():
+        tag_id_arr = form.data['brew_tags'].split(',')
+        tag_id_arr = [int(id) for id in tag_id_arr]
+        tags = Tag.query.all()
         brew = Brew.query.get(form.data['id'])
         brew.title = form.data['title']
         brew.description = form.data['description']
         brew.price = form.data['price']
-        brew.pdf_url = pdf_url
+        brew.brew_tags = [tag for tag in tags if tag.id in tag_id_arr]
+        if pdf_url:
+            brew.pdf_url = pdf_url
+        for img_id, img_url in image_urls.items():
+            if img_id[0] == 'i':
+                new_image = Image(
+                    img_url=img_url,
+                    brew_id=brew.id)
+                db.session.add(new_image)
+            else:
+                image = Image.query.get(img_id)
+                image.img_url = img_url
         db.session.commit()
-        # image = Image.query.filter_by(brew_id=form.data["id"])
-        # image.img_url = img_url
-        return brew.to_dict()
+        brew = Brew.query.options(joinedload('reviews'), joinedload(
+            'images'), joinedload('brew_tags')).get(brew.id)
+        return brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.brew_tags) 
     return {'errors': format_errors(form.errors)}, 401
 
 

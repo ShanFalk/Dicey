@@ -1,20 +1,43 @@
 import BrewUpdateForm from "../BrewUpdateForm";
 import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import './BrewDetail.css';
 
 function BrewDetails ({brew, setShowEditForm}) {
-    const sessionUser = useSelector(state => state.session.user);
+    // const images = brew?.images
 
-    const image = brew?.images[0]
+    const sessionUser = useSelector(state => state.session.user);
+    const [images, setImages] = useState(brew?.images);
+    const [centerDisplayImage, setCenterDisplay] = useState(images[0].img_url);
+    // const [centerDisplayImage, setCenterDisplay] = useState("");
+
+
+    // useEffect(() => {
+    //     if (images) {
+    //     setCenterDisplay(images[0].img_url);
+    //     }
+    // }, [images])
+
 
     //console.log(brew?.images)
 
     return (
         <div className="brew-block">
-            <h2>This is the BrewSingleComponents - BrewDetails Component</h2>
-            <div className="brew-image-block">
-            <img className="brew-image" src={image?.img_url}
-        alt="" />
+            <div className="images-field">
+            <div className="listed-images">
+            { images && images.map((image) => {
+                return (
+            <div className="brew-image-block" key={image.id}>
+            <img className="brew-image" src={image?.img_url}alt="" />
             </div>
+            )}
+            )}
+            </div>
+            <div className="center-image-container">
+                <img className="brew-image center-image" src={centerDisplayImage}alt="" />
+            </div>
+            </div>
+
             <div className="brew-details-block">
             <h3>Title: {brew?.title}</h3>
             <p>Description: {brew?.description}</p>
