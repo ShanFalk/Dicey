@@ -1,15 +1,36 @@
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import RemoveItem from '../RemoveItem';
 
 function ShoppingCartPage () {
     const brews = useSelector(state => state.brews);
-    const brewIds = JSON.parse(localStorage.getItem('cart'));
+    const [brewIds, updatebrewIds] = useState(JSON.parse(localStorage.getItem('cart')));
+    const [isDeleted, setIsDeleted] = useState(false)
 
     const numItems = brewIds.length;
 
+    //function to pass as props
+    const onDeleteEnd = () => {
+        setIsDeleted(true);
+    };
 
-    const sum = brewIds.reduce(function(accum, currValue){
-        return parseFloat(brews[accum]?.price) + parseFloat(brews[currValue]?.price);
-    })
+    //re-rendering after remove button is clicked
+    useEffect(()=> {
+        updatebrewIds(JSON.parse(localStorage.getItem('cart')));
+        setIsDeleted(false)
+    },[isDeleted])
+
+    if(numItems === 0) {
+        return (
+            <div>
+                Your cart is empty.
+            </div>
+        )
+    }
+
+    //
+    const sum = brewIds.map((brewId) => brews[brewId]?.price).reduce((accum, currVal) => accum + currVal)
+
 
     return (
         <div>
@@ -20,12 +41,15 @@ function ShoppingCartPage () {
             {brewIds.map((id) => {
                 const brew = brews[id];
             return (
+                <>
                 <ul key={brew?.id}>
                     <li>{brew?.title}</li>
                     <li>{brew?.description}</li>
                     <li>{brew?.images}</li>
                     <li>${brew?.price}</li>
                 </ul>
+                <RemoveItem brewIds={brewIds} brewId={brew?.id} deleteEnd={onDeleteEnd}/>
+                </>
               );
             })}
             </div>
