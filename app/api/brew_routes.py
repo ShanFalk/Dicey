@@ -97,7 +97,6 @@ def update_brew():
             else:
                 image = Image.query.get(img_id)
                 image.img_url = img_url
-                db.session.add(image)
         db.session.commit()
         brew = Brew.query.options(joinedload('reviews'), joinedload(
             'images'), joinedload('brew_tags')).get(brew.id)
