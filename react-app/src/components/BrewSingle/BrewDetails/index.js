@@ -7,8 +7,10 @@ function BrewDetails ({brew, setShowEditForm}) {
     // const images = brew?.images
 
     const sessionUser = useSelector(state => state.session.user);
+    const users = useSelector(state => state.session.user);
     const [images, setImages] = useState(brew?.images);
     const [centerDisplayImage, setCenterDisplay] = useState(images[0].img_url);
+
     // const [centerDisplayImage, setCenterDisplay] = useState("");
 
 
@@ -20,6 +22,7 @@ function BrewDetails ({brew, setShowEditForm}) {
 
 
     //console.log(brew?.images)
+    console.log(users? users : "*********************Not loaded yet")
 
     return (
         <div className="brew-block">

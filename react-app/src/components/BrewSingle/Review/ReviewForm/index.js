@@ -2,13 +2,15 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState} from 'react'
 import { addReviewToBrew } from '../../../../store/brew';
+import StarsRating from 'react-star-rate';
 import '../reviews.css'
 
 function ReviewForm ({setCreateReviewField, brew_id}) {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
+    const [value, setValue] = useState(0);
 
-    const [user_id, setUser_id] = useState(sessionUser.id);
+    const [user_id, setUser_id] = useState(sessionUser?.id);
     const [content, setContent] = useState("");
     const [rating, setRating] = useState("");
     const [errors, setErrors] = useState([]);
@@ -61,6 +63,14 @@ function ReviewForm ({setCreateReviewField, brew_id}) {
                 <ul>
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
+
+                <div>
+                <StarsRating
+                    value={value}
+                    onChange={value => {
+                    setValue(value);
+                    }}/>
+                </div>
 
                 <input
                 type="number"

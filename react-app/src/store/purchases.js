@@ -9,13 +9,12 @@ const getAction = (purchases) => ({
 
 export const getPurchases = () => async (dispatch) => {
     const response = await fetch('/api/purchases');
-  
     if (response.ok) {
       const data = await response.json();
       if (data.errors) {
         return data.errors;
       }
-  
+
       dispatch(getAction(data));
     }
   }

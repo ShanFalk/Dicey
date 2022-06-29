@@ -4,6 +4,5 @@ pipenv run flask db migrate -m “message”
 pipenv db upgrade
 pipenv seed all
 pipenv flask run seed undo
-
-
 pipenv run flask run
+heroku run -a HEROKU_APP_NAME flask seed all
