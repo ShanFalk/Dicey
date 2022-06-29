@@ -30,3 +30,4 @@ class UpdateBrew(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
     description = TextAreaField('description', validators=[DataRequired()])
     price = FloatField('price', validators=[DataRequired()])
+    brew_tags = DictField("brew_tags")

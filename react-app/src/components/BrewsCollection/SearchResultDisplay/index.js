@@ -28,8 +28,6 @@ function SearchResultDisplay () {
         }
     })
 
-    console.log("RESULTS", results)
-
     return (
         <>
         <h2>Results</h2>

@@ -14,8 +14,8 @@ function BrewCreateForm() {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [pdfUrl, setPdfUrl] = useState("");
-  const [imgUrl, setImgUrl] = useState(null);
+  const [pdfUrl, setPdfUrl] = useState(null);
+  const [imgs, setImgs] = useState(new Object());
   const [price, setPrice] = useState("");
   const [tags, setTags] = useState([]);
 
@@ -36,36 +36,40 @@ function BrewCreateForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-    console.log(tags)
+    console.log('HERE', tags)
+    console.log('HERE')
+    console.log('IMGS', imgs)
 
     const payload = {
       description,
       title,
       pdf_url: pdfUrl,
       price,
-      img_url: imgUrl,
+      imgs,
       brew_tags: tags,
       user_id: sessionUser.id
-};
+    };
 
-let createdBrew = await dispatch(createBrew(payload)).catch(async (res) => {
-  const data = await res.json();
-  if (data && data.errors) setErrors(data.errors);
-});
-if (createdBrew) {
-  history.push(`/brews/${createdBrew.id}`)
-}
-}
+    let createdBrew = await dispatch(createBrew(payload)).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+    });
 
-const updateImage = (e) => {
-  const file = e.target.files[0]
-  setImgUrl(file)
+    if (createdBrew) {
+      history.push(`/brews/${createdBrew.id}`)
+    }
 }
 
-const updatePdf = (e) => {
-  const pdf = e.target.files[0]
-  setPdfUrl(pdf)
-}
+  const updateImages = (e, i) => {
+    const file = e.target.files[0]
+    imgs[i.toString()] = file
+    setImgs({...imgs })
+  }
+
+  const updatePdf = (e) => {
+    const pdf = e.target.files[0]
+    setPdfUrl(pdf)
+  }
 
 
 
@@ -83,55 +87,71 @@ const handleCancelClick = (e) => {
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
-        <input
+      <input
         type="text"
         placeholder="Title"
         required
         className='input'
         value={title}
         onChange={updateTitle} />
-        <input
+      <input
         type="text"
         placeholder="Description"
         required
         className='input'
         value={description}
         onChange={updateDescription} />
-        <input
+      <input
         type="file"
         placeholder="Pdf Upload"
         required
         accept='application/pdf'
         className='input'
         onChange={updatePdf} />
-        <input
+      <input
         type="file"
-        placeholder="Image Upload"
+        placeholder="Image Upload 1"
         required
         accept='image/*'
         className='input'
-        onChange={updateImage} />
-        <input
+        onChange={(e) => updateImages(e, 1)} />
+      <input
+        type="file"
+        placeholder="Image Upload 2"
+        // required
+        accept='image/*'
+        className='input'
+        onChange={(e) => updateImages(e, 2)} />
+      <input
+        type="file"
+        placeholder="Image Upload 3"
+        // required
+        accept='image/*'
+        className='input'
+        onChange={(e) => updateImages(e, 3)} />
+      <input
         type="number"
+        step="0.01"
         placeholder="Price"
         value={price}
-        min="0"
+        min="0.01"
+        max="9.99"
         required
         className='input'
         onChange={updatePrice} />
-        {allTags.map((tag) => {
-            return (
-              <div key={tag.id}>
+      {allTags.map((tag) => {
+        return (
+          <div key={tag.id}>
             <label>{tag.name}</label>
             <input 
-            value={tag.id}
-            type="checkbox"
-            id={tag.id}
-            onClick={updateTags}
+              value={tag.id}
+              type="checkbox"
+              id={tag.id}
+              onClick={updateTags}
             />
-            </div>
-            )
-          })}
+          </div>
+          )
+        })}
       <button className='' type="submit">Create Brew</button>
       <button className='' type="button" onClick={handleCancelClick}>Cancel</button>
     </form>

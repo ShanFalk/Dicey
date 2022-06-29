@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState} from 'react'
-import { updateReviewOnBrew } from '../../../store/brew';
+import { updateReviewOnBrew, deleteReview } from '../../../store/brew';
 
 
 function EditReview({review, setReviewEdit}) {
@@ -41,12 +41,22 @@ function EditReview({review, setReviewEdit}) {
         if (data && data.errors) setErrors(data.errors);
         });
 
-        console.log(createdReview)
-
         setRating("")
         setContent("")
         setErrors([])
         setReviewEdit(false)
+    }
+
+    const handleDelete = async (e) => {
+        e.preventDefault();
+        setErrors([]);
+
+        let deleteFeedback = await dispatch(deleteReview(review.id, review.brew_id)).catch(async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors);
+          });
+
+        console.log(deleteFeedback)
     }
 
   return (
@@ -59,7 +69,6 @@ function EditReview({review, setReviewEdit}) {
 
           <input
           type="number"
-          // placeholder="Rating"
           value={rating}
           min="0"
           max="5"
@@ -68,14 +77,14 @@ function EditReview({review, setReviewEdit}) {
           onChange={updateRating} />
 
           <textarea
-          // placeholder="Content"
           value={content}
           required
           className='input review-textarea'
           onChange={updateContent} />
 
-          <button className='' type="submit">Create Review</button>
-          <button className='' type="button" onClick={handleCancelClick}>Cancel</button>
+          <button className='' type="submit">Edit Review</button>
+          <button className='' type="button" onClick={handleCancelClick}>Cancel Edit</button>
+          <button className='' type="button" onClick={handleDelete}>Delete Review</button>
       </form>
     </div>
   )
