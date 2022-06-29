@@ -48,7 +48,6 @@ export const createBrew = (payload) => async (dispatch) => {
     form.append('pdf_url', pdf_url);
     console.log(imgs)
     for (let [key, img] of Object.entries(imgs)) {
-      console.log(`img_${key}`);
       form.append(`img_${key}`, img);
     }
     form.append('price', price);
@@ -95,7 +94,7 @@ export const updateBrew = (payload) => async (dispatch) => {
     pdf_url,
     price,
     id,
-    img_url,
+    imgs,
     brew_tags
   } = payload
 
@@ -105,7 +104,13 @@ export const updateBrew = (payload) => async (dispatch) => {
   form.append('title', title)
   form.append('description', description)
   form.append('pdf_url', pdf_url)
-  form.append('img_url', img_url)
+  for (let [key, img] of Object.entries(imgs)) {
+    if(key.startsWith('E-')) {
+      form.append(key.slice(2), img)
+    } else {
+      form.append(`img_${key}`, img);
+    }
+  }
   form.append('price', price)
   form.append('brew_tags', brew_tags)
   form.append('id', id)
@@ -122,7 +127,7 @@ export const updateBrew = (payload) => async (dispatch) => {
     }
 
     dispatch(creation(data));
-    return null
+    return data
   }
 }
 
@@ -206,12 +211,12 @@ export default function brewReducer(state = initialState, action) {
       case GET_BREWS:
         const brews = action.brews
         return {...state, ...brews}
-        case MODIFY_BREW:
-          return {...state, [action.brew.id] : action.brew }
-        case DELETE_BREW:
-          let newState = {...state}
-          delete newState[action.brewId]
-          return newState
+      case MODIFY_BREW:
+        return {...state, [action.brew.id] : action.brew }
+      case DELETE_BREW:
+        let newState = {...state}
+        delete newState[action.brewId]
+        return newState
       default:
         return state;
     }

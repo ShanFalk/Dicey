@@ -17,7 +17,7 @@ function BrewUpdateForm({brew, setShowEditForm}) {
   const [title, setTitle] = useState(brew?.title);
   const [description, setDescription] = useState(brew?.description);
   const [pdfUrl, setPdfUrl] = useState(null);
-  const [imgUrl, setImgUrl] = useState(null);
+  const [imgs, setImgs] = useState(new Object());
   const [price, setPrice] = useState(brew?.price);
   const [tags, setTags] = useState(brew?.brew_tags.map((tag) => tag.id.toString()));
 
@@ -38,7 +38,6 @@ function BrewUpdateForm({brew, setShowEditForm}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-    console.log('TAGS', tags);
 
     const payload = {
         id: brew.id,
@@ -46,7 +45,7 @@ function BrewUpdateForm({brew, setShowEditForm}) {
         title,
         price,
         pdf_url: pdfUrl,
-        img_url: imgUrl,
+        imgs,
         brew_tags: tags,
         user_id: sessionUser.id
     };
@@ -60,9 +59,15 @@ function BrewUpdateForm({brew, setShowEditForm}) {
     }
   }
 
-  const updateImage = (e) => {
-    const file = e.target.files[0]
-    setImgUrl(file)
+  const updateImages = (e, i) => {
+    const file = e.target.files[0];
+    if (brew.images[i]) {
+      imgs[`E-${brew.images[i].id}`] = file;
+    } else {
+      imgs[i.toString()] = file;
+    }
+    console.log(imgs);
+    setImgs({ ...imgs });
   }
 
   const updatePdf = (e) => {
@@ -89,47 +94,62 @@ function BrewUpdateForm({brew, setShowEditForm}) {
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
         <input
-        type="text"
-        placeholder="Title"
-        required
-        className='input'
-        value={title}
-        onChange={updateTitle} />
+          type="text"
+          placeholder="Title"
+          required
+          className='input'
+          value={title}
+          onChange={updateTitle} />
 
         <input
-        type="text"
-        placeholder="Description"
-        required
-        className='input'
-        value={description}
-        onChange={updateDescription} />
+          type="text"
+          placeholder="Description"
+          required
+          className='input'
+          value={description}
+          onChange={updateDescription} />
 
         <input
-        type="file"
-        placeholder="Pdf Upload"
-        // required
-        accept='application/pdf'
-        className='input'
-        onChange={updatePdf} />
+          type="file"
+          placeholder="Pdf Upload"
+          // required
+          accept='application/pdf'
+          className='input'
+          onChange={updatePdf} />
 
         <input
-        type="file"
-        placeholder="Image Upload"
-        // required
-        accept='image/*'
-        className='input'
-        onChange={updateImage} />
+          type="file"
+          placeholder="Image Upload 1"
+          required
+          accept='image/*'
+          className='input'
+          onChange={(e) => updateImages(e, 1)} />
+        <input
+          type="file"
+          placeholder="Image Upload 2"
+          // required
+          accept='image/*'
+          className='input'
+          onChange={(e) => updateImages(e, 2)} />
+        <input
+          type="file"
+          placeholder="Image Upload 3"
+          // required
+          accept='image/*'
+          className='input'
+          onChange={(e) => updateImages(e, 3)} />
 
         <input
-        type="number"
-        step="0.01"
-        placeholder="Price"
-        value={price}
-        min="0.01"
-        max="9.99"
-        required
-        className='input'
-        onChange={updatePrice} />
+          type="number"
+          step="0.01"
+          placeholder="Price"
+          value={price}
+          min="0.01"
+          max="9.99"
+          required
+          className='input'
+          onChange={updatePrice} />
+
         {allTags.map((tag) => {
           return (
             <div key={tag.id}>

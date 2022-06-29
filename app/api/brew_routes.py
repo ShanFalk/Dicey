@@ -16,8 +16,6 @@ brew_routes = Blueprint('brews', __name__)
 @brew_routes.route("", methods=["POST"])
 def add_brew():
 
-    print('*'*50, request.files.keys())
-
     image_urls = []
 
     for key in request.files.keys():
@@ -25,8 +23,6 @@ def add_brew():
             image = request.files[key]
             image_url = upload(image)
             image_urls.append(image_url)
-
-    print('*'*50, 'URLS', image_urls)
 
     pdf = request.files["pdf_url"]
     pdf_url = upload(pdf)
@@ -51,7 +47,6 @@ def add_brew():
         db.session.add(new_brew)
         db.session.commit()
         for img_url in image_urls:
-            print('*'*50, "IMAGE ADD")
             new_image = Image(
                 img_url=img_url,
                 brew_id=new_brew.id)
@@ -66,27 +61,24 @@ def add_brew():
 @brew_routes.route("", methods=["PUT"])
 def update_brew():
 
-    print('*'*50, request.files.keys())
+    image_urls = {}
+    pdf_url = None
 
-    img_url = pdf_url = None
-
-    if "img_url" in request.files.keys():
-        image = request.files["img_url"]
-        img_url = upload(image)
-        print(img_url)
-
-    if "pdf_url" in request.files.keys():
-        pdf = request.files["pdf_url"]
-        pdf_url = upload(pdf)
+    for key in request.files.keys():
+        if key == "pdf_url":
+            pdf = request.files["pdf_url"]
+            pdf_url = upload(pdf)
+        else:
+            image = request.files[key]
+            image_url = upload(image)
+            image_urls[key] = image_url
 
     form = UpdateBrew()
     form['csrf_token'].data = request.cookies['csrf_token']
 
 
     if form.validate_on_submit():
-        print('*'*50, form.data)
         tag_id_arr = form.data['brew_tags'].split(',')
-        print('*'*50)
         tag_id_arr = [int(id) for id in tag_id_arr]
         tags = Tag.query.all()
         brew = Brew.query.get(form.data['id'])
@@ -96,9 +88,16 @@ def update_brew():
         brew.brew_tags = [tag for tag in tags if tag.id in tag_id_arr]
         if pdf_url:
             brew.pdf_url = pdf_url
-        if img_url:
-            image = Image.query.filter_by(brew_id=form.data["id"])
-            image.img_url = img_url
+        for img_id, img_url in image_urls.items():
+            if img_id[0] == 'i':
+                new_image = Image(
+                    img_url=img_url,
+                    brew_id=new_brew.id)
+                db.session.add(new_image)
+            else:
+                image = Image.query.get(img_id)
+                image.img_url = img_url
+                db.session.add(image)
         db.session.commit()
         return brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.brew_tags) 
     return {'errors': format_errors(form.errors)}, 401

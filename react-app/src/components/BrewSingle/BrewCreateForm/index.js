@@ -64,7 +64,6 @@ function BrewCreateForm() {
     const file = e.target.files[0]
     imgs[i.toString()] = file
     setImgs({...imgs })
-    console.log('HERE', imgs)
   }
 
   const updatePdf = (e) => {
