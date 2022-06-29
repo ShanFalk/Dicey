@@ -4,10 +4,10 @@ from app.forms.brew_form import CreateBrew, UpdateBrew
 from app.utils import upload, format_errors
 from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy.orm import joinedload
-import pandas as pd
-import nltk
-import plotly.express as px
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
+# import pandas as pd
+# import nltk
+# import plotly.express as px
+# from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 
 brew_routes = Blueprint('brews', __name__)
@@ -22,13 +22,11 @@ def add_brew():
     img_url = upload(image)
     pdf_url = upload(pdf)
 
-    print('*'*30, img_url)
-
     form = CreateBrew()
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-
+        print('*'*50, form.data)
         tag_id_arr = form.data["brew_tags"].split(",")
         tag_id_arr = [int(id) for id in tag_id_arr]
         tags = Tag.query.all()
@@ -57,30 +55,42 @@ def add_brew():
 
 @brew_routes.route("", methods=["PUT"])
 def update_brew():
-    # print(request.files)
 
-    if request.files["img_url"]:
+    print('*'*50, request.files.keys())
+
+    img_url = pdf_url = None
+
+    if "img_url" in request.files.keys():
         image = request.files["img_url"]
         img_url = upload(image)
+        print(img_url)
 
-    if request.files["pdf_url"]:
+    if "pdf_url" in request.files.keys():
         pdf = request.files["pdf_url"]
         pdf_url = upload(pdf)
 
     form = UpdateBrew()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    if form.validate_on_submit():
 
+    if form.validate_on_submit():
+        print('*'*50, form.data)
+        tag_id_arr = form.data['brew_tags'].split(',')
+        print('*'*50)
+        tag_id_arr = [int(id) for id in tag_id_arr]
+        tags = Tag.query.all()
         brew = Brew.query.get(form.data['id'])
         brew.title = form.data['title']
         brew.description = form.data['description']
         brew.price = form.data['price']
-        brew.pdf_url = pdf_url
+        brew.brew_tags = [tag for tag in tags if tag.id in tag_id_arr]
+        if pdf_url:
+            brew.pdf_url = pdf_url
+        if img_url:
+            image = Image.query.filter_by(brew_id=form.data["id"])
+            image.img_url = img_url
         db.session.commit()
-        # image = Image.query.filter_by(brew_id=form.data["id"])
-        # image.img_url = img_url
-        return brew.to_dict()
+        return brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.brew_tags) 
     return {'errors': format_errors(form.errors)}, 401
 
 

@@ -74,7 +74,6 @@ export const createBrew = (payload) => async (dispatch) => {
 
 export const getAllBrews = () => async (dispatch) => {
   const response = await fetch('/api/brews');
-  console.log("HIT HERE")
 
   if (response.ok) {
     const data = await response.json();
@@ -92,26 +91,29 @@ export const updateBrew = (payload) => async (dispatch) => {
   const {
     description,
     title,
-    // pdf_url,
+    pdf_url,
     price,
     id,
-    // img_url,
-    tags
+    img_url,
+    brew_tags
   } = payload
+
+  console.log(brew_tags);
 
   const form = new FormData();
   form.append('title', title)
   form.append('description', description)
-  // form.append('pdf_url', pdf_url)
-  // form.append('img_url', img_url)
+  form.append('pdf_url', pdf_url)
+  form.append('img_url', img_url)
   form.append('price', price)
+  form.append('brew_tags', brew_tags)
   form.append('id', id)
-  form.append('brew_tags', tags)
 
   const response = await fetch('/api/brews', {
     method: "PUT",
     body: form
   });
+  
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {

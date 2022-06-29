@@ -8,70 +8,77 @@ function BrewUpdateForm({brew, setShowEditForm}) {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector(state => state.session.user);
+  const allTags = Object.values(useSelector(state => state.tags));
 
   const [errors, setErrors] = useState([]);
 
 
-//   const allTags = [{id: 1, name: 'Classic'}, {id: 2, name: 'Sci-fi'}, {id: 3, name: 'Comedy'}]
 
   const [title, setTitle] = useState(brew?.title);
   const [description, setDescription] = useState(brew?.description);
-//   const [pdfUrl, setPdfUrl] = useState("");
-//   const [imgUrl, setImgUrl] = useState(null);
+  const [pdfUrl, setPdfUrl] = useState(null);
+  const [imgUrl, setImgUrl] = useState(null);
   const [price, setPrice] = useState(brew?.price);
-//   const [tags, setTags] = useState("");
+  const [tags, setTags] = useState(brew?.brew_tags.map((tag) => tag.id.toString()));
 
 
 
   const updateTitle = (e) => setTitle(e.target.value);
   const updateDescription = (e) => setDescription(e.target.value);
   const updatePrice = (e) => setPrice(e.target.value);
-//   const updateTags = (e) => setTags(...tags, e.target.value);
+  const updateTags = (e) => {
+    if (tags.indexOf(e.target.value) !== -1) {
+      tags.splice(tags.indexOf(e.target.value), 1)
+      return setTags([...tags])
+    }
+    else return setTags([...tags, e.target.value])
+  }
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
+    console.log('TAGS', tags);
 
     const payload = {
         id: brew.id,
         description,
         title,
         price,
-    //   pdf_url: pdfUrl,
-    //   img_url: imgUrl,
-    //   tags,
-    //   user_id: sessionUser.id
-        };
+        pdf_url: pdfUrl,
+        img_url: imgUrl,
+        brew_tags: tags,
+        user_id: sessionUser.id
+    };
 
-let updatedBrew = await dispatch(updateBrew(payload)).catch(async (res) => {
-  const data = await res.json();
-  if (data && data.errors) setErrors(data.errors);
-});
-if (updatedBrew) {
-    setShowEditForm(false)
-}
-}
+    let updatedBrew = await dispatch(updateBrew(payload)).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+    });
+    if (updatedBrew) {
+        setShowEditForm(false)
+    }
+  }
 
-// const updateImage = (e) => {
-//   const file = e.target.files[0]
-//   setImgUrl(file)
-// }
+  const updateImage = (e) => {
+    const file = e.target.files[0]
+    setImgUrl(file)
+  }
 
-// const updatePdf = (e) => {
-//   const pdf = e.target.files[0]
-//   setPdfUrl(pdf)
-// }
+  const updatePdf = (e) => {
+    const pdf = e.target.files[0]
+    setPdfUrl(pdf)
+  }
 
-const handleCancelClick = (e) => {
+  const handleCancelClick = (e) => {
     e.preventDefault();
     setShowEditForm(false);
   };
 
-const handleDelete = (e) => {
-  const data = dispatch(deleteBrew(brew.id))
-  history.push("/")
-}
+  const handleDelete = (e) => {
+    const data = dispatch(deleteBrew(brew.id))
+    history.push("/")
+  }
 
 
   return (
@@ -97,7 +104,7 @@ const handleDelete = (e) => {
         value={description}
         onChange={updateDescription} />
 
-        {/* <input
+        <input
         type="file"
         placeholder="Pdf Upload"
         // required
@@ -111,29 +118,32 @@ const handleDelete = (e) => {
         // required
         accept='image/*'
         className='input'
-        onChange={updateImage} /> */}
+        onChange={updateImage} />
 
         <input
         type="number"
+        step="0.01"
         placeholder="Price"
         value={price}
-        min="0"
+        min="0.01"
+        max="9.99"
         required
         className='input'
         onChange={updatePrice} />
-        {/* {allTags.map((tag) => {
-            return (
-              <>
+        {allTags.map((tag) => {
+          return (
+            <div key={tag.id}>
               <label>{tag.name}</label>
-            <input
-            value={tag.name}
-            type="radio"
-            id={tag.id}
-            onClick={updateTags}
-            />
-            </>
-            )
-          })} */}
+              <input
+                value={tag.id}
+                type="checkbox"
+                id={tag.id}
+                onClick={updateTags}
+                defaultChecked={tags.includes(tag.id.toString())}
+              />
+            </div>
+          )
+        })}
       <button className='' type="submit">Update Brew</button>
       <button className='' type="button" onClick={handleCancelClick}>Cancel</button>
       <button className='' type='button' onClick={handleDelete}>Delete Brew</button>

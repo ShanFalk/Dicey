@@ -14,7 +14,7 @@ function BrewCreateForm() {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [pdfUrl, setPdfUrl] = useState("");
+  const [pdfUrl, setPdfUrl] = useState(null);
   const [imgUrl, setImgUrl] = useState(null);
   const [price, setPrice] = useState("");
   const [tags, setTags] = useState([]);
@@ -113,9 +113,11 @@ const handleCancelClick = (e) => {
         onChange={updateImage} />
         <input
         type="number"
+        step="0.01"
         placeholder="Price"
         value={price}
-        min="0"
+        min="0.01"
+        max="9.99"
         required
         className='input'
         onChange={updatePrice} />
