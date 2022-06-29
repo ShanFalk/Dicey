@@ -36,10 +36,10 @@ function ReviewsSection ({brew}) {
 
     return (
         <div className="review-table">
-            <h3>Reviews</h3>
-            <p>Number of Reviews: {numOfReviews}</p>
-            <p>Average Rating: {averageRating}</p>
+            <div>
+            <h3>{numOfReviews} Reviews --- Rating: {averageRating}</h3>
             <button onClick={() => setCreateReviewField(!showCreateReviewField)}>Add Review</button>
+            </div>
             {showCreateReviewField &&
             <ReviewForm setCreateReviewField={setCreateReviewField} brew_id={brew?.id}/>
             }
