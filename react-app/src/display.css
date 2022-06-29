@@ -3,8 +3,9 @@
     height: 200px;
 }
 .container {
-    inline-size: min(100% - 2rem, 70rem);
+    /* inline-size: min(100% - 2rem, 70rem); */
     margin-inline: auto;
+    margin-top: 200px;
 }
 
 .flow {
@@ -26,4 +27,33 @@
     min-height: fit-content;
     text-align: center;
     background-color: white;
+}
+
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    border: 1px solid black;
+}
+
+.user-info {
+    padding-left: 50px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.brew-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    width: 100%;
+    /* margin-left: 30px;
+    margin-right: 30px; */
+}
+
+.bottom-border {
+    border-bottom: 2px solid black;
+    padding: 20px;
 }

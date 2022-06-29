@@ -12,7 +12,12 @@ const NavBar = () => {
   let sessionButton;
   if (sessionUser) {
     sessionButton = (
-      <LogoutButton />
+      <>
+        <Link className='button purple' to={`/profile/${sessionUser.id}`} >
+          <i className="fa-solid fa-user"></i>
+        </Link>
+        <LogoutButton />
+      </>
     );
   } else {
     sessionButton = (

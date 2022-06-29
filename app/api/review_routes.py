@@ -1,9 +1,10 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import Review, db, Image, Tag, Brew, review
+from app.models import Review, brew, db, Image, Tag, Brew
 from app.forms.review_form import CreateReview, UpdateReview
 from app.utils import upload, format_errors
 from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy.orm import joinedload
+import pd
 
 
 review_routes = Blueprint('reviews', __name__)
@@ -65,3 +66,12 @@ def delete_review(id):
     db.session.delete(review)
     db.session.commit()
     return {'Successful': 'Successful'}
+
+
+@review_routes.route("/sentiment", methods=["GET"])
+def sentiment():
+    review_data = pd.read_sql_table(table_name=Review.tablename,
+                                    con=session.connection(), index_col="id")
+    brew_data = pd.read_sql_table(table_name=Brew.tablename,
+                                  con=session.connection(), index_col="id")
+    print(brew_data, review_data)
