@@ -16,17 +16,25 @@ brew_routes = Blueprint('brews', __name__)
 @brew_routes.route("", methods=["POST"])
 def add_brew():
 
-    image = request.files["img_url"]
-    pdf = request.files["pdf_url"]
+    print('*'*50, request.files.keys())
 
-    img_url = upload(image)
+    image_urls = []
+
+    for key in request.files.keys():
+        if key != "pdf_url":
+            image = request.files[key]
+            image_url = upload(image)
+            image_urls.append(image_url)
+
+    print('*'*50, 'URLS', image_urls)
+
+    pdf = request.files["pdf_url"]
     pdf_url = upload(pdf)
 
     form = CreateBrew()
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        print('*'*50, form.data)
         tag_id_arr = form.data["brew_tags"].split(",")
         tag_id_arr = [int(id) for id in tag_id_arr]
         tags = Tag.query.all()
@@ -42,10 +50,12 @@ def add_brew():
 
         db.session.add(new_brew)
         db.session.commit()
-        new_image = Image(
-            img_url=img_url,
-            brew_id=new_brew.id)
-        db.session.add(new_image)
+        for img_url in image_urls:
+            print('*'*50, "IMAGE ADD")
+            new_image = Image(
+                img_url=img_url,
+                brew_id=new_brew.id)
+            db.session.add(new_image)
         db.session.commit()
         brew = Brew.query.options(joinedload('reviews'), joinedload(
             'images'), joinedload('brew_tags')).get(new_brew.id)

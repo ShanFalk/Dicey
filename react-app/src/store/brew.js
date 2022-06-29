@@ -35,7 +35,7 @@ export const createBrew = (payload) => async (dispatch) => {
       title,
       pdf_url,
       price,
-      img_url,
+      imgs,
       brew_tags,
       user_id
     } = payload
@@ -43,16 +43,17 @@ export const createBrew = (payload) => async (dispatch) => {
     console.log(brew_tags)
 
     const form = new FormData();
-    form.append('title', title)
-    form.append('description', description)
-    form.append('pdf_url', pdf_url)
-    form.append('img_url', img_url)
-    form.append('price', price)
-    form.append('brew_tags', brew_tags)
+    form.append('title', title);
+    form.append('description', description);
+    form.append('pdf_url', pdf_url);
+    console.log(imgs)
+    for (let [key, img] of Object.entries(imgs)) {
+      console.log(`img_${key}`);
+      form.append(`img_${key}`, img);
+    }
+    form.append('price', price);
+    form.append('brew_tags', brew_tags);
     form.append('user_id', user_id)
-
-
-
 
 
   const response = await fetch('/api/brews', {
