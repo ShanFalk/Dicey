@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import Checkout from '../Checkout';
 import RemoveItem from '../RemoveItem';
 
 function ShoppingCartPage () {
@@ -60,7 +61,7 @@ function ShoppingCartPage () {
                 <p>Coupon Applied!</p>
                 <p>NAT20 -${sum}</p>
                 <p>Total $0.00</p>
-                <button>Checkout</button>
+                <Checkout />
             </div>
         </div>
 
