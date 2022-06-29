@@ -1,9 +1,13 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import Brew, db, Image, Tag
+from app.models import Brew, db, Image, Tag, Review
 from app.forms.brew_form import CreateBrew, UpdateBrew
 from app.utils import upload, format_errors
 from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy.orm import joinedload
+import pandas as pd
+import nltk
+import plotly.express as px
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 
 brew_routes = Blueprint('brews', __name__)
@@ -94,3 +98,26 @@ def delete_brew(id):
     db.session.delete(brew)
     db.session.commit()
     return {'Successful': 'Successful'}
+
+
+@brew_routes.route("/one", methods=["GET"])
+def sentiment():
+    review_data = pd.read_sql_table(table_name=Review.__tablename__,
+                                    con=db.session.connection(), index_col="id")
+    brew_data = pd.read_sql_table(table_name=Brew.__tablename__,
+                                  con=db.session.connection(), index_col="id")
+    print(brew_data, review_data)
+
+    ratings = review_data["rating"].value_counts()
+
+    sentiments = SentimentIntensityAnalyzer()
+    review_data["Positive"] = [sentiments.polarity_scores(
+        i)["pos"] for i in review_data["content"]]
+    review_data["Negative"] = [sentiments.polarity_scores(
+        i)["neg"] for i in review_data["content"]]
+    review_data["Neutral"] = [sentiments.polarity_scores(
+        i)["neu"] for i in review_data["content"]]
+    review_data = review_data[["content", "Positive", "Negative", "Neutral"]]
+    print(review_data.head())
+
+    return "Success"
