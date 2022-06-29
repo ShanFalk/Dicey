@@ -4,12 +4,10 @@ function ShoppingCartPage () {
     const brews = useSelector(state => state.brews);
     const brewIds = JSON.parse(localStorage.getItem('cart'));
 
-    const cartItems = brewIds.map((id) => brews[id]);
-    const numItems = cartItems.length;
+    const numItems = brewIds.length;
 
-    const sum = cartItems?.reduce(function(accum, currValue){
-        console.log('THIS IS THE ACCUM PRICE', parseFloat(accum.price))
-        return parseFloat(accum.price) + parseFloat(currValue.price);
+    const sum = brewIds.reduce(function(accum, currValue){
+        return parseFloat(brews[accum]?.price) + parseFloat(brews[currValue]?.price);
     })
 
     return (
@@ -18,13 +16,14 @@ function ShoppingCartPage () {
                 <p>{numItems} item(s) in your cart</p>
             </div>
             <div>
-            {cartItems?.map((item) => {
+            {brewIds.map((id) => {
+                const brew = brews[id];
             return (
-                <ul key={item.id}>
-                    <li>{item.title}</li>
-                    <li>{item.description}</li>
-                    <li>{item.images}</li>
-                    <li>${item.price}</li>
+                <ul key={brew?.id}>
+                    <li>{brew?.title}</li>
+                    <li>{brew?.description}</li>
+                    <li>{brew?.images}</li>
+                    <li>${brew?.price}</li>
                 </ul>
               );
             })}
@@ -32,8 +31,8 @@ function ShoppingCartPage () {
             <div>
                 <p>Item(s) total ${sum}</p>
                 <p>Coupon Applied!</p>
-                <p>NAT20</p>
-                <p>Total </p>
+                <p>NAT20 -${sum}</p>
+                <p>Total $0.00</p>
                 <button>Checkout</button>
             </div>
         </div>
