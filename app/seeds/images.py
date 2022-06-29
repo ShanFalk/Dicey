@@ -108,75 +108,75 @@ def seed_images():
             brew_id = 9,
         ),
         Image(
-            img_url = "https://myawstestpython.s3.amazonaws.com/The_Ruins_of_Olbi1",
+            img_url = "https://myawstestpython.s3.amazonaws.com/The_Ruins_of_Olbi1.png",
             brew_id = 10,
         ),
         Image(
-            img_url = "https://myawstestpython.s3.amazonaws.com/The_Ruins_of_Olbi2",
+            img_url = "https://myawstestpython.s3.amazonaws.com/The_Ruins_of_Olbi2.png",
             brew_id = 10,
         ),
         Image(
-            img_url = "https://myawstestpython.s3.amazonaws.com/The_Ruins_of_Olbi3",
+            img_url = "https://myawstestpython.s3.amazonaws.com/The_Ruins_of_Olbi3.png",
             brew_id = 10,
         ),
         Image(
-            img_url = "https://myawstestpython.s3.amazonaws.com/Kidnap_the_Archpriest1",
+            img_url = "https://myawstestpython.s3.amazonaws.com/Kidnap_the_Archpriest1.png",
             brew_id = 11,
         ),
         Image(
-            img_url = "https://myawstestpython.s3.amazonaws.com/Kidnap_the_Archpriest2",
+            img_url = "https://myawstestpython.s3.amazonaws.com/Kidnap_the_Archpriest2.png",
             brew_id = 11,
         ),
         Image(
-            img_url = "https://myawstestpython.s3.amazonaws.com/Kidnap_the_Archpriest3",
+            img_url = "https://myawstestpython.s3.amazonaws.com/Kidnap_the_Archpriest3.png",
             brew_id = 11,
         ),
         Image(
-            img_url = "https://myawstestpython.s3.amazonaws.com/RandomEncountersExpanded1",
+            img_url = "https://myawstestpython.s3.amazonaws.com/RandomEncountersExpanded1.png",
             brew_id = 12,
         ),
         Image(
-            img_url = "https://myawstestpython.s3.amazonaws.com/RandomEncountersExpanded2",
+            img_url = "https://myawstestpython.s3.amazonaws.com/RandomEncountersExpanded2.png",
             brew_id = 12,
         ),
         Image(
-            img_url = "https://myawstestpython.s3.amazonaws.com/RandomEncountersExpanded3",
+            img_url = "https://myawstestpython.s3.amazonaws.com/RandomEncountersExpanded3.png",
             brew_id = 12,
         ),
         Image(
-            img_url = "https://myawstestpython.s3.amazonaws.com/GE_Final1",
+            img_url = "https://myawstestpython.s3.amazonaws.com/GE_Final1.png",
             brew_id = 13,
         ),
         Image(
-            img_url = "https://myawstestpython.s3.amazonaws.com/GE_Final2",
+            img_url = "https://myawstestpython.s3.amazonaws.com/GE_Final2.png",
             brew_id = 13,
         ),
         Image(
-            img_url = "https://myawstestpython.s3.amazonaws.com/GE_Final3",
+            img_url = "https://myawstestpython.s3.amazonaws.com/GE_Final3.png",
             brew_id = 13,
         ),
         Image(
-            img_url = "https://myawstestpython.s3.amazonaws.com/Versatile_NPCs_II_full1",
+            img_url = "https://myawstestpython.s3.amazonaws.com/Versatile_NPCs_II_full1.png",
             brew_id = 14,
         ),
         Image(
-            img_url = "https://myawstestpython.s3.amazonaws.com/Versatile_NPCs_II_full2",
+            img_url = "https://myawstestpython.s3.amazonaws.com/Versatile_NPCs_II_full2.png",
             brew_id = 14,
         ),
         Image(
-            img_url = "https://myawstestpython.s3.amazonaws.com/Versatile_NPCs_II_full3",
+            img_url = "https://myawstestpython.s3.amazonaws.com/Versatile_NPCs_II_full3.png",
             brew_id = 14,
         ),
         Image(
-            img_url = "https://myawstestpython.s3.amazonaws.com/Blood_at_the_Auction1",
+            img_url = "https://myawstestpython.s3.amazonaws.com/Blood_at_the_Auction1.png",
             brew_id = 15,
         ),
         Image(
-            img_url = "https://myawstestpython.s3.amazonaws.com/Blood_at_the_Auction2",
+            img_url = "https://myawstestpython.s3.amazonaws.com/Blood_at_the_Auction2.png",
             brew_id = 15,
         ),
         Image(
-            img_url = "https://myawstestpython.s3.amazonaws.com/Blood_at_the_Auction3",
+            img_url = "https://myawstestpython.s3.amazonaws.com/Blood_at_the_Auction3.png",
             brew_id = 15,
         ),
     ]
