@@ -1,18 +1,26 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import './reviews.css'
+import EditReview from "./EditReview";
 
-function Review ({review, setReviewEdit}) {
+function Review ({review }) {
     const sessionUser = useSelector(state => state.session.user);
+    const [showReviewEdit, setReviewEdit] = useState(false)
     console.log(review)
 
     return (
-        <div>
-            <h3></h3>
-            <p>Comment: {review.content}</p>
-            <p>Rating: {review.rating}</p>
+        <div className="review-container">
+            <div><p>User: {review.user_id}, Date: {review.created_at}</p>
             {sessionUser.id === review.user_id && (
-                <button onClick={() => setReviewEdit(true)}>Edit Review</button>
-            )}
+                <button onClick={() => setReviewEdit(!showReviewEdit)}>{!showReviewEdit ? "Edit Review" : "Cancel" }</button>
+            )}</div>
+            {showReviewEdit ? <EditReview review={review} setReviewEdit={setReviewEdit}/> :
+            <div>
+            <p>Rating: {review.rating}</p>
+            <p>Comment: {review.content}</p>
+            </div>}
+
         </div>
     )
 }
