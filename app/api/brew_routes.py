@@ -116,7 +116,6 @@ def sentiment():
     # print(data)
 
     print(data["rating"].value_counts())
-    print(data['name'])
 
     # sentiments = SentimentIntensityAnalyzer()
     # review_data["Positive"] = [sentiments.polarity_scores(
