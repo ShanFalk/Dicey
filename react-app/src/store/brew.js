@@ -136,7 +136,15 @@ export const deleteBrew = (brewId) => async dispatch => {
     method: "DELETE"
   })
   if (response.ok) {
-    dispatch(deletion(brewId))
+    const data = await response.json()
+    if(data.errors){
+      return;
+    }
+    if(data.Successful) dispatch(deletion(brewId))
+
+    else dispatch(creation(data))
+
+    return data
   }
 }
 

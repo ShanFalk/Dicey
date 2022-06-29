@@ -116,10 +116,19 @@ def get_brews():
 @brew_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
 def delete_brew(id):
-    brew = Brew.query.get(id)
-    db.session.delete(brew)
-    db.session.commit()
-    return {'Successful': 'Successful'}
+
+    # brew = Brew.query.get(id)
+    brew = Brew.query.options(joinedload("purchases")).get(id)
+    if len(brew.purchases) > 0:
+        brew.for_sale = False
+        db.session.commit()
+        brew = Brew.query.options(joinedload('reviews'), joinedload(
+            'images'), joinedload('brew_tags')).get(brew.id)
+        return brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.brew_tags)
+    else:
+        db.session.delete(brew)
+        db.session.commit()
+        return {'Successful': 'Successful'}
 
 
 @brew_routes.route("/one", methods=["GET"])
@@ -131,14 +140,14 @@ def sentiment():
     # Brew.query.options(joinedload(
     #       'reviews'), joinedload('brew_tags')).filter(Brew.user_id == 1).all()
 
-    data = pd.read_sql_query('''select * from reviews inner join brews on brews.id = reviews.brew_id inner 
-    join brewtags on brewtags."brewId" = brews.id inner join tags on tags.id = brewtags."tagId" where reviews.user_id = 3''',
-                             con=db.session.connection())
-    # print(data)
+    # data = pd.read_sql_query('''select * from reviews inner join brews on brews.id = reviews.brew_id inner
+    # join brewtags on brewtags."brewId" = brews.id inner join tags on tags.id = brewtags."tagId" where reviews.user_id = 3''',
+    #                          con=db.session.connection())
+    # # print(data)
 
-    ratings = data["rating"].value_counts()
-    print(data[["rating", "name"]])
-    print(ratings)
+    # ratings = data["rating"].value_counts()
+    # print(data[["rating", "name"]])
+    # print(ratings)
 
     # sentiments = SentimentIntensityAnalyzer()
     # review_data["Positive"] = [sentiments.polarity_scores(
@@ -150,5 +159,12 @@ def sentiment():
     # review_data = review_data[["content", "Positive", "Negative", "Neutral"]]
     # print(review_data.head())
     # print(ratings)
+
+    brew = Brew.query.get(1)
+    query = brew.query.options(joinedload("purchases")).get(1)
+    if len(query.purchases) > 0:
+        print(True)
+    else:
+        print(False)
 
     return "ratings"

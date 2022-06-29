@@ -8,15 +8,18 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onSignup = async (e) => {
     e.preventDefault();
+    if(password === repeatPassword){
     const data = await dispatch(signUp(username, email, password));
     if (data) {
       setErrors(data);
     }
+  }
   };
 
   const handleDemo = (e) => {
@@ -72,6 +75,16 @@ const LoginForm = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <div>
+        <label>Repeat Password</label>
+        <input
+          type='password'
+          name='repeat_password'
+          onChange={(e) => setRepeatPassword(e.target.value)}
+          value={repeatPassword}
+          required={true}
+        ></input>
+      </div>
         <button className='button purple' type='submit'>Sign Up</button>
         <button className='button purple' type="button" onClick={handleDemo}>Demo User</button>
       </div>
