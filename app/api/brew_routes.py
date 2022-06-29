@@ -109,11 +109,11 @@ def sentiment():
     # Brew.query.options(joinedload(
     #       'reviews'), joinedload('brew_tags')).filter(Brew.user_id == 1).all()
 
-    data = pd.read_sql_query('select * from brews ',
-                             con=db.session.connection(), index_col="id")
+    data = pd.read_sql_query('select * from reviews inner join brews on brews.id = reviews.brew_id where reviews.user_id = 1',
+                             con=db.session.connection())
     print(data)
 
-    # ratings = review_data["rating"].value_counts()
+    ratings = data["rating"].value_counts()
 
     # sentiments = SentimentIntensityAnalyzer()
     # review_data["Positive"] = [sentiments.polarity_scores(
@@ -124,5 +124,6 @@ def sentiment():
     #     i)["neu"] for i in review_data["content"]]
     # review_data = review_data[["content", "Positive", "Negative", "Neutral"]]
     # print(review_data.head())
+    print(ratings)
 
-    return "Success"
+    return "ratings"
