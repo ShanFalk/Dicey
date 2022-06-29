@@ -77,7 +77,7 @@ const handleCancelClick = (e) => {
 
 
   return (
-    <div className="">
+    <div className="create form">
     <h1>Add your Brew</h1>
       <form className='' onSubmit={handleSubmit}>
       <ul>

@@ -4,7 +4,6 @@ from app.forms.review_form import CreateReview, UpdateReview
 from app.utils import upload, format_errors
 from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy.orm import joinedload
-import pd
 
 
 review_routes = Blueprint('reviews', __name__)
@@ -18,7 +17,7 @@ def add_review():
 
     if form.validate_on_submit():
         # This id is of brew that the review belongs to.
-        id=form.data["brew_id"]
+        id = form.data["brew_id"]
         new_review = Review(
             rating=form.data["rating"],
             content=form.data["content"],
@@ -45,7 +44,6 @@ def update_review():
         review = Review.query.get(form.data['id'])
         review.content = form.data['content']
         review.rating = form.data['rating']
-        db.session.commit()
         brew = Brew.query.options(joinedload('reviews'), joinedload(
             'images'), joinedload('brew_tags')).get(id)
         return brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.brew_tags)

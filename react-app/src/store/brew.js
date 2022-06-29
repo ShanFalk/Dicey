@@ -74,7 +74,6 @@ export const createBrew = (payload) => async (dispatch) => {
 
 export const getAllBrews = () => async (dispatch) => {
   const response = await fetch('/api/brews');
-  console.log("HIT HERE")
 
   if (response.ok) {
     const data = await response.json();

@@ -22,14 +22,21 @@ class User(db.Model, UserMixin):
     reviews = db.relationship("Review", back_populates="user")
     purchases = db.relationship("Purchase", back_populates="user")
 
-    def to_dict(self):
-        return {
+    def to_dict(self, **kwargs):
+
+        out = {
             "id": self.id,
             "username": self.username,
             "email": self.email,
             "image_url": self.image_url,
             "bio": self.bio
         }
+
+        for key, collection in kwargs.items():
+            # might neeed to import the to_dict methods for the associated models
+            out[key] = [ele.to_dict() for ele in collection]
+
+        return out
 
     @validates('username')
     def validate_username(self, key, username):

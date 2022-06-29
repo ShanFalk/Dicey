@@ -5,47 +5,49 @@ def seed_purchases():
     db.session.add_all(
         [
             Purchase(
-                user_id = 1,
-                brew_id = 4,
+                user_id=1,
+                brew_id=4,
             ),
             Purchase(
-                user_id = 1,
-                brew_id = 9,
+                user_id=1,
+                brew_id=9,
             ),
             Purchase(
-                user_id = 1,
-                brew_id = 12,
+                user_id=1,
+                brew_id=12,
             ),
             Purchase(
-                user_id = 1,
-                brew_id = 13,
+                user_id=1,
+                brew_id=13,
             ),
             Purchase(
-                user_id = 2,
-                brew_id = 1,
+                user_id=2,
+                brew_id=1,
             ),
             Purchase(
-                user_id = 2,
-                brew_id = 2,
+                user_id=2,
+                brew_id=2,
             ),
             Purchase(
-                user_id = 2,
-                brew_id = 4,
+                user_id=2,
+                brew_id=4,
             ),
             Purchase(
-                user_id = 1,
-                brew_id = 4,
+                user_id=1,
+                brew_id=4,
             ),
             Purchase(
-                user_id = 3,
-                brew_id = 6,
+                user_id=3,
+                brew_id=6,
             ),
             Purchase(
-                user_id = 3,
-                brew_id = 7,
+                user_id=3,
+                brew_id=7,
             ),
         ]
     )
+    db.session.commit()
+
 
 def undo_purchases():
     db.session.execute('TRUNCATE purchases RESTART IDENTITY CASCADE;')

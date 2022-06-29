@@ -21,6 +21,7 @@ import { authenticate } from './store/session';
 import { getAllBrews } from './store/brew';
 import { getAllTags } from './store/tag';
 import { getAllUsers} from './store/user';
+import { getPurchases } from './store/purchases';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
     dispatch(getAllBrews());
     dispatch(getAllTags());
     dispatch(getAllUsers());
+    dispatch(getPurchases())
 
   }, [dispatch]);
 
