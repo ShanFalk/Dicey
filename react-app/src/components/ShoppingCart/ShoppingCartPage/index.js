@@ -6,6 +6,7 @@ function ShoppingCartPage () {
 
     const numItems = brewIds.length;
 
+
     const sum = brewIds.reduce(function(accum, currValue){
         return parseFloat(brews[accum]?.price) + parseFloat(brews[currValue]?.price);
     })

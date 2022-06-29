@@ -1,3 +1,4 @@
+from ntpath import join
 from flask import Blueprint, jsonify, session, request
 from app.models import Brew, db, Image, Tag, Review
 from app.forms.brew_form import CreateBrew, UpdateBrew
