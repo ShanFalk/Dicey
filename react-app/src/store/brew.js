@@ -191,6 +191,22 @@ export const updateReviewOnBrew = (payload) => async (dispatch) => {
   }
 }
 
+export const deleteReview = (reviewId, brewId) => async dispatch => {
+  const response = await fetch(`/api/reviews/${reviewId}`, {
+    method: "DELETE",
+    body: brewId
+  })
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return;
+    }
+
+    dispatch(creation(data));
+    return null
+  }
+}
+
 
 const initialState = {  };
 
