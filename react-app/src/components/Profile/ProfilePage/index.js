@@ -9,10 +9,18 @@ import { Link, useHistory } from 'react-router-dom';
 function ProfilePage () {
   const history  = useHistory()
   const user = useSelector(state => state.session.user)
+  //const purchased = user.purchases
   const allBrews = Object.values(useSelector(state => state.brews))
 
-    const brews = allBrews.filter(brew => brew.user_id === user.id)
+  const owned = allBrews.filter(brew => brew.user_id === user.id)
 
+  const allPurchased = Object.values(useSelector(state => state.purchases))
+
+  const ids = allPurchased.filter(purchase => purchase.user_id === user.id).map(purchase => purchase.brew_id)
+
+  const purchased = allBrews.filter(brew => ids.includes(brew.id))
+
+  console.log(purchased)
     const handleCreateClick = () => {
       history.push("/brew")
     }
@@ -29,7 +37,7 @@ function ProfilePage () {
         </div>
         <h2 className="bottom-border">Owned Brews</h2>
         <div className="brew-section">   
-        {brews.map((brew) => {
+        {owned.map((brew) => {
           return (
           <div className='brew-card-link' key={brew.id}>
             <Link to={`/brews/${brew.id}`} brew={brew} className="room-nav-link">
@@ -41,6 +49,18 @@ function ProfilePage () {
     })}
     </div>
     <h2 className="bottom-border">Purchased Brews</h2>
+    <div className="brew-section">   
+        {purchased.map((brew) => {
+          return (
+          <div className='brew-card-link' key={brew.id}>
+            <Link to={`/brews/${brew.id}`} brew={brew} className="room-nav-link">
+              <FeaturedBrewsCollection key={brew.id} brew={brew} />
+            </Link>
+          </div>
+          
+      );
+    })}
+    </div>
         </div>
     )
 }

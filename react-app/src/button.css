@@ -13,6 +13,7 @@ input {
     text-decoration: none;
     color: white;
     padding: 5px;
+    margin: 5px;
     transition: all 500ms;
 }
 

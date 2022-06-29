@@ -11,11 +11,6 @@ class DictField(Field):
         self.data = values
 
 
-class DictField(Field):
-    def get_list(self, values):
-        self.data = values
-
-
 class CreateBrew(FlaskForm):
 
     title = StringField('title', validators=[DataRequired()])
