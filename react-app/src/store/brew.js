@@ -132,6 +132,66 @@ export const deleteBrew = (brewId) => async dispatch => {
   }
 }
 
+export const addReviewToBrew = (payload) => async (dispatch) => {
+  const {
+    brew_id,
+    content,
+    rating,
+    user_id,
+  } = payload
+
+  const form = new FormData();
+  form.append('brew_id', brew_id)
+  form.append('content', content)
+  form.append('rating', rating)
+  form.append('user_id', user_id)
+
+  const response = await fetch('/api/reviews', {
+    method: "POST",
+    body: form
+  });
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return;
+    }
+
+    dispatch(creation(data));
+    return null
+  }
+}
+
+export const updateReviewOnBrew = (payload) => async (dispatch) => {
+  const {
+    id,
+    brew_id,
+    content,
+    rating,
+    user_id,
+  } = payload
+
+  const form = new FormData();
+  form.append('id', id)
+  form.append('brew_id', brew_id)
+  form.append('content', content)
+  form.append('rating', rating)
+  form.append('user_id', user_id)
+
+  const response = await fetch('/api/reviews', {
+    method: "PUT",
+    body: form
+  });
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      return;
+    }
+
+    dispatch(creation(data));
+    return null
+  }
+}
+
 
 const initialState = {  };
 

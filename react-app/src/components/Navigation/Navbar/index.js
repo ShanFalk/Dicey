@@ -12,7 +12,12 @@ const NavBar = () => {
   let sessionButton;
   if (sessionUser) {
     sessionButton = (
-      <LogoutButton />
+      <>
+        <Link className='button purple' to={`/profile/${sessionUser.id}`} >
+          <i className="fa-solid fa-user"></i>
+        </Link>
+        <LogoutButton />
+      </>
     );
   } else {
     sessionButton = (
@@ -29,9 +34,6 @@ const NavBar = () => {
       { sessionButton }
       <Link className='button purple' to='/shopping-cart'>
         <i className="fa-solid fa-cart-shopping"></i>
-      </Link>
-      <Link className='button purple' to={`/profile/${sessionUser.id}`}>
-      <i className="fa-solid fa-user"></i>
       </Link>
     </nav>
   );
