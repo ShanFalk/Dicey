@@ -13,6 +13,7 @@ class CreateReview(FlaskForm):
 
 
 class UpdateReview(FlaskForm):
+    id = IntegerField("id")
     rating = IntegerField("rating")
     content = StringField("content")
     user_id = IntegerField("user_id")

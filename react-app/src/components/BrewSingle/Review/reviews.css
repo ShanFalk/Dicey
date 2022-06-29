@@ -1,0 +1,22 @@
+.review-container {
+    border: black 1px solid;
+}
+
+.create-review-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    display: flex;
+    border: black 1px solid;
+}
+
+.rating-input {
+    width: 40px;
+}
+
+.review-textarea {
+    height: 200px;
+    width: 300px;
+}

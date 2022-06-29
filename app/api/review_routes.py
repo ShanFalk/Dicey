@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import Review, db, Image, Tag, Brew
+from app.models import Review, db, Image, Tag, Brew, review
 from app.forms.review_form import CreateReview, UpdateReview
 from app.utils import upload, format_errors
 from flask_login import current_user, login_user, logout_user, login_required
@@ -16,6 +16,8 @@ def add_review():
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
+        # This id is of brew that the review belongs to.
+        id=form.data["brew_id"]
         new_review = Review(
             rating=form.data["rating"],
             content=form.data["content"],
@@ -24,7 +26,9 @@ def add_review():
         )
         db.session.add(new_review)
         db.session.commit()
-        return new_review.to_dict()
+        brew = Brew.query.options(joinedload('reviews'), joinedload(
+            'images'), joinedload('brew_tags')).get(id)
+        return brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.brew_tags)
     return {'errors': format_errors(form.errors)}, 401
 
 
@@ -35,8 +39,15 @@ def update_review():
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        db.session.commit()
-        return review.to_dict()
+        # This id is of brew that the review belongs to.
+        id=form.data["brew_id"]
+        review = Review.query.get(id)
+        review.content = form.data['content']
+        review.rating = form.data['rating']
+
+        brew = Brew.query.options(joinedload('reviews'), joinedload(
+            'images'), joinedload('brew_tags')).get(id)
+        return brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.brew_tags)
     return {'errors': format_errors(form.errors)}, 401
 
 
