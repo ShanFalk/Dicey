@@ -42,10 +42,10 @@ def update_review():
     if form.validate_on_submit():
         # This id is of brew that the review belongs to.
         id=form.data["brew_id"]
-        review = Review.query.get(id)
+        review = Review.query.get(form.data['id'])
         review.content = form.data['content']
         review.rating = form.data['rating']
-
+        db.session.commit()
         brew = Brew.query.options(joinedload('reviews'), joinedload(
             'images'), joinedload('brew_tags')).get(id)
         return brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.brew_tags)
@@ -62,10 +62,14 @@ def update_review():
 @review_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
 def delete_review(id):
-    review = review.query.get(id)
+    review = Review.query.get(id)
+    brew_id = review.brew_id
     db.session.delete(review)
     db.session.commit()
-    return {'Successful': 'Successful'}
+
+    brew = Brew.query.options(joinedload('reviews'), joinedload(
+            'images'), joinedload('brew_tags')).get(brew_id)
+    return brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.brew_tags)
 
 
 @review_routes.route("/sentiment", methods=["GET"])

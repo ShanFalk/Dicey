@@ -12,8 +12,8 @@ function Review ({review }) {
     return (
         <div className="review-container">
             <div><p>User: {review.user_id}, Date: {review.created_at}</p>
-            {sessionUser.id === review.user_id && (
-                <button onClick={() => setReviewEdit(!showReviewEdit)}>{!showReviewEdit ? "Edit Review" : "Cancel" }</button>
+            {sessionUser && sessionUser.id === review.user_id && (
+                <button onClick={() => setReviewEdit(!showReviewEdit)}>{!showReviewEdit ? "Edit Review" : "Cancel Edit" }</button>
             )}</div>
             {showReviewEdit ? <EditReview review={review} setReviewEdit={setReviewEdit}/> :
             <div>
