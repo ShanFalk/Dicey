@@ -35,7 +35,7 @@ export const createBrew = (payload) => async (dispatch) => {
       title,
       pdf_url,
       price,
-      img_url,
+      imgs,
       brew_tags,
       user_id
     } = payload
@@ -43,16 +43,16 @@ export const createBrew = (payload) => async (dispatch) => {
     console.log(brew_tags)
 
     const form = new FormData();
-    form.append('title', title)
-    form.append('description', description)
-    form.append('pdf_url', pdf_url)
-    form.append('img_url', img_url)
-    form.append('price', price)
-    form.append('brew_tags', brew_tags)
+    form.append('title', title);
+    form.append('description', description);
+    form.append('pdf_url', pdf_url);
+    console.log(imgs)
+    for (let [key, img] of Object.entries(imgs)) {
+      form.append(`img_${key}`, img);
+    }
+    form.append('price', price);
+    form.append('brew_tags', brew_tags);
     form.append('user_id', user_id)
-
-
-
 
 
   const response = await fetch('/api/brews', {
@@ -91,26 +91,35 @@ export const updateBrew = (payload) => async (dispatch) => {
   const {
     description,
     title,
-    // pdf_url,
+    pdf_url,
     price,
     id,
-    // img_url,
-    tags
+    imgs,
+    brew_tags
   } = payload
+
+  console.log(brew_tags);
 
   const form = new FormData();
   form.append('title', title)
   form.append('description', description)
-  // form.append('pdf_url', pdf_url)
-  // form.append('img_url', img_url)
+  form.append('pdf_url', pdf_url)
+  for (let [key, img] of Object.entries(imgs)) {
+    if(key.startsWith('E-')) {
+      form.append(key.slice(2), img)
+    } else {
+      form.append(`img_${key}`, img);
+    }
+  }
   form.append('price', price)
+  form.append('brew_tags', brew_tags)
   form.append('id', id)
-  form.append('brew_tags', tags)
 
   const response = await fetch('/api/brews', {
     method: "PUT",
     body: form
   });
+  
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
@@ -118,7 +127,7 @@ export const updateBrew = (payload) => async (dispatch) => {
     }
 
     dispatch(creation(data));
-    return null
+    return data
   }
 }
 
@@ -218,12 +227,12 @@ export default function brewReducer(state = initialState, action) {
       case GET_BREWS:
         const brews = action.brews
         return {...state, ...brews}
-        case MODIFY_BREW:
-          return {...state, [action.brew.id] : action.brew }
-        case DELETE_BREW:
-          let newState = {...state}
-          delete newState[action.brewId]
-          return newState
+      case MODIFY_BREW:
+        return {...state, [action.brew.id] : action.brew }
+      case DELETE_BREW:
+        let newState = {...state}
+        delete newState[action.brewId]
+        return newState
       default:
         return state;
     }
