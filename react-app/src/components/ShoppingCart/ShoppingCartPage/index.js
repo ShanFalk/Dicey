@@ -20,16 +20,18 @@ function ShoppingCartPage () {
         setIsDeleted(false)
     },[isDeleted])
 
+    //if the shopping cart is empty
     if(numItems === 0) {
         return (
             <div>
-                Your cart is empty.
+                Your cart is empty!
             </div>
         )
     }
 
-    //
-    const sum = brewIds.map((brewId) => brews[brewId]?.price).reduce((accum, currVal) => accum + currVal)
+    //array methods to get the prices for the shopping cart items and total them
+    const prices = brewIds.map((brewId) => brews[brewId]?.price)
+    const sum = prices.reduce((prevPrice, currPrice) => prevPrice + currPrice)
 
 
     return (
