@@ -92,13 +92,15 @@ def update_brew():
             if img_id[0] == 'i':
                 new_image = Image(
                     img_url=img_url,
-                    brew_id=new_brew.id)
+                    brew_id=brew.id)
                 db.session.add(new_image)
             else:
                 image = Image.query.get(img_id)
                 image.img_url = img_url
                 db.session.add(image)
         db.session.commit()
+        brew = Brew.query.options(joinedload('reviews'), joinedload(
+            'images'), joinedload('brew_tags')).get(brew.id)
         return brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.brew_tags) 
     return {'errors': format_errors(form.errors)}, 401
 

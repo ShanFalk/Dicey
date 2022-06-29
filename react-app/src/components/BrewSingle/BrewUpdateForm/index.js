@@ -61,8 +61,8 @@ function BrewUpdateForm({brew, setShowEditForm}) {
 
   const updateImages = (e, i) => {
     const file = e.target.files[0];
-    if (brew.images[i]) {
-      imgs[`E-${brew.images[i].id}`] = file;
+    if (brew.images[i-1]) {
+      imgs[`E-${brew.images[i-1].id}`] = file;
     } else {
       imgs[i.toString()] = file;
     }
