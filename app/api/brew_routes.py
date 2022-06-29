@@ -102,22 +102,27 @@ def delete_brew(id):
 
 @brew_routes.route("/one", methods=["GET"])
 def sentiment():
-    review_data = pd.read_sql_table(table_name=Review.__tablename__,
-                                    con=db.session.connection(), index_col="id")
-    brew_data = pd.read_sql_table(table_name=Brew.__tablename__,
-                                  con=db.session.connection(), index_col="id")
-    print(brew_data, review_data)
+    # review_data = pd.read_sql_table(table_name=Review.__tablename__,
+    #                                 con=db.session.connection(), index_col="id")
+    # brew_data = pd.read_sql_table(table_name=Brew.__tablename__,
+    #                               con=db.session.connection(), index_col="id")
+    # Brew.query.options(joinedload(
+    #       'reviews'), joinedload('brew_tags')).filter(Brew.user_id == 1).all()
 
-    ratings = review_data["rating"].value_counts()
+    data = pd.read_sql_query('select * from brews ',
+                             con=db.session.connection(), index_col="id")
+    print(data)
 
-    sentiments = SentimentIntensityAnalyzer()
-    review_data["Positive"] = [sentiments.polarity_scores(
-        i)["pos"] for i in review_data["content"]]
-    review_data["Negative"] = [sentiments.polarity_scores(
-        i)["neg"] for i in review_data["content"]]
-    review_data["Neutral"] = [sentiments.polarity_scores(
-        i)["neu"] for i in review_data["content"]]
-    review_data = review_data[["content", "Positive", "Negative", "Neutral"]]
-    print(review_data.head())
+    # ratings = review_data["rating"].value_counts()
+
+    # sentiments = SentimentIntensityAnalyzer()
+    # review_data["Positive"] = [sentiments.polarity_scores(
+    #     i)["pos"] for i in review_data["content"]]
+    # review_data["Negative"] = [sentiments.polarity_scores(
+    #     i)["neg"] for i in review_data["content"]]
+    # review_data["Neutral"] = [sentiments.polarity_scores(
+    #     i)["neu"] for i in review_data["content"]]
+    # review_data = review_data[["content", "Positive", "Negative", "Neutral"]]
+    # print(review_data.head())
 
     return "Success"

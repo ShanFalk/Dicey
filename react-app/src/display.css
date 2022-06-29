@@ -3,8 +3,9 @@
     height: 200px;
 }
 .container {
-    inline-size: min(100% - 2rem, 70rem);
+    /* inline-size: min(100% - 2rem, 70rem); */
     margin-inline: auto;
+    margin-top: 200px;
 }
 
 .flow {
