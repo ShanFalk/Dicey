@@ -5,6 +5,7 @@ import LogoutButton from '../../auth/LogoutButton';
 import Search from '../Search';
 import "./navbar.css";
 import LoginFormModal from '../../LoginForms';
+import SignupFormModal from '../../SignupForms';
 
 const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user);
@@ -21,7 +22,10 @@ const NavBar = () => {
     );
   } else {
     sessionButton = (
+      <>
       <LoginFormModal />
+      <SignupFormModal />
+      </>
     );
   }
 

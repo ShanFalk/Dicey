@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import brewReducer from './brew';
+import purchaseReducer from './purchases';
 import session from './session'
 import tagReducer from './tag';
 
@@ -8,6 +9,7 @@ const rootReducer = combineReducers({
   session,
   brews: brewReducer,
   tags: tagReducer,
+  purchases: purchaseReducer
 });
 
 

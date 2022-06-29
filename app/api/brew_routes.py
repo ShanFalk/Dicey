@@ -1,3 +1,4 @@
+from ntpath import join
 from flask import Blueprint, jsonify, session, request
 from app.models import Brew, db, Image, Tag, Review
 from app.forms.brew_form import CreateBrew, UpdateBrew
@@ -109,11 +110,13 @@ def sentiment():
     # Brew.query.options(joinedload(
     #       'reviews'), joinedload('brew_tags')).filter(Brew.user_id == 1).all()
 
-    data = pd.read_sql_query('select * from brews ',
-                             con=db.session.connection(), index_col="id")
-    print(data)
+    data = pd.read_sql_query('''select * from reviews inner join brews on brews.id = reviews.brew_id inner 
+    join brewtags on brewtags."brewId" = brews.id inner join tags on tags.id = brewtags."tagId" where reviews.user_id = 1''',
+                             con=db.session.connection())
+    # print(data)
 
-    # ratings = review_data["rating"].value_counts()
+    print(data["rating"].value_counts())
+    print(data['name'])
 
     # sentiments = SentimentIntensityAnalyzer()
     # review_data["Positive"] = [sentiments.polarity_scores(
@@ -124,5 +127,6 @@ def sentiment():
     #     i)["neu"] for i in review_data["content"]]
     # review_data = review_data[["content", "Positive", "Negative", "Neutral"]]
     # print(review_data.head())
+    # print(ratings)
 
-    return "Success"
+    return "ratings"
