@@ -152,8 +152,8 @@ const handleCancelClick = (e) => {
           </div>
           )
         })}
-      <button className='' type="submit">Create Brew</button>
-      <button className='' type="button" onClick={handleCancelClick}>Cancel</button>
+      <button className='button purple' type="submit">Create Brew</button>
+      <button className='button purple' type="button" onClick={handleCancelClick}>Cancel</button>
     </form>
   </div>
   )

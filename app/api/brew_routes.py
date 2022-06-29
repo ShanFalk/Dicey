@@ -14,6 +14,7 @@ from sqlalchemy.orm import joinedload
 brew_routes = Blueprint('brews', __name__)
 
 
+@login_required
 @brew_routes.route("", methods=["POST"])
 def add_brew():
 
@@ -59,6 +60,7 @@ def add_brew():
     return {'errors': format_errors(form.errors)}, 401
 
 
+@login_required
 @brew_routes.route("", methods=["PUT"])
 def update_brew():
 
@@ -76,7 +78,6 @@ def update_brew():
 
     form = UpdateBrew()
     form['csrf_token'].data = request.cookies['csrf_token']
-
 
     if form.validate_on_submit():
         tag_id_arr = form.data['brew_tags'].split(',')
@@ -101,7 +102,7 @@ def update_brew():
         db.session.commit()
         brew = Brew.query.options(joinedload('reviews'), joinedload(
             'images'), joinedload('brew_tags')).get(brew.id)
-        return brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.brew_tags) 
+        return brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.brew_tags)
     return {'errors': format_errors(form.errors)}, 401
 
 
