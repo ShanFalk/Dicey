@@ -20,7 +20,7 @@ function ReviewsSection ({brew}) {
     sumOfRatings = reviews.reduce((sum, review) => {
         return sum += review.rating
     }, 0);
-    averageRating = sumOfRatings / numOfReviews;
+    averageRating = sumOfRatings / numOfReviews || "No Reviews";
     }
 
     // const progressiveVowelIndex = word => {

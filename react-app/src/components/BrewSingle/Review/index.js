@@ -7,7 +7,7 @@ import EditReview from "./EditReview";
 function Review ({review }) {
     const sessionUser = useSelector(state => state.session.user);
     const [showReviewEdit, setReviewEdit] = useState(false)
-    console.log(review)
+    
 
     return (
         <div className="review-container">

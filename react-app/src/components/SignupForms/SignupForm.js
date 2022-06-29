@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { login } from '../../store/session';
+import { signUp, login } from '../../store/session';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
-  const onLogin = async (e) => {
+  const onSignup = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password));
+    const data = await dispatch(signUp(username, email, password));
     if (data) {
       setErrors(data);
     }
@@ -33,12 +34,22 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
-      <h1>Login</h1>
+    <form onSubmit={onSignup}>
       <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
+      </div>
+      <div>
+        <label htmlFor='username'>Username:</label>
+        <input
+          name='username'
+          type='text'
+          placeholder='Username'
+          required
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
       </div>
       <div>
         <label htmlFor='email'>Email:</label>
@@ -48,7 +59,7 @@ const LoginForm = () => {
           placeholder='Email'
           required
           value={email}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <div>
@@ -61,7 +72,7 @@ const LoginForm = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className='button purple' type='submit'>Login</button>
+        <button className='button purple' type='submit'>Sign Up</button>
         <button className='button purple' type="button" onClick={handleDemo}>Demo User</button>
       </div>
     </form>
