@@ -31,7 +31,7 @@ const NavBar = () => {
 
   return (
     <nav className='nav'>
-      <Link className='nav-logo' to='/'>
+      <Link className='nav-logo cardo' to='/'>
         <h2>Dicey</h2>
       </Link>
       <Search />
