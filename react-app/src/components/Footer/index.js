@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import "./footer.css"
 
 function Footer() {
-    // TODO: github, link to about page, link to etsy, names(link to our individual github)
     return (
         <div className='footer'>
             <Link to='/about' className='footerlink cardo'>
