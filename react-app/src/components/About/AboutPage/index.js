@@ -1,7 +1,7 @@
 function AboutPage () {
     return (
         <div>
-            <h2>This is the AboutComponents - AboutPage Component</h2>
+            <h2>About Dicey</h2>
         </div>
 
     )
