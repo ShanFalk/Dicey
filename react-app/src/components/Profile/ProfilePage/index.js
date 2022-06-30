@@ -51,12 +51,12 @@ function ProfilePage () {
             
         <button onClick={handleCreateClick} className="button purple">Add Brew</button>
         </div>
-        <h2 className="bottom-border">Owned Brews</h2>
+        <h2 className="bottom-border">Brews Listed For Sale</h2>
         <div className="brew-section">   
         {owned.map((brew) => {
           return (
           <div className='brew-card-link' key={brew.id}>
-            <Link to={`/brews/${brew.id}`} brew={brew} className="room-nav-link">
+            <Link to={`/brews/${brew.id}`} brew={brew} className="no-decor">
               <FeaturedBrewsCollection key={brew.id} brew={brew} />
             </Link>
           </div>
@@ -69,7 +69,7 @@ function ProfilePage () {
         {purchased.map((brew) => {
           return (
           <div className='brew-card-link' key={brew.id}>
-            <Link to={`/brews/${brew.id}`} brew={brew} className="room-nav-link">
+            <Link to={`/brews/${brew.id}`} brew={brew} className="no-decor">
               <FeaturedBrewsCollection key={brew.id} brew={brew} />
             </Link>
           </div>
