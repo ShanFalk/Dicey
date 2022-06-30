@@ -94,9 +94,9 @@ function App() {
           <AboutPage/>
         </Route>
 
-        <Route path="/brew" exact={true}>
+        <ProtectedRoute path="/brew" exact={true}>
           <BrewCreateForm/>
-        </Route>
+        </ProtectedRoute>
 
       </Switch>
       <Footer />

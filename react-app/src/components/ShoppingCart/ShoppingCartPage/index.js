@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import Checkout from '../Checkout';
 import RemoveItem from '../RemoveItem';
 
 function ShoppingCartPage () {
     const brews = useSelector(state => state.brews);
+    console.log(brews);
     const [brewIds, updatebrewIds] = useState(JSON.parse(localStorage.getItem('cart')));
     const [isDeleted, setIsDeleted] = useState(false)
 
@@ -20,16 +22,18 @@ function ShoppingCartPage () {
         setIsDeleted(false)
     },[isDeleted])
 
+    //if the shopping cart is empty
     if(numItems === 0) {
         return (
             <div>
-                Your cart is empty.
+                Your cart is empty!
             </div>
         )
     }
 
-    //
-    const sum = brewIds.map((brewId) => brews[brewId]?.price).reduce((accum, currVal) => accum + currVal)
+    //array methods to get the prices for the shopping cart items and total them
+    const prices = brewIds.map((brewId) => brews[brewId]?.price)
+    const sum = prices.reduce((prevPrice, currPrice) => prevPrice + currPrice)
 
 
     return (
@@ -45,7 +49,7 @@ function ShoppingCartPage () {
                 <ul key={brew?.id}>
                     <li>{brew?.title}</li>
                     <li>{brew?.description}</li>
-                    <li>{brew?.images}</li>
+                    {/* <img src={brew?.images[0].img_url} alt="A fantastic scene"/> */}
                     <li>${brew?.price}</li>
                 </ul>
                 <RemoveItem brewIds={brewIds} brewId={brew?.id} deleteEnd={onDeleteEnd}/>
@@ -58,7 +62,7 @@ function ShoppingCartPage () {
                 <p>Coupon Applied!</p>
                 <p>NAT20 -${sum}</p>
                 <p>Total $0.00</p>
-                <button>Checkout</button>
+                <Checkout brewIds={brewIds}/>
             </div>
         </div>
 

@@ -13,6 +13,8 @@ export const getAllUsers = () => async (dispatch) => {
         if (data.errors) {
             return;
         }
+
+        console.log(data)
         dispatch(retrieveAll(data));
     }
 }

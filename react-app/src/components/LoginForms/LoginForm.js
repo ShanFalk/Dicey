@@ -48,7 +48,7 @@ const LoginForm = () => {
           placeholder='Email'
           required
           value={email}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
       <div>

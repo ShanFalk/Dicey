@@ -11,16 +11,17 @@ function ProfilePage () {
   const user = useSelector(state => state.session.user)
   //const purchased = user.purchases
   const allBrews = Object.values(useSelector(state => state.brews))
-
   const owned = allBrews.filter(brew => brew.user_id === user.id)
-
   const allPurchased = Object.values(useSelector(state => state.purchases))
-
   const ids = allPurchased.filter(purchase => purchase.user_id === user.id).map(purchase => purchase.brew_id)
-
   const purchased = allBrews.filter(brew => ids.includes(brew.id))
 
-  console.log(purchased)
+  const member = new Date(user?.created_at)
+  const date = member.getDate();
+  const month = member.getMonth(); 
+  const year = member.getFullYear();
+  const monthDateYear  = (month+1) + "/" + date + "/" + year; 
+
     const handleCreateClick = () => {
       history.push("/brew")
     }
@@ -28,11 +29,19 @@ function ProfilePage () {
     return (
         <div className="profile-page">
             <div className="user-info">
-            <h2>{user?.username}</h2>
-            <p>{user?.email}</p>
-            <img className="profile-image" src={user?.image_url}
+              <div>
+              <img className="profile-image" src={user?.image_url}
         alt="" />
-
+            <h2>{user?.username}</h2>
+            <h4>Member Since: {monthDateYear}</h4>
+              </div>
+              <div>
+                <h3 className="profile-header">User Information</h3>
+              <p>Email: {user?.email}</p>
+              <p>Bio: {user?.bio}</p>
+              </div>
+     
+            
         <button onClick={handleCreateClick} className="button purple">Add Brew</button>
         </div>
         <h2 className="bottom-border">Owned Brews</h2>

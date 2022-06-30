@@ -2,16 +2,19 @@ import Review from "../index";
 import ReviewForm from "../ReviewForm";
 import {useState} from 'react'
 import EditReview from "../EditReview";
+import StarsRating from 'react-star-rate';
+import { useSelector } from "react-redux";
 
 function ReviewsSection ({brew}) {
-    const [reviewEdit, setReviewEdit] = useState(false)
     const [showCreateReviewField, setCreateReviewField] = useState(false)
+    const users = useSelector(state => state.users);
 
     //Initializing Variables Used in Reviews Display
     let reviews;
     let numOfReviews;
     let sumOfRatings;
     let averageRating;
+    let user;
 
     //When/if a brew is threaded, this code block will set values the the above variables.
     if (brew)  {
@@ -23,21 +26,15 @@ function ReviewsSection ({brew}) {
     averageRating = sumOfRatings / numOfReviews || "No Reviews";
     }
 
-    // const progressiveVowelIndex = word => {
-    //     return word.reduce((accumulator, character, index) => {
-    //         return isVowel(character) ? accumulator = index : accumulator;
-    //     }, 0);
 
-    // if (reviewEdit){
-    //     return (
-    //         <EditReview  setReviewEdit={setReviewEdit}/>
-    //     )
-    // }
+
 
     return (
         <div className="review-table">
             <div>
-            <h3>{numOfReviews} Reviews --- Rating: {averageRating}</h3>
+            <h3>{numOfReviews} Reviews - <StarsRating
+                  value={averageRating}
+                  disabled={true}/> {averageRating}</h3>
             <button onClick={() => setCreateReviewField(!showCreateReviewField)}>Add Review</button>
             </div>
             {showCreateReviewField &&
@@ -45,7 +42,7 @@ function ReviewsSection ({brew}) {
             }
             {brew?.reviews.map(review => {
                 return (
-                <Review key={review.id} review={review} setReviewEdit={setReviewEdit} />
+                    {users} && <Review key={review.id} review={review} user={users[review.user_id]}  />
                 )
             })}
         </div>
