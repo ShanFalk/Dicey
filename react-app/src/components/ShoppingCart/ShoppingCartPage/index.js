@@ -62,7 +62,7 @@ function ShoppingCartPage () {
                 <p>Coupon Applied!</p>
                 <p>NAT20 -${sum}</p>
                 <p>Total $0.00</p>
-                <Checkout />
+                <Checkout brewIds={brewIds}/>
             </div>
         </div>
 
