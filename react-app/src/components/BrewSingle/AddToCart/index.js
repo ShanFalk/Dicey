@@ -1,15 +1,21 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Modal } from '../../../context/Modal';
 
 function AddToCart ({ brew }) {
     const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]')
+    const sessionUser = useSelector(state => state.session.user);
 
     const [cart, setCart] = useState(cartFromLocalStorage);
     const [showModal, setShowModal] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [isOwned, setIsOwned] = useState(false);
 
     useEffect(()=> {
-        localStorage.setItem('cart', JSON.stringify(cart))
-    }, [cart]);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        if (JSON.parse(localStorage.getItem('cart')).includes(brew?.id)) setIsDisabled(true);
+        else if (sessionUser.id === brew.user_id) setIsOwned(true);
+    }, [cart, isDisabled]);
 
     const addToCart = () => {
         if (JSON.parse(localStorage.getItem('cart')).includes(brew?.id)) {
@@ -25,9 +31,14 @@ function AddToCart ({ brew }) {
     return (
         <>
         {/* TODO: Add go to cart button, brew image, title, price */}
-            <button onClick={addToCart}>
-                Add to Cart
-            </button>
+            {!isOwned && (
+                <button disabled={isDisabled} onClick={addToCart}>
+                    Add to Cart
+                </button>
+            )}
+            {isOwned && (
+                <p>In Library</p>
+            )}
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <h4><i className="fa-solid fa-check"></i>Added to cart</h4>
