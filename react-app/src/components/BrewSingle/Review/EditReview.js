@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState} from 'react'
 import { updateReviewOnBrew, deleteReview } from '../../../store/brew';
+import StarsRating from 'react-star-rate';
 
 
 function EditReview({review, setReviewEdit}) {
@@ -67,14 +68,22 @@ function EditReview({review, setReviewEdit}) {
               {errors.map((error, idx) => <li key={idx}>{error}</li>)}
           </ul>
 
-          <input
+          <div>
+              <StarsRating
+                  value={rating}
+                  onChange={value => {
+                  setRating(value);
+              }}/>
+          </div>
+
+          {/* <input
           type="number"
           value={rating}
           min="0"
           max="5"
           required
           className='input rating-input'
-          onChange={updateRating} />
+          onChange={updateRating} /> */}
 
           <textarea
           value={content}
