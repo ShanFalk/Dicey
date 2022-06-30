@@ -2,15 +2,17 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState} from 'react'
 import { addReviewToBrew } from '../../../../store/brew';
+import StarsRating from 'react-star-rate';
 import '../reviews.css'
 
 function ReviewForm ({setCreateReviewField, brew_id}) {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
+    // const [value, setValue] = useState(0);
 
-    const [user_id, setUser_id] = useState(sessionUser.id);
+    const [user_id, setUser_id] = useState(sessionUser?.id);
     const [content, setContent] = useState("");
-    const [rating, setRating] = useState("");
+    const [rating, setRating] = useState(0);
     const [errors, setErrors] = useState([]);
 
 
@@ -62,7 +64,15 @@ function ReviewForm ({setCreateReviewField, brew_id}) {
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                 </ul>
 
-                <input
+                <div>
+                <StarsRating
+                    value={rating}
+                    onChange={value => {
+                    setRating(value);
+                    }}/>
+                </div>
+
+                {/* <input
                 type="number"
                 placeholder="Rating"
                 value={rating}
@@ -70,7 +80,7 @@ function ReviewForm ({setCreateReviewField, brew_id}) {
                 max="5"
                 required
                 className='input rating-input'
-                onChange={updateRating} />
+                onChange={updateRating} /> */}
 
                 <textarea
                 placeholder="Content"
