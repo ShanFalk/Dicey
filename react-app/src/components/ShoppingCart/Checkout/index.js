@@ -28,6 +28,7 @@ function Checkout({ brewIds }) {
         let makePurchase = await dispatch(createPurchases(payload))
 
         if (makePurchase) {
+            localStorage.setItem('cart', JSON.stringify([]));
             history.push(`/profile/${sessionUser.id}`)
         }
 

@@ -55,7 +55,7 @@ export const createPurchases = (payload) => async (dispatch) => {
       case GET_PURCHASES:
         return {...state, ...action.purchases }
       case CREATE_PURCHASES:
-        return {...state, ...action.purchases }
+        return {...action.purchases }
       default:
         return state;
     }
