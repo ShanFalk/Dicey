@@ -15,13 +15,14 @@ def get_purchase():
 
 @purchase_routes.route("",methods=["POST"])
 def post_purchase():
-    print('*'*50, json.loads(request.data))
-    brew_ids = request.data["brew_ids"]
-    user_id = request.data["user_id"]
+
+    data = json.loads(request.data)
+    brew_ids = data["brew_ids"]
+
     for brew_id in brew_ids:
         new_purchase = Purchase(
-            user_id,
-            brew_id
+            user_id = data["user_id"],
+            brew_id = brew_id
         )
         db.session.add(new_purchase)
     db.session.commit()
