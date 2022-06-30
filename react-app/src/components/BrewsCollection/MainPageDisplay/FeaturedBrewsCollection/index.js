@@ -1,5 +1,4 @@
 import React from 'react'
-import './FeaturedBrew.css'
 
 
 function FeaturedBrewsCollection ({brew}) {
@@ -8,14 +7,15 @@ function FeaturedBrewsCollection ({brew}) {
     //console.log(image)
 
     return (
-        <div className='card-block'>
-        <img className="brew-image" src={image?.img_url}
-        alt="" /> 
-          <div className='card-info'>
+        <div className='thumbnail'>
+
+        <img className="thumbnail-image" src={image?.img_url}
+        alt="" />
+         <div className='thumbnail-details'>
               <h2>{brew.title}</h2>
-              <p>$ {brew.price}</p>
-              
-          </div>
+              {/* <p>$ {brew.price}</p> */}
+            </div>
+
       </div>
     )
 }

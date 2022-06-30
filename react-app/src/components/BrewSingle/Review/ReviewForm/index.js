@@ -54,10 +54,6 @@ function ReviewForm ({setCreateReviewField, brew_id}) {
 
     return (
         <div className='create-review-form'>
-            <h3>This is the ReviewComponents - ReviewForm Component</h3>
-
-            <h1>Add your Brew</h1>
-
             <form className='' onSubmit={handleSubmit}>
 
                 <ul>

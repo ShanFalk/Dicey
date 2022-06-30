@@ -4,6 +4,7 @@ import {useState} from 'react'
 import EditReview from "../EditReview";
 import StarsRating from 'react-star-rate';
 import { useSelector } from "react-redux";
+import '../reviews.css';
 
 function ReviewsSection ({brew}) {
     const sessionUser = useSelector(state => state.session.user);
@@ -42,7 +43,7 @@ function ReviewsSection ({brew}) {
                   value={averageRating? averageRating : 5}
                   disabled={true}/> -----
             {sessionUser && purchases[brew.id] &&
-            <button onClick={() => setCreateReviewField(!showCreateReviewField)}>Add Review</button>
+            <button className="purple button" onClick={() => setCreateReviewField(!showCreateReviewField)}>Add Review</button>
             }
             </div>
             {showCreateReviewField &&
