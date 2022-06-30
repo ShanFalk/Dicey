@@ -3,6 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState} from 'react'
 import {createBrew} from'../../../store/brew'
+import '../../../form.css'
 
 function BrewCreateForm() {
   const dispatch = useDispatch();
@@ -83,7 +84,7 @@ const handleCancelClick = (e) => {
   return (
     <div className="create form">
     <h1>Add your Brew</h1>
-      <form className='' onSubmit={handleSubmit}>
+      <form className='form' onSubmit={handleSubmit}>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
@@ -152,8 +153,8 @@ const handleCancelClick = (e) => {
           </div>
           )
         })}
-      <button className='' type="submit">Create Brew</button>
-      <button className='' type="button" onClick={handleCancelClick}>Cancel</button>
+      <button className='button purple' type="submit">Create Brew</button>
+      <button className='button purple' type="button" onClick={handleCancelClick}>Cancel</button>
     </form>
   </div>
   )
