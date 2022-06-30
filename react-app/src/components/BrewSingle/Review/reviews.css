@@ -1,6 +1,20 @@
+.bottom-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.button-row {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
 .create-review-form {
     display: flex;
     flex-direction: column;
+    border: black solid 1px;
 }
 
 .input {
@@ -13,7 +27,8 @@
 }
 
 .review-container {
-    border: black 1px solid;
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.3);
+    padding-right: 5px;
 }
 
 .review-section-header {
@@ -23,20 +38,25 @@
 }
 
 .review-textarea {
+    resize: none;
     height: 100%;
-    width: 100%;
+    width:100%;
+    margin-right: 10px;
     border: none;
+    border-bottom: 1px solid black;
     font-family: 'Montserrat';
     font-size: 22px;
-    color: #D03341;
+    color: black;
 
 }
 
 .review-table {
     margin-right: auto;
+    gap: 10px;
     margin-left: auto;
     display: flex;
     flex-direction: column;
     width: 80%;
     max-width: 80%;
+    margin-bottom: 10px;
 }

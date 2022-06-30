@@ -44,22 +44,23 @@ function App() {
     dispatch(getAllBrews());
     dispatch(getAllTags());
     dispatch(getAllUsers());
-    
+
 
   }, [dispatch]);
 
- 
+
 
 
   if (!loaded || !brews) {
     return null;
   }
 
-  
+
 
   return (
     <BrowserRouter>
       <NavBar />
+      <div id="main-content">
       <Switch>
 
         <Route path='/login' exact={true}>
@@ -112,6 +113,7 @@ function App() {
 
 
       </Switch>
+      </div>
       <Footer />
     </BrowserRouter>
   );

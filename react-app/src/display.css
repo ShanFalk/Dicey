@@ -64,3 +64,43 @@
     border-bottom: 1px solid black;
     margin-bottom: 35px;
 }
+
+
+.thumbnail-image {
+    width: 100%;
+    object-fit: fill;
+    height: 250px;
+}
+
+.thumbnail {
+    width: 350px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid #97A9B4;
+    transition: all 300ms;
+}
+
+.thumbnail:hover {
+    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.5);
+}
+
+.thumbnail-details {
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.thumbnail-details > * {
+    margin: 0;
+}
+
+.no-decor {
+    text-decoration: none;
+    color: #1A1E20;
+}

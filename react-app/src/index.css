@@ -16,3 +16,7 @@ body {
 .cardo {
     font-family: 'Cardo';
 }
+
+#main-content {
+    margin-bottom: 100px;
+}
