@@ -1,11 +1,12 @@
 from ntpath import join
 from flask import Blueprint, jsonify, session, request
-from app.models import Brew, db, Image, Tag, Review, User
+from app.models import Brew, db, Image, Tag, Review, User, brewtags
 from app.forms.brew_form import CreateBrew, UpdateBrew
 from app.utils import upload, format_errors
 from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy.orm import joinedload
-# import pandas as pd
+import pandas as pd
+import numpy
 # import nltk
 # import plotly.express as px
 # from nltk.sentiment.vader import SentimentIntensityAnalyzer
@@ -131,45 +132,25 @@ def delete_brew(id):
         return {'Successful': 'Successful'}
 
 
-@brew_routes.route("/reccomend", methods=["GET"])
-def reccomend():
-    pass
+@brew_routes.route("/<int:id>/recommend", methods=["GET"])
+def reccomend(id):
 
+    data = pd.read_sql_query('''select b.id, b.title, t.name , r.rating, r.content, r.brew_id, r.user_id, t.id as tag
+from brews b
+inner join purchases p on p.brew_id = b.id
+inner join brewtags bt on bt."brewId" = b.id 
+inner join tags t on t.id = bt."tagId"
+inner join reviews r on r.brew_id = p.brew_id
+where r.user_id = {id} AND r.rating > 4
+'''.format(id=id), con=db.session.connection())
 
-# @brew_routes.route("/one", methods=["GET"])
-# def sentiment():
-#     # review_data = pd.read_sql_table(table_name=Review.__tablename__,
-#     #                                 con=db.session.connection(), index_col="id")
-#     # brew_data = pd.read_sql_table(table_name=Brew.__tablename__,
-#     #                               con=db.session.connection(), index_col="id")
-#     # Brew.query.options(joinedload(
-#     #       'reviews'), joinedload('brew_tags')).filter(Brew.user_id == 1).all()
-
-#     # data = pd.read_sql_query('''select * from reviews inner join brews on brews.id = reviews.brew_id inner
-#     # join brewtags on brewtags."brewId" = brews.id inner join tags on tags.id = brewtags."tagId" where reviews.user_id = 3''',
-#     #                          con=db.session.connection())
-#     # # print(data)
-
-#     # ratings = data["rating"].value_counts()
-#     # print(data[["rating", "name"]])
-#     # print(ratings)
-
-#     # sentiments = SentimentIntensityAnalyzer()
-#     # review_data["Positive"] = [sentiments.polarity_scores(
-#     #     i)["pos"] for i in review_data["content"]]
-#     # review_data["Negative"] = [sentiments.polarity_scores(
-#     #     i)["neg"] for i in review_data["content"]]
-#     # review_data["Neutral"] = [sentiments.polarity_scores(
-#     #     i)["neu"] for i in review_data["content"]]
-#     # review_data = review_data[["content", "Positive", "Negative", "Neutral"]]
-#     # print(review_data.head())
-#     # print(ratings)
-
-#     brew = Brew.query.get(1)
-#     query = brew.query.options(joinedload("purchases")).get(1)
-#     if len(query.purchases) > 0:
-#         print(True)
-#     else:
-#         print(False)
-
-#     return "ratings"
+    if len(data) > 0:
+        tagId = numpy.int16(data["tag"][0]).item()
+        id = numpy.int16(data["id"][0]).item()
+        brew = Brew.query.options(joinedload('reviews'), joinedload(
+            'images'), joinedload('brew_tags')).get(id)
+        title = brew.title
+        query = Brew.query.join(Brew.brew_tags)
+        brews = query.filter(Tag.id == tagId).all()
+        return {"brews": {brew.id: brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.brew_tags) for brew in brews}, "title": title}
+    return {"None": "None"}
