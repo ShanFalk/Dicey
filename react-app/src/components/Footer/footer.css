@@ -1,0 +1,23 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #97A9B4;
+    align-items: center;
+    padding: 15px 0px;
+}
+
+.footerlink {
+    text-decoration-color: transparent;
+    color: white;
+    transition: all 500ms;
+    padding: 0px;
+}
+
+.footerlink:hover {
+    text-decoration-color: white;
+    font-weight: bolder;
+}
