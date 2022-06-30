@@ -5,14 +5,14 @@ function Footer() {
     // TODO: github, link to about page, link to etsy, names(link to our individual github)
     return (
         <div className='footer'>
-            <Link to='/about' className='footerlink'>
+            <Link to='/about' className='footerlink cardo'>
                 About
             </Link>
-            <a href='https://www.etsy.com' className='footerlink' target="_blank">Etsy</a>
-            <a href='https://github.com/ShanFalk' className='footerlink' target="_blank">Shannon Falk</a>
-            <a href='https://github.com/Chase-Riddick' className='footerlink' target="_blank">Chase Riddick</a>
-            <a href='https://github.com/connorwfitch' className='footerlink' target="_blank">Connor Fitch</a>
-            <a href='https://github.com/keimjm' className='footerlink' target="_blank">Josh Keim</a>
+            <a href='https://www.etsy.com' className='footerlink cardo' target="_blank">Etsy</a>
+            <a href='https://github.com/ShanFalk' className='footerlink cardo ' target="_blank">Shannon Falk</a>
+            <a href='https://github.com/Chase-Riddick' className='footerlink cardo' target="_blank">Chase Riddick</a>
+            <a href='https://github.com/connorwfitch' className='footerlink cardo' target="_blank">Connor Fitch</a>
+            <a href='https://github.com/keimjm' className='footerlink cardo' target="_blank">Josh Keim</a>
         </div>
     )
 }
