@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 
 function ReviewsSection ({brew}) {
     const sessionUser = useSelector(state => state.session.user);
+    const purchases = useSelector(state => state.purchases);
     const [showCreateReviewField, setCreateReviewField] = useState(false)
     const users = useSelector(state => state.users);
 
@@ -24,7 +25,11 @@ function ReviewsSection ({brew}) {
     sumOfRatings = reviews.reduce((sum, review) => {
         return sum += review.rating
     }, 0);
-    averageRating = sumOfRatings / numOfReviews || "No Reviews";
+    if (numOfReviews) {
+        averageRating = sumOfRatings / numOfReviews;
+    } else {
+        averageRating = null;
+    }
     }
 
 
@@ -32,11 +37,11 @@ function ReviewsSection ({brew}) {
 
     return (
         <div className="review-table">
-            <div>
-            <h3>{numOfReviews} Reviews - <StarsRating
-                  value={averageRating}
-                  disabled={true}/> {averageRating}</h3>
-            {sessionUser &&
+            <div className="review-section-header" >
+            <h3>{numOfReviews} Reviews ----- </h3> <StarsRating
+                  value={averageRating? averageRating : 5}
+                  disabled={true}/> -----
+            {sessionUser && purchases[brew.id] &&
             <button onClick={() => setCreateReviewField(!showCreateReviewField)}>Add Review</button>
             }
             </div>
