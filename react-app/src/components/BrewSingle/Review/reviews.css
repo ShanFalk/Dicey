@@ -1,3 +1,16 @@
+.bottom-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.buttom-row {
+    right: 0;
+    align-content: flex-end;
+    justify-self: end;
+    align-self: flex-end;
+}
+
 .create-review-form {
     display: flex;
     flex-direction: column;
@@ -24,7 +37,7 @@
 
 .review-textarea {
     height: 100%;
-    width: 100%;
+    width:95%;
     border: none;
     font-family: 'Montserrat';
     font-size: 22px;
@@ -39,4 +52,5 @@
     flex-direction: column;
     width: 80%;
     max-width: 80%;
+    margin-bottom: 10px;
 }
