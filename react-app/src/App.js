@@ -16,6 +16,7 @@ import ProfilePage from './components/Profile/ProfilePage';
 import ShoppingCartPage from './components/ShoppingCart/ShoppingCartPage';
 import BrewPage from './components/BrewSingle/BrewPage';
 import BrewCreateForm from './components/BrewSingle/BrewCreateForm/index';
+import NotFound from './components/NotFound';
 import Footer from './components/Footer';
 import { authenticate } from './store/session';
 import { getAllBrews } from './store/brew';
@@ -28,6 +29,8 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const brews = useSelector(state => state.brews)
+  const id = useSelector(state => state.session.id)
+  console.log(id)
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
@@ -37,17 +40,22 @@ function App() {
 
   useEffect(() => {
 
+
     dispatch(getAllBrews());
     dispatch(getAllTags());
     dispatch(getAllUsers());
-    dispatch(getPurchases())
+    
 
   }, [dispatch]);
+
+ 
 
 
   if (!loaded || !brews) {
     return null;
   }
+
+  
 
   return (
     <BrowserRouter>
@@ -97,6 +105,11 @@ function App() {
         <ProtectedRoute path="/brew" exact={true}>
           <BrewCreateForm/>
         </ProtectedRoute>
+
+        <Route path="*">
+          <NotFound/>
+        </Route>
+
 
       </Switch>
       <Footer />
