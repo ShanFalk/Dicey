@@ -92,9 +92,8 @@ function EditReview({review, setReviewEdit}) {
           onChange={updateContent} />
 
           <div className='button-row'>
-            <button className='' type="submit">Edit Review</button>
-            <button className='' type="button" onClick={handleCancelClick}>Cancel Edit</button>
-            <button className='' type="button" onClick={handleDelete}>Delete Review</button>
+            <button className="purple button" type="submit">Edit Review</button>
+            <button className="red button" type="button" onClick={handleDelete}>Delete Review</button>
           </div>
       </form>
     </div>

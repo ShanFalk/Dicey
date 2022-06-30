@@ -24,7 +24,7 @@ function MainPageDisplay () {
         {firstHalf.map((brew) => {
           return (
           <div className='brew-card-link' key={brew.id}>
-            <Link to={`/brews/${brew.id}`} brew={brew} className="room-nav-link">
+            <Link to={`/brews/${brew.id}`} brew={brew} className="no-decor">
               <FeaturedBrewsCollection key={brew.id} brew={brew} />
             </Link>
           </div>
@@ -37,7 +37,7 @@ function MainPageDisplay () {
         {secondHalf.map((brew) => {
           return (
           <div className='brew-card-link' key={brew.id}>
-            <Link to={`/brews/${brew.id}`} brew={brew} className="room-nav-link">
+            <Link to={`/brews/${brew.id}`} brew={brew} className="no-decor">
               <FeaturedBrewsCollection key={brew.id} brew={brew} />
             </Link>
           </div>
