@@ -109,34 +109,49 @@ function BrewUpdateForm({brew, setShowEditForm}) {
           value={description}
           onChange={updateDescription} />
 
+        <label for="pdf">
+          PDF
+        </label>
         <input
           type="file"
           placeholder="Pdf Upload"
           // required
           accept='application/pdf'
           className='input'
+          name='pdf'
           onChange={updatePdf} />
-
+        <label for="img1">
+          Image 1
+        </label>
         <input
           type="file"
           placeholder="Image Upload 1"
-          required
+          // required
           accept='image/*'
           className='input'
+          name="img1"
           onChange={(e) => updateImages(e, 1)} />
+        <label for="img2">
+          Image 2
+        </label>
         <input
           type="file"
           placeholder="Image Upload 2"
           // required
           accept='image/*'
           className='input'
+          name='img2'
           onChange={(e) => updateImages(e, 2)} />
+        <label for="img3">
+          Image 3
+        </label>
         <input
           type="file"
           placeholder="Image Upload 3"
           // required
           accept='image/*'
           className='input'
+          name='img3'
           onChange={(e) => updateImages(e, 3)} />
 
         <input
@@ -150,23 +165,26 @@ function BrewUpdateForm({brew, setShowEditForm}) {
           className='input'
           onChange={updatePrice} />
 
+        <h2>Tags:</h2>
         {allTags.map((tag) => {
           return (
-            <div key={tag.id}>
-              <label>{tag.name}</label>
+            <div className='tagholder' key={tag.id}>
+              <label for={tag.name}>{tag.name}</label>
               <input
                 value={tag.id}
                 type="checkbox"
                 id={tag.id}
                 onClick={updateTags}
+                name={tag.name}
+                className="checkbox"
                 defaultChecked={tags.includes(tag.id.toString())}
               />
             </div>
           )
         })}
-      <button className='' type="submit">Update Brew</button>
-      <button className='' type="button" onClick={handleCancelClick}>Cancel</button>
-      <button className='' type='button' onClick={handleDelete}>Delete Brew</button>
+      <button className='button purple' type="submit">Update Brew</button>
+      <button className='button cancel' type="button" onClick={handleCancelClick}>Cancel</button>
+      <button className='button red' type='button' onClick={handleDelete}>Delete Brew</button>
     </form>
   </div>
   )
