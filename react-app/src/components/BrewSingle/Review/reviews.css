@@ -16,9 +16,20 @@
     border: black 1px solid;
 }
 
+.review-section-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .review-textarea {
-    height: 200px;
-    width: 300px;
+    height: 100%;
+    width: 100%;
+    border: none;
+    font-family: 'Montserrat';
+    font-size: 22px;
+    color: #D03341;
+
 }
 
 .review-table {
