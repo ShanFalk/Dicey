@@ -15,7 +15,10 @@ function MainPageDisplay () {
     
 
     useEffect(() => {
-      if(user) dispatch(recommendBrews(user?.id))
+      if(user) {
+        dispatch(recommendBrews(user?.id))
+      }
+
     }, [dispatch])
 
     const brews = Object.values(useSelector(state => state.brews))

@@ -10,12 +10,12 @@ function AboutPage () {
                 feature artisianlly-crafted homebrew content for Dungeons and 
                 Dragons and other table-top RPGs. We hope you enjoy our site!
             </p>
-            <a href="https://github.com/ShanFalk/Dicey" className="cardo" target="_blank">GitHub Repo</a>
-            <a href='https://www.etsy.com' className='cardo' target="_blank">Etsy</a>
-            <a href='https://github.com/ShanFalk' className='cardo ' target="_blank">Shannon Falk</a>
-            <a href='https://github.com/Chase-Riddick' className='cardo' target="_blank">Chase Riddick</a>
-            <a href='https://github.com/connorwfitch' className='cardo' target="_blank">Connor Fitch</a>
-            <a href='https://github.com/keimjm' className='cardo' target="_blank">Josh Keim</a>
+            <a href="https://github.com/ShanFalk/Dicey" className="cardo about-link" target="_blank">GitHub Repo</a>
+            <a href='https://www.etsy.com' className='cardo about-link' target="_blank">Etsy</a>
+            <a href='https://github.com/ShanFalk' className='cardo about-link' target="_blank">Shannon Falk</a>
+            <a href='https://github.com/Chase-Riddick' className='cardo about-link' target="_blank">Chase Riddick</a>
+            <a href='https://github.com/connorwfitch' className='cardo about-link' target="_blank">Connor Fitch</a>
+            <a href='https://github.com/keimjm' className='cardo about-link' target="_blank">Josh Keim</a>
         </div>
 
     )
