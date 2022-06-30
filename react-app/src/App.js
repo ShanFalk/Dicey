@@ -40,7 +40,7 @@ function App() {
     dispatch(getAllBrews());
     dispatch(getAllTags());
     dispatch(getAllUsers());
-    dispatch(getPurchases())
+    
 
   }, [dispatch]);
 

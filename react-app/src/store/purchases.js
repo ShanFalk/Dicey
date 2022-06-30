@@ -7,8 +7,8 @@ const getAction = (purchases) => ({
 })
 
 
-export const getPurchases = () => async (dispatch) => {
-    const response = await fetch('/api/purchases');
+export const getPurchases = (id) => async (dispatch) => {
+    const response = await fetch(`/api/users/${id}/purchases`);
     if (response.ok) {
       const data = await response.json();
       if (data.errors) {

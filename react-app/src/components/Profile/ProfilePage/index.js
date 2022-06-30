@@ -11,10 +11,11 @@ function ProfilePage () {
   const user = useSelector(state => state.session.user)
   //const purchased = user.purchases
   const allBrews = Object.values(useSelector(state => state.brews))
+  const purchased = Object.values(useSelector(state => state.purchases))
   const owned = allBrews.filter(brew => brew.user_id === user.id)
-  const allPurchased = Object.values(useSelector(state => state.purchases))
-  const ids = allPurchased.filter(purchase => purchase.user_id === user.id).map(purchase => purchase.brew_id)
-  const purchased = allBrews.filter(brew => ids.includes(brew.id))
+  // const allPurchased = Object.values(useSelector(state => state.purchases))
+  // const ids = allPurchased.filter(purchase => purchase.user_id === user.id).map(purchase => purchase.brew_id)
+  // const purchased = allBrews.filter(brew => ids.includes(brew.id))
 
   const member = new Date(user?.created_at)
   const date = member.getDate();
