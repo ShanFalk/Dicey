@@ -12,13 +12,13 @@ function BrewDetails ({brew, setShowEditForm}) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-      dispatch(getPurchases(sessionUser.id))
+      dispatch(getPurchases(sessionUser?.id))
    }, [dispatch])
 
    const ids = Object.values(useSelector(state => state.purchases)).filter(purchase => purchase.user_id === sessionUser.id).map(purchase => purchase.brew_id)
 
-   
-    
+
+
 
     if(!brew) return null
 

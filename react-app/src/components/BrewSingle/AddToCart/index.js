@@ -20,7 +20,7 @@ function AddToCart ({ brew }) {
     useEffect(()=> {
         localStorage.setItem('cart', JSON.stringify(cart));
         if (JSON.parse(localStorage.getItem('cart')).includes(brew?.id)) setIsDisabled(true);
-        else if (sessionUser.id === brew.user_id) setIsOwned(true);
+        else if (sessionUser?.id === brew?.user_id) setIsOwned(true);
         else if (purchased) setIsOwned(true);
     }, [cart, isDisabled]);
 

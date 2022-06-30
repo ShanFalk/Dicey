@@ -41,22 +41,20 @@ function ShoppingCartPage () {
             <div>
                 <p>{numItems} item(s) in your cart</p>
             </div>
-            <div>
             {brewIds.map((id) => {
                 const brew = brews[id];
             return (
-                <>
-                <ul key={brew?.id}>
-                    <li>{brew?.title}</li>
-                    <li>{brew?.description}</li>
-                    {/* <img src={brew?.images[0].img_url} alt="A fantastic scene"/> */}
-                    <li>${brew?.price}</li>
-                </ul>
-                <RemoveItem brewIds={brewIds} brewId={brew?.id} deleteEnd={onDeleteEnd}/>
-                </>
+                <div key={brew?.id}>
+                    <ul>
+                        <li>{brew?.title}</li>
+                        <li>{brew?.description}</li>
+                        {/* <img src={brew?.images[0].img_url} alt="A fantastic scene"/> */}
+                        <li>${brew?.price}</li>
+                    </ul>
+                    <RemoveItem brewIds={brewIds} brewId={brew?.id} deleteEnd={onDeleteEnd}/>
+                </div>
               );
             })}
-            </div>
             <div>
                 <p>Item(s) total ${sum}</p>
                 <p>Coupon Applied!</p>
