@@ -39,7 +39,7 @@ function AddToCart ({ brew }) {
         <>
         {/* TODO: Add go to cart button, brew image, title, price */}
             {!isOwned && (
-                <button disabled={isDisabled} onClick={addToCart}>
+                <button className="purple button" disabled={isDisabled} onClick={addToCart}>
                     Add to Cart
                 </button>
             )}
