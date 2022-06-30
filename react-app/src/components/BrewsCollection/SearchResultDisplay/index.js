@@ -32,21 +32,17 @@ function SearchResultDisplay () {
         <>
         <h2>Results</h2>
         <div>
-            {/* {results.map((brew) => {
-                return (
-                    <div key={brew.id}>{brew.title}</div>
-                )
-            })} */}
+                {results.length === 0 && (<h3>Sorry, nothing found</h3>)}
 
         {results.map((brew) => {
-          return (
-          <div className='brew-card-link' key={brew.id}>
-            <Link to={`/brews/${brew.id}`} brew={brew} className="room-nav-link">
-              <FeaturedBrewsCollection key={brew.id} brew={brew} />
-            </Link>
-          </div>
-      );
-    })}
+            return (
+                <div className='brew-card-link' key={brew.id}>
+                    <Link to={`/brews/${brew.id}`} brew={brew} className="room-nav-link">
+                    <FeaturedBrewsCollection key={brew.id} brew={brew} />
+                    </Link>
+                </div>
+            );
+        })}
         </div>
         </>
     )
