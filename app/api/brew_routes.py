@@ -131,40 +131,45 @@ def delete_brew(id):
         return {'Successful': 'Successful'}
 
 
-@brew_routes.route("/one", methods=["GET"])
-def sentiment():
-    # review_data = pd.read_sql_table(table_name=Review.__tablename__,
-    #                                 con=db.session.connection(), index_col="id")
-    # brew_data = pd.read_sql_table(table_name=Brew.__tablename__,
-    #                               con=db.session.connection(), index_col="id")
-    # Brew.query.options(joinedload(
-    #       'reviews'), joinedload('brew_tags')).filter(Brew.user_id == 1).all()
+@brew_routes.route("/reccomend", methods=["GET"])
+def reccomend():
+    pass
 
-    # data = pd.read_sql_query('''select * from reviews inner join brews on brews.id = reviews.brew_id inner
-    # join brewtags on brewtags."brewId" = brews.id inner join tags on tags.id = brewtags."tagId" where reviews.user_id = 3''',
-    #                          con=db.session.connection())
-    # # print(data)
 
-    # ratings = data["rating"].value_counts()
-    # print(data[["rating", "name"]])
-    # print(ratings)
+# @brew_routes.route("/one", methods=["GET"])
+# def sentiment():
+#     # review_data = pd.read_sql_table(table_name=Review.__tablename__,
+#     #                                 con=db.session.connection(), index_col="id")
+#     # brew_data = pd.read_sql_table(table_name=Brew.__tablename__,
+#     #                               con=db.session.connection(), index_col="id")
+#     # Brew.query.options(joinedload(
+#     #       'reviews'), joinedload('brew_tags')).filter(Brew.user_id == 1).all()
 
-    # sentiments = SentimentIntensityAnalyzer()
-    # review_data["Positive"] = [sentiments.polarity_scores(
-    #     i)["pos"] for i in review_data["content"]]
-    # review_data["Negative"] = [sentiments.polarity_scores(
-    #     i)["neg"] for i in review_data["content"]]
-    # review_data["Neutral"] = [sentiments.polarity_scores(
-    #     i)["neu"] for i in review_data["content"]]
-    # review_data = review_data[["content", "Positive", "Negative", "Neutral"]]
-    # print(review_data.head())
-    # print(ratings)
+#     # data = pd.read_sql_query('''select * from reviews inner join brews on brews.id = reviews.brew_id inner
+#     # join brewtags on brewtags."brewId" = brews.id inner join tags on tags.id = brewtags."tagId" where reviews.user_id = 3''',
+#     #                          con=db.session.connection())
+#     # # print(data)
 
-    brew = Brew.query.get(1)
-    query = brew.query.options(joinedload("purchases")).get(1)
-    if len(query.purchases) > 0:
-        print(True)
-    else:
-        print(False)
+#     # ratings = data["rating"].value_counts()
+#     # print(data[["rating", "name"]])
+#     # print(ratings)
 
-    return "ratings"
+#     # sentiments = SentimentIntensityAnalyzer()
+#     # review_data["Positive"] = [sentiments.polarity_scores(
+#     #     i)["pos"] for i in review_data["content"]]
+#     # review_data["Negative"] = [sentiments.polarity_scores(
+#     #     i)["neg"] for i in review_data["content"]]
+#     # review_data["Neutral"] = [sentiments.polarity_scores(
+#     #     i)["neu"] for i in review_data["content"]]
+#     # review_data = review_data[["content", "Positive", "Negative", "Neutral"]]
+#     # print(review_data.head())
+#     # print(ratings)
+
+#     brew = Brew.query.get(1)
+#     query = brew.query.options(joinedload("purchases")).get(1)
+#     if len(query.purchases) > 0:
+#         print(True)
+#     else:
+#         print(False)
+
+#     return "ratings"
