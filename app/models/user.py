@@ -29,7 +29,8 @@ class User(db.Model, UserMixin):
             "username": self.username,
             "email": self.email,
             "image_url": self.image_url,
-            "bio": self.bio
+            "bio": self.bio,
+            "created_at": self.created_at
         }
 
         for key, collection in kwargs.items():

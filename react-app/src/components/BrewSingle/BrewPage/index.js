@@ -12,7 +12,7 @@ function BrewPage () {
     const { brewId } = useParams();
     const [showEditForm, setShowEditForm] = useState(false)
 
-    const brew = useSelector(state => state.brews[brewId])
+    const brew = useSelector(state => state?.brews[brewId])
 
     if(showEditForm){
         return (
@@ -20,10 +20,12 @@ function BrewPage () {
         )
     }
 
+    if(!brew) return null
+
 return (
     <div>
         <BrewDetails setShowEditForm={setShowEditForm} brew={brew} />
-        <AddToCart brew={brew} />
+        {brew?.for_sale ? <AddToCart brew={brew}/> : "No longer for Sale" }
         <ReviewsSection brew={brew} />
     </div>
 )

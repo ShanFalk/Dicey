@@ -4,40 +4,26 @@ import { useState, useEffect } from "react";
 import './BrewDetail.css';
 
 function BrewDetails ({brew, setShowEditForm}) {
-    // const images = brew?.images
-
+    const images = brew?.images
     const sessionUser = useSelector(state => state.session.user);
-    const users = useSelector(state => state.session.user);
-    const [images, setImages] = useState(brew?.images);
-    const [centerDisplayImage, setCenterDisplay] = useState(images[0].img_url);
+    const [centerDisplayImage, setCenterDisplay] = useState(0);
 
-    // const [centerDisplayImage, setCenterDisplay] = useState("");
-
-
-    // useEffect(() => {
-    //     if (images) {
-    //     setCenterDisplay(images[0].img_url);
-    //     }
-    // }, [images])
-
-
-    //console.log(brew?.images)
-    console.log(users? users : "*********************Not loaded yet")
+    if(!brew) return null
 
     return (
         <div className="brew-block">
             <div className="images-field">
             <div className="listed-images">
-            { images && images.map((image) => {
+            {images && images.map((image, idx) => {
                 return (
             <div className="brew-image-block" key={image.id}>
-            <img className="brew-image" src={image?.img_url}alt="" />
+            <button onClick={() => setCenterDisplay(idx)} ><img className="brew-image" src={image?.img_url}alt="" /></button>
             </div>
             )}
             )}
             </div>
             <div className="center-image-container">
-                <img className="brew-image center-image" src={centerDisplayImage}alt="" />
+                <img className="brew-image center-image" src={images[centerDisplayImage].img_url}alt="" />
             </div>
             </div>
 
@@ -48,7 +34,7 @@ function BrewDetails ({brew, setShowEditForm}) {
             <p>User: {brew?.user_id}</p>
             <p>Price: {brew?.price}</p>
             {/* <p>Tags: {brew?.brew_tags}</p> */}
-            {sessionUser?.id === brew?.user_id && (
+            {(brew?.for_sale && sessionUser?.id === brew?.user_id) && (
             <button onClick={() => setShowEditForm(true)}>Show Edit Form</button>
             )}
             </div>

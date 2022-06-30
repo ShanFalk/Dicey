@@ -5,7 +5,7 @@
 
 .input {
     display: flex;
-    border: black 1px solid;
+    /* border: black 1px solid; */
 }
 
 .rating-input {

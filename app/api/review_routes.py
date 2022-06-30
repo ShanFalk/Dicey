@@ -40,7 +40,7 @@ def update_review():
 
     if form.validate_on_submit():
         # This id is of brew that the review belongs to.
-        id=form.data["brew_id"]
+        id = form.data["brew_id"]
         review = Review.query.get(form.data['id'])
         review.content = form.data['content']
         review.rating = form.data['rating']
@@ -66,14 +66,5 @@ def delete_review(id):
     db.session.commit()
 
     brew = Brew.query.options(joinedload('reviews'), joinedload(
-            'images'), joinedload('brew_tags')).get(brew_id)
+        'images'), joinedload('brew_tags')).get(brew_id)
     return brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.brew_tags)
-
-
-@review_routes.route("/sentiment", methods=["GET"])
-def sentiment():
-    review_data = pd.read_sql_table(table_name=Review.tablename,
-                                    con=session.connection(), index_col="id")
-    brew_data = pd.read_sql_table(table_name=Brew.tablename,
-                                  con=session.connection(), index_col="id")
-    print(brew_data, review_data)
