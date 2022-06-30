@@ -5,7 +5,7 @@ import './FeaturedBrew.css'
 function FeaturedBrewsCollection ({brew}) {
     const image = brew?.images[0]
 
-   
+    //console.log(image)
 
     return (
         <div className='card-block'>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import { getPurchases} from '../../store/purchases'
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -12,23 +13,27 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(email, password));
+    const user = await dispatch(login(email, password));
+    if (!user) {
+      setErrors();
+    }
+    dispatch(getPurchases(user.id))
+
+  };
+
+  const handleDemo = async (e) => {
+    e.preventDefault();
+    
+    const data = await dispatch(login("demo@aa.io", "password"));
     if (data) {
       setErrors(data);
     }
-  };
-
-  const handleDemo = (e) => {
-    e.preventDefault();
-    
-    return dispatch(login("demo@aa.io",'password'))
-      .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-      });
+    dispatch(getPurchases(1))
+      
   }
 
   if (user) {
+   
     return <Redirect to='/' />;
   }
 

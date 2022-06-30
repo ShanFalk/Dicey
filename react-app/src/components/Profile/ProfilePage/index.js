@@ -1,21 +1,28 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, {useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "../../../display.css"
 import UsersList from "../../UsersList";
 import FeaturedBrewsCollection from "../../BrewsCollection/MainPageDisplay/FeaturedBrewsCollection";
 import { Link, useHistory } from 'react-router-dom';
+import {getPurchases} from '../../../store/purchases'
 
 
 function ProfilePage () {
   const history  = useHistory()
+  const dispatch = useDispatch()
+
   const user = useSelector(state => state.session.user)
-  //const purchased = user.purchases
+  useEffect(() => {
+    dispatch(getPurchases(user.id))
+ }, [dispatch])
+
   const allBrews = Object.values(useSelector(state => state.brews))
-  const owned = allBrews.filter(brew => brew.user_id === user.id)
   const allPurchased = Object.values(useSelector(state => state.purchases))
+  const owned = allBrews.filter(brew => brew.user_id === user.id)
   const ids = allPurchased.filter(purchase => purchase.user_id === user.id).map(purchase => purchase.brew_id)
   const purchased = allBrews.filter(brew => ids.includes(brew.id))
 
+  
   const member = new Date(user?.created_at)
   const date = member.getDate();
   const month = member.getMonth(); 
