@@ -13,7 +13,7 @@ Dicey is a clone of Etsy that focuses on selling homebrew content for Dungeons a
 ### Technologies used
 ![Python](https://img.shields.io/badge/python-%2314354C.svg?&style=for-the-badge&logo=python&logoColor=white)
 ![Flask](https://img.shields.io/badge/flask-%23000.svg?&style=for-the-badge&logo=flask&logoColor=white)
-![SQLAlchemy](https://img.shields.io/badge/Sqlalchemy-800020?style=for-the-badge)
+![SQLAlchemy](https://img.shields.io/badge/SQLALCHEMY-800020?style=for-the-badge&logo=sqlalchemy&logoColor=white)
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
