@@ -4,11 +4,11 @@ import { useState, useEffect } from "react";
 import './BrewDetail.css';
 
 function BrewDetails ({brew, setShowEditForm}) {
-    // const images = brew?.images
+    const images = brew?.images
 
     const sessionUser = useSelector(state => state.session.user);
-    const [images, setImages] = useState(brew?.images);
-    const [centerDisplayImage, setCenterDisplay] = useState(images[0].img_url);
+    // const [images, setImages] = useState(brew?.images);
+    // const [centerDisplayImage, setCenterDisplay] = useState(images[0].img_url);
     // const [centerDisplayImage, setCenterDisplay] = useState("");
 
 
@@ -28,13 +28,13 @@ function BrewDetails ({brew, setShowEditForm}) {
             { images && images.map((image) => {
                 return (
             <div className="brew-image-block" key={image.id}>
-            <img className="brew-image" src={image?.img_url}alt="" />
+            <img className="brew-image" src={image.img_url}alt="" />
             </div>
             )}
             )}
             </div>
             <div className="center-image-container">
-                <img className="brew-image center-image" src={centerDisplayImage}alt="" />
+                <img className="brew-image center-image" src={brew?.images[0].img_url}alt="" />
             </div>
             </div>
 

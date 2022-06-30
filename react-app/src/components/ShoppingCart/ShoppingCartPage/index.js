@@ -5,6 +5,7 @@ import RemoveItem from '../RemoveItem';
 
 function ShoppingCartPage () {
     const brews = useSelector(state => state.brews);
+    console.log(brews);
     const [brewIds, updatebrewIds] = useState(JSON.parse(localStorage.getItem('cart')));
     const [isDeleted, setIsDeleted] = useState(false)
 
@@ -48,7 +49,7 @@ function ShoppingCartPage () {
                 <ul key={brew?.id}>
                     <li>{brew?.title}</li>
                     <li>{brew?.description}</li>
-                    <li>{brew?.images}</li>
+                    {/* <img src={brew?.images[0].img_url} alt="A fantastic scene"/> */}
                     <li>${brew?.price}</li>
                 </ul>
                 <RemoveItem brewIds={brewIds} brewId={brew?.id} deleteEnd={onDeleteEnd}/>
