@@ -6,7 +6,6 @@ function Footer() {
         <>
 
         <div className='footer'>
-<<<<<<< HEAD
         <div className='purple-extension'>This is content</div>
         <div className='footer-main'>
             <div className='col'>
@@ -21,7 +20,7 @@ function Footer() {
             </div>
 
             <div className='col'>
-                <h4 className='footer-col-header'>Heading </h4>
+                <h4 className='footer-col-header'> Heading </h4>
                 <a href="Python" className='footerlink cardo' target="https://docs.python.org/3/index.html">Python</a>
                 <a href="" className='footerlink cardo' target="https://flask.palletsprojects.com/en/1.1.x/">Flask</a>
                 <a href="" className='footerlink cardo' target="https://www.javascript.com/">Javascript</a>
@@ -45,49 +44,9 @@ function Footer() {
 
 
         </div>
-=======
-            <Link to='/about' className='footerlink cardo'>
-                About
-            </Link>
-            <a href='https://www.etsy.com' className='footerlink cardo' target="_blank" rel="noreferrer">
-                Etsy
-            </a>
-            <a href='https://github.com/ShanFalk' className='footerlink cardo ' target="_blank" rel="noreferrer">
-                Shannon Falk
-            </a>
-            <a href='https://github.com/Chase-Riddick' className='footerlink cardo' target="_blank" rel="noreferrer">
-                Chase Riddick
-            </a>
-            <a href='https://github.com/connorwfitch' className='footerlink cardo' target="_blank" rel="noreferrer">
-                Connor Fitch
-            </a>
-            <a href='https://github.com/keimjm' className='footerlink cardo' target="_blank" rel="noreferrer">
-                Josh Keim
-            </a>
->>>>>>> 80abf99c43033db4152364013f20e208ec9cf2e9
         </div>
         </>
     )
 }
-
-
-// Python https://docs.python.org/3/index.html
-// Flask https://flask.palletsprojects.com/en/1.1.x/
-
-
-
-
-// FlaskSQLAlchemy https://docs.sqlalchemy.org/en/13/
-
-
-// React https://reactjs.org/docs/getting-started.html
-
-
-// React Packages
-
-
-// React Star Rate - https://github.com/raymon-zhang/react-star-rate#readme
-
-// Moment - https://momentjs.com/
 
 export default Footer;
