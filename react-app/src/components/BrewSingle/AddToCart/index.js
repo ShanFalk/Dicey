@@ -25,14 +25,8 @@ function AddToCart ({ brew }) {
     }, [cart, isDisabled]);
 
     const addToCart = () => {
-        if (JSON.parse(localStorage.getItem('cart')).includes(brew?.id)) {
-            return (
-                alert('Item already in cart!')
-            )
-        } else {
-            setCart([...cart, brew?.id]);
-            setShowModal(true);
-        };
+        setCart([...cart, brew?.id]);
+        setShowModal(true);
     };
 
     return (
