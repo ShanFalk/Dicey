@@ -12,7 +12,6 @@ function ShoppingCartPage() {
     const [brewIds, updatebrewIds] = useState(JSON.parse(localStorage.getItem('cart')));
     const [isDeleted, setIsDeleted] = useState(false)
     const [duplicates, setDuplicates] = useState([])
-    const [isDisabled, setIsDisabled] = useState(false)
 
     const numItems = brewIds.length;
 
@@ -21,6 +20,7 @@ function ShoppingCartPage() {
         setIsDeleted(true);
     };
 
+    //function to check for duplicates in user's library and cart
     const checkForDuplicates = () => {
         return brewIds.filter((brewId) => {
             return brews[brewId]?.user_id === sessionUser?.id
@@ -33,15 +33,12 @@ function ShoppingCartPage() {
         setIsDeleted(false)
     }, [isDeleted])
 
+    //re-rendering if a user logs in or cart is updated
     useEffect(() => {
         if (sessionUser) {
             setDuplicates(checkForDuplicates());
         }
-    }, [sessionUser])
-
-    console.log('THIS IS THE DISABLED STATUS', isDisabled)
-    console.log('THESE ARE THE DUPES', duplicates)
-    console.log('THIS IS THE SESSION USER', sessionUser)
+    }, [sessionUser, brewIds])
 
     //if the shopping cart is empty
     if (numItems === 0) {
