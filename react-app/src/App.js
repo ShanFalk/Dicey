@@ -29,7 +29,6 @@ function App() {
   const dispatch = useDispatch();
   const brews = useSelector(state => state.brews)
   const id = useSelector(state => state.session.id)
-  console.log(id)
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());

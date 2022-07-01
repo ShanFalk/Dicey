@@ -71,7 +71,6 @@ function BrewUpdateForm({brew, setShowEditForm}) {
     } else {
       imgs[i.toString()] = file;
     }
-    console.log(imgs);
     setImgs({ ...imgs });
   }
 
