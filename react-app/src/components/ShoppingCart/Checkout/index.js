@@ -5,7 +5,7 @@ import { Modal } from '../../../context/Modal'
 import { createPurchases } from '../../../store/purchases';
 import LoginForm from '../../LoginForms/LoginForm';
 
-function Checkout({ brewIds }) {
+function Checkout({ brewIds, duplicates }) {
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
     const history =useHistory();
@@ -36,12 +36,12 @@ function Checkout({ brewIds }) {
 
     return (
         <>
-            <button className="purple button" onClick={onClick}>
+            <button disabled={duplicates.length > 0} className="purple button" onClick={onClick}>
                 Checkout
             </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <h4>Please log in</h4>
+                    <h4>Please log in to continue</h4>
                     <LoginForm />
                 </Modal>
             )}
