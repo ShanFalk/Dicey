@@ -15,10 +15,13 @@ input {
     padding: 5px;
     margin: 5px;
     transition: all 500ms;
-    cursor: pointer;
 }
 
-.button.purple:hover {
+.button:disabled {
+    opacity: 0.5;
+}
+
+.button.purple:hover:not([disabled]) {
     background-color: transparent;
     color: #A589FB;
 }
