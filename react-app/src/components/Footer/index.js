@@ -20,6 +20,7 @@ function Footer() {
             </div>
 
             <div className='col'>
+                <h4 className='footer-col-header'>Heading </h4>
                 <a href="Python" className='footerlink cardo' target="https://docs.python.org/3/index.html">Python</a>
                 <a href="" className='footerlink cardo' target="https://flask.palletsprojects.com/en/1.1.x/">Flask</a>
                 <a href="" className='footerlink cardo' target="https://www.javascript.com/">Javascript</a>
