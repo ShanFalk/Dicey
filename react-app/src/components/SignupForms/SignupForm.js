@@ -45,9 +45,12 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={onSignup}>
+      <h1>Sign Up</h1>
+      <div>
       {errors.length > 0 && <ul className='errors'>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>}
+      </div>
       <div>
         <label htmlFor='username'>Username:</label>
         <input
