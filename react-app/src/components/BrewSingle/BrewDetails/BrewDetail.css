@@ -10,6 +10,32 @@
     gap: 20px;
 }
 
+.brew-details-block {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    width: 33%;
+    min-width: 200px;
+
+}
+
+.brew-details-block > * {
+    margin: 0;
+    padding: 0;
+}
+
+.brew-title {
+    margin: 0;
+}
+
+.center-image {
+    width: 100%;
+    min-width: 300px;
+    height: auto;
+    margin: auto;
+}
 
 .images-field {
     display: flex;
@@ -25,18 +51,6 @@
 .listed-images {
     display: flex;
     flex-direction: column;
-}
-
-.center-image {
-    width: 100%;
-    height: auto;
-    margin: auto;
-}
-
-.brew-details-block {
-    width: 33%;
-    min-width: 33%;
-
 }
 
 .user-snippet {

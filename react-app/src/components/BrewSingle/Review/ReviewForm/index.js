@@ -4,6 +4,7 @@ import { useEffect, useState} from 'react'
 import { addReviewToBrew } from '../../../../store/brew';
 import StarsRating from 'react-star-rate';
 import '../reviews.css'
+import '../../../../form.css'
 
 function ReviewForm ({setCreateReviewField, brew_id}) {
     const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function ReviewForm ({setCreateReviewField, brew_id}) {
     const [content, setContent] = useState("");
     const [rating, setRating] = useState(0);
     const [errors, setErrors] = useState([]);
+
 
 
     const updateContent = (e) => setContent(e.target.value);
@@ -38,15 +40,21 @@ function ReviewForm ({setCreateReviewField, brew_id}) {
             user_id,
         };
 
-        let createdReview = await dispatch(addReviewToBrew(payload)).catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-        });
-
-        setRating("")
-        setContent("")
-        setErrors([])
-        setCreateReviewField(false)
+        let data = await dispatch(addReviewToBrew(payload));
+        if (data && data.errors) {
+            let modified_error_messages = []
+            data.errors.forEach(error => {
+                let splitError = error.split(": ")
+                modified_error_messages.push(splitError[1])
+            });
+            console.log(modified_error_messages)
+            setErrors(modified_error_messages)
+        } else {
+            setRating("")
+            setContent("")
+            setErrors([])
+            setCreateReviewField(false)
+        }
     }
 
 
@@ -54,9 +62,9 @@ function ReviewForm ({setCreateReviewField, brew_id}) {
         <div className='create-review-form'>
             <form className='' onSubmit={handleSubmit}>
 
-                <ul>
+            {errors.length > 0 && <ul className='errors'>
                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
+                </ul>}
 
                 <div>
                 <StarsRating
@@ -66,25 +74,16 @@ function ReviewForm ({setCreateReviewField, brew_id}) {
                     }}/>
                 </div>
 
-                {/* <input
-                type="number"
-                placeholder="Rating"
-                value={rating}
-                min="0"
-                max="5"
-                required
-                className='input rating-input'
-                onChange={updateRating} /> */}
-
                 <textarea
-                placeholder="Content"
+                placeholder="Your review..."
                 value={content}
-                required
+                maxLength={260}
+                // required
                 className='input review-textarea'
                 onChange={updateContent} />
 
-                <button className='' type="submit">Create Review</button>
-                <button className='' type="button" onClick={handleCancelClick}>Cancel</button>
+                <button className='button purple' type="submit">Create Review</button>
+                <button className='button cancel' type="button" onClick={handleCancelClick}>Cancel</button>
             </form>
 
         </div>

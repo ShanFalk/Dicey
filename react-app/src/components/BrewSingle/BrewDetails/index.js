@@ -42,6 +42,7 @@ function BrewDetails ({brew, setShowEditForm}) {
             </div>
 
             <div className="brew-details-block">
+
             <h3>{brew?.title}</h3>
             <div className="user-snippet">{users && <img className="profile-image" src={users[brew.user_id]?.image_url}
             alt="" />} {users && users[brew.user_id]?.username}</div>
@@ -49,13 +50,19 @@ function BrewDetails ({brew, setShowEditForm}) {
             {ids.includes(brew.id) && <a href={brew?.pdf_url} download="true">Download</a>}
 
             <p><b>${brew?.price}</b></p>
+
             {brew.brew_tags.map(tag => {
                 <p>Tags: {tag?.name}</p>
-            })}
+            })}</div>
+
+            <div>{ids.includes(brew.id) && <a href={brew?.pdf_url} download="true">Download</a>}
+            <p><b>${brew?.price}</b></p>
             {brew?.for_sale ? <AddToCart brew={brew}/> : "No longer for Sale" }
             {(brew?.for_sale && sessionUser?.id === brew?.user_id) && (
             <button onClick={() => setShowEditForm(true)}>Show Edit Form</button>
             )}
+            </div>
+
             </div>
         </div>
 
