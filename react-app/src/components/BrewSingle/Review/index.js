@@ -21,7 +21,7 @@ function Review ({review, user }) {
             <div className="comment-content-box">{review.content}</div>
             </div>}
 
-            <div className="bottom-details"><div>{user?.username}{"----"}{convertToTimeAgo(review.created_at)}</div>
+            <div className="bottom-details"><div className="bottom-text-details"><div className="user">{user?.username}</div><div className="date">{convertToTimeAgo(review.created_at)}</div></div>
             {sessionUser && sessionUser?.id === review.user_id && showReviewEdit && (
                 <button className="cancel button" onClick={() => setReviewEdit(!showReviewEdit)}>Cancel Edit</button>
             )}{sessionUser && sessionUser?.id === review.user_id && !showReviewEdit && (
