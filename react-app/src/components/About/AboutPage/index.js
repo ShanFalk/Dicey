@@ -1,3 +1,5 @@
+import "./about.css"
+
 function AboutPage () {
     return (
         <div>
@@ -10,24 +12,26 @@ function AboutPage () {
                 feature artisianlly-crafted homebrew content for Dungeons and 
                 Dragons and other table-top RPGs. We hope you enjoy our site!
             </p>
-            <a href="https://github.com/ShanFalk/Dicey" className="cardo" target="_blank" rel="noreferrer">
-                GitHub Repo
-            </a>
-            <a href='https://www.etsy.com' className='cardo' target="_blank" rel="noreferrer">
-                Etsy
-            </a>
-            <a href='https://github.com/ShanFalk' className='cardo ' target="_blank" rel="noreferrer">
-                Shannon Falk
-            </a>
-            <a href='https://github.com/Chase-Riddick' className='cardo' target="_blank" rel="noreferrer">
-                Chase Riddick
-            </a>
-            <a href='https://github.com/connorwfitch' className='cardo' target="_blank" rel="noreferrer">
-                Connor Fitch
-            </a>
-            <a href='https://github.com/keimjm' className='cardo' target="_blank" rel="noreferrer">
-                Josh Keim
-            </a>
+            <div className="about-display">
+                <a href="https://github.com/ShanFalk/Dicey" className="no-decor" target="_blank" rel="noreferrer">
+                    GitHub Repo
+                </a>
+                <a href='https://www.etsy.com' className='no-decor' target="_blank" rel="noreferrer">
+                    Etsy
+                </a>
+                <a href='https://github.com/ShanFalk' className='no-decor ' target="_blank" rel="noreferrer">
+                    Shannon Falk
+                </a>
+                <a href='https://github.com/Chase-Riddick' className='no-decor' target="_blank" rel="noreferrer">
+                    Chase Riddick
+                </a>
+                <a href='https://github.com/connorwfitch' className='no-decor' target="_blank" rel="noreferrer">
+                    Connor Fitch
+                </a>
+                <a href='https://github.com/keimjm' className='no-decor' target="_blank" rel="noreferrer">
+                    Josh Keim
+                </a>
+            </div>
         </div>
 
     )
