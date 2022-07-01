@@ -5,11 +5,8 @@ from app.forms.brew_form import CreateBrew, UpdateBrew
 from app.utils import upload, format_errors
 from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy.orm import joinedload
-# import pandas as pd
-# import numpy
-# import nltk
-# import plotly.express as px
-# from nltk.sentiment.vader import SentimentIntensityAnalyzer
+import pandas as pd
+import numpy
 
 
 brew_routes = Blueprint('brews', __name__)
