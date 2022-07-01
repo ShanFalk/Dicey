@@ -49,7 +49,8 @@ function ProfilePage () {
               </div>
      
         <div className="add-block">
-        <button onClick={handleCreateClick} className="button purple add">Add Brew</button>
+        <h3 className="profile-header">Ready to create Content?</h3>
+        <button onClick={handleCreateClick} className="button purple add">Add a new Brew</button>
         </div>
         </div>
         <h2 className="bottom-border">Brews Listed For Sale</h2>
