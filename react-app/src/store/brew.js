@@ -42,13 +42,10 @@ export const createBrew = (payload) => async (dispatch) => {
       user_id
     } = payload
 
-    console.log(brew_tags)
-
     const form = new FormData();
     form.append('title', title);
     form.append('description', description);
     form.append('pdf_url', pdf_url);
-    console.log(imgs)
     for (let [key, img] of Object.entries(imgs)) {
       form.append(`img_${key}`, img);
     }
@@ -119,7 +116,7 @@ export const updateBrew = (payload) => async (dispatch) => {
     method: "PUT",
     body: form
   });
-  
+
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
@@ -166,14 +163,15 @@ export const addReviewToBrew = (payload) => async (dispatch) => {
     method: "POST",
     body: form
   });
+
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
-      return;
+      return data;
     }
 
     dispatch(creation(data));
-    return null
+    return data
   }
 }
 
@@ -200,11 +198,11 @@ export const updateReviewOnBrew = (payload) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
-      return;
+      return data;
     }
 
     dispatch(creation(data));
-    return null
+    return data
   }
 }
 

@@ -10,11 +10,11 @@ def seed_purchases():
             ),
             Purchase(
                 user_id=1,
-                brew_id=9,
+                brew_id=8,
             ),
             Purchase(
                 user_id=1,
-                brew_id=12,
+                brew_id=1,
             ),
             Purchase(
                 user_id=1,
@@ -26,7 +26,7 @@ def seed_purchases():
             ),
             Purchase(
                 user_id=2,
-                brew_id=2,
+                brew_id=12,
             ),
             Purchase(
                 user_id=2,
@@ -42,8 +42,16 @@ def seed_purchases():
             ),
             Purchase(
                 user_id=3,
-                brew_id=7,
+                brew_id=14,
             ),
+            Purchase(
+                user_id=3,
+                brew_id=15,
+            ),
+            Purchase(
+                user_id=3,
+                brew_id=5,
+            )
         ]
     )
     db.session.commit()

@@ -68,5 +68,4 @@ def format_errors(validation_errors):
     for field in validation_errors:
         for error in validation_errors[field]:
             errorMessages.append(f'{field} : {error}')
-    print(errorMessages)
     return errorMessages

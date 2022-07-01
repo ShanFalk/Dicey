@@ -97,7 +97,8 @@ input {
 
 .add-block {
     display: flex;
+    width: 400px;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }

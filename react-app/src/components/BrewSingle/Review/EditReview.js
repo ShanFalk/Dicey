@@ -38,15 +38,21 @@ function EditReview({review, setReviewEdit}) {
             user_id:review.user_id,
         };
 
-        let createdReview = await dispatch(updateReviewOnBrew(payload)).catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
-        });
-
-        setRating("")
-        setContent("")
-        setErrors([])
-        setReviewEdit(false)
+        let data = await dispatch(updateReviewOnBrew(payload));
+        if (data && data.errors) {
+            let modified_error_messages = []
+            data.errors.forEach(error => {
+                let splitError = error.split(": ")
+                modified_error_messages.push(splitError[1])
+            });
+            console.log(modified_error_messages)
+            setErrors(modified_error_messages)
+        } else {
+            setRating("")
+            setContent("")
+            setErrors([])
+            setReviewEdit(false)
+        }
     }
 
     const handleDelete = async (e) => {
@@ -57,17 +63,15 @@ function EditReview({review, setReviewEdit}) {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
           });
-
-        console.log(deleteFeedback)
     }
 
   return (
       <div>
         <form className='' onSubmit={handleSubmit}>
 
-          <ul>
-              {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-          </ul>
+        {errors.length > 0 && <ul className='errors'>
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>}
         <div className='review-content-display'>
           <div>
               <StarsRating
@@ -81,7 +85,7 @@ function EditReview({review, setReviewEdit}) {
 
           <textarea
           value={content}
-          required
+          // required
           className='input review-textarea'
           onChange={updateContent} />
           </div>
