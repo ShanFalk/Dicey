@@ -23,6 +23,47 @@ body {
 }
 
 #main-content {
-    margin-bottom: 100px;
-    width: 60%;
+    margin-bottom: 400px;
+}
+
+.custom-shape-divider-bottom-1656629992 {
+    position: absolute;
+    bottom: 260px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1656629992 svg {
+    position: relative;
+    display: block;
+    width: calc(148% + 1.3px);
+    height: 96px;
+}
+
+.custom-shape-divider-bottom-1656629992 .shape-fill {
+    fill: #D03341;
+}
+
+.custom-shape-divider-bottom-1656635902 {
+    position: absolute;
+    bottom: 260px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1656635902 svg {
+    position: relative;
+    display: block;
+    width: calc(148% + 1.3px);
+    height: 96px;
+}
+
+.custom-shape-divider-bottom-1656635902 .shape-fill {
+    fill: #A589FB;
 }

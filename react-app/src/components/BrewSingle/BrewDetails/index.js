@@ -3,9 +3,11 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import {getPurchases} from '../../../store/purchases'
+import AddToCart from "../AddToCart"
 import './BrewDetail.css';
 
 function BrewDetails ({brew, setShowEditForm}) {
+    const users = useSelector(state => state.users);
     const images = brew?.images
     const sessionUser = useSelector(state => state.session.user);
     const [centerDisplayImage, setCenterDisplay] = useState(0);
@@ -31,25 +33,28 @@ function BrewDetails ({brew, setShowEditForm}) {
             {images && images.map((image, idx) => {
                 return (
             <div className="brew-image-block" key={image.id}>
-            <button onClick={() => setCenterDisplay(idx)} ><img className="brew-image" src={image?.img_url}alt="" /></button>
+            <button className="img-button" onClick={() => setCenterDisplay(idx)} ><img className="brew-image" src={image?.img_url}alt="" /></button>
             </div>
             )}
             )}
             </div>
             <div className="center-image-container">
-                <img className="brew-image center-image" src={images[centerDisplayImage].img_url}alt="" />
+                <img className="center-image" src={images[centerDisplayImage].img_url}alt="" />
             </div>
             </div>
 
             <div className="brew-details-block">
-            <h3>Title: {brew?.title}</h3>
-            <p>Description: {brew?.description}</p>
+            <h3>{brew?.title}</h3>
+            <div className="user-snippet">{users && <img className="profile-image" src={users[brew.user_id]["image_url"]}
+            alt="" />} {users && users[brew.user_id]['username']}</div>
+            <p>{brew?.description}</p>
             {ids.includes(brew.id) && <a href={brew?.pdf_url} download="true">Download</a>}
-            <p>User: {brew?.user_id}</p>
-            <p>Price: {brew?.price}</p>
+
+            <p><b>${brew?.price}</b></p>
             {brew.brew_tags.map(tag => {
                 <p>Tags: {tag?.name}</p>
             })}
+            {brew?.for_sale ? <AddToCart brew={brew}/> : "No longer for Sale" }
             {(brew?.for_sale && sessionUser?.id === brew?.user_id) && (
             <button onClick={() => setShowEditForm(true)}>Show Edit Form</button>
             )}
@@ -58,5 +63,22 @@ function BrewDetails ({brew, setShowEditForm}) {
 
     )
 }
+
+{/* <div className="user-info">
+              <div>
+              <img className="profile-image" src={user?.image_url}
+        alt="" />
+            <h2>{user?.username}</h2>
+            <h4>Member Since: {monthDateYear}</h4>
+              </div>
+              <div>
+                <h3 className="profile-header">User Information</h3>
+              <p>Email: {user?.email}</p>
+              <p>Bio: {user?.bio}</p>
+              </div>
+
+
+        <button onClick={handleCreateClick} className="button purple">Add Brew</button>
+        </div> */}
 
 export default BrewDetails;
