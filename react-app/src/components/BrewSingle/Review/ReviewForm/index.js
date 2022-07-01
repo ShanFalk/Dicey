@@ -43,8 +43,6 @@ function ReviewForm ({setCreateReviewField, brew_id}) {
         if (data && data.errors) setErrors(data.errors);
         });
 
-        console.log(createdReview)
-
         setRating("")
         setContent("")
         setErrors([])

@@ -7,7 +7,6 @@ import './ShoppingCart.css'
 
 function ShoppingCartPage() {
     const brews = useSelector(state => state.brews);
-    console.log(brews);
     const [brewIds, updatebrewIds] = useState(JSON.parse(localStorage.getItem('cart')));
     const [isDeleted, setIsDeleted] = useState(false)
 

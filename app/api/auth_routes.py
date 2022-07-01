@@ -43,7 +43,6 @@ def login():
         # Add the user to the session, we are logged in!
         user = User.query.filter(User.email == form.data['email']).first()
         login_user(user)
-        print(user)
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
@@ -62,10 +61,6 @@ def sign_up():
     """
     Creates a new user and logs them in
     """
-
-    print("EHEEHEHRREREKLJSDF")
-
-    print(request.files.keys())
 
     img = request.files["img_url"]
     img_url = upload(img)
