@@ -11,7 +11,6 @@ function ShoppingCartPage() {
     const purchases = useSelector(state => state.purchases);
 
     const brewsPurchased = Object.values(purchases);
-    // const purchased = brewsPurchased.find(purchase => sessionUser.id === purchase.user_id && brew.id === purchase.brew_id)
 
     const [brewIds, updatebrewIds] = useState(JSON.parse(localStorage.getItem('cart')));
     const [isDeleted, setIsDeleted] = useState(false)
@@ -27,7 +26,8 @@ function ShoppingCartPage() {
     //function to check for duplicates in user's library and cart
     const checkForDuplicates = () => {
         return brewIds.filter((brewId) => {
-            return brews[brewId]?.user_id === sessionUser?.id
+            return brews[brewId]?.user_id === sessionUser?.id ||
+            brewsPurchased.find(purchase => sessionUser?.id === purchase?.user_id && brewId === purchase?.brew_id)
         })
     }
 
@@ -42,7 +42,8 @@ function ShoppingCartPage() {
         if (sessionUser) {
             setDuplicates(checkForDuplicates());
         }
-    }, [sessionUser, brewIds])
+    }, [sessionUser, brewIds, purchases])
+
 
     //if the shopping cart is empty
     if (numItems === 0) {

@@ -36,7 +36,7 @@ function Checkout({ brewIds, duplicates }) {
 
     return (
         <>
-            <button disabled={duplicates.length > 0} className="purple button" onClick={onClick}>
+            <button disabled={duplicates?.length > 0} className="purple button" onClick={onClick}>
                 Checkout
             </button>
             {showModal && (
