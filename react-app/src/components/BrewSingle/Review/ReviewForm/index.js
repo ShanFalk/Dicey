@@ -69,6 +69,7 @@ function ReviewForm ({setCreateReviewField, brew_id}) {
                 <div>
                 <StarsRating
                     value={rating}
+                    allowHalf={false}
                     onChange={value => {
                     setRating(value);
                     }}/>
