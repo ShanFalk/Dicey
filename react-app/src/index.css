@@ -23,12 +23,13 @@ body {
 }
 
 #main-content {
+    width: 60%;
     margin-bottom: 400px;
 }
 
 .custom-shape-divider-bottom-1656629992 {
     position: absolute;
-    bottom: 260px;
+    bottom: 180px;
     left: 0;
     width: 100%;
     overflow: hidden;
@@ -49,7 +50,7 @@ body {
 
 .custom-shape-divider-bottom-1656635902 {
     position: absolute;
-    bottom: 260px;
+    bottom: 180px;
     left: 0;
     width: 100%;
     overflow: hidden;
