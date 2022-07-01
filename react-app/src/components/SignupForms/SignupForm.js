@@ -38,11 +38,9 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={onSignup}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
+      {errors.length > 0 && <ul className='errors'>
+        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+      </ul>}
       <div>
         <label htmlFor='username'>Username:</label>
         <input

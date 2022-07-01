@@ -6,6 +6,7 @@ function Footer() {
         <>
 
         <div className='footer'>
+<<<<<<< HEAD
         <div className='purple-extension'>This is content</div>
         <div className='footer-main'>
             <div className='col'>
@@ -44,6 +45,26 @@ function Footer() {
 
 
         </div>
+=======
+            <Link to='/about' className='footerlink cardo'>
+                About
+            </Link>
+            <a href='https://www.etsy.com' className='footerlink cardo' target="_blank" rel="noreferrer">
+                Etsy
+            </a>
+            <a href='https://github.com/ShanFalk' className='footerlink cardo ' target="_blank" rel="noreferrer">
+                Shannon Falk
+            </a>
+            <a href='https://github.com/Chase-Riddick' className='footerlink cardo' target="_blank" rel="noreferrer">
+                Chase Riddick
+            </a>
+            <a href='https://github.com/connorwfitch' className='footerlink cardo' target="_blank" rel="noreferrer">
+                Connor Fitch
+            </a>
+            <a href='https://github.com/keimjm' className='footerlink cardo' target="_blank" rel="noreferrer">
+                Josh Keim
+            </a>
+>>>>>>> 80abf99c43033db4152364013f20e208ec9cf2e9
         </div>
         </>
     )

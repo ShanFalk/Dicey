@@ -3,15 +3,6 @@
     height: 480px;
 } */
 
-.form {
-    width: 280px;
-    transition: .5s;
-    position: relative;
-    margin-top: 55px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 input {
     width: 100%;
     background: transparent;
@@ -22,4 +13,27 @@ input {
     border-right: 0;
     border-bottom: 1px solid gray;
     outline: none;
+}
+
+.tagholder {
+    display: flex;
+    align-items: center;
+    width: 250px;
+    justify-content: space-between;
+}
+
+.checkbox {
+    width: 20px;
+}
+
+.errors {
+    border: 2px solid #D03341;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 30px 10px;
+}
+
+.errors>* {
+    color: #D03341;
 }
