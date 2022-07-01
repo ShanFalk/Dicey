@@ -4,7 +4,6 @@ import BrewUpdateForm from "../BrewUpdateForm";
 import React, { useEffect, useState }  from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import AddToCart from "../AddToCart";
 
 
 function BrewPage () {
@@ -25,7 +24,6 @@ function BrewPage () {
 return (
     <div>
         <BrewDetails setShowEditForm={setShowEditForm} brew={brew} />
-        {brew?.for_sale ? <AddToCart brew={brew}/> : "No longer for Sale" }
         <ReviewsSection brew={brew} />
     </div>
 )
