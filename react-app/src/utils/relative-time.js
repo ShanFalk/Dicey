@@ -23,7 +23,6 @@ export default function convertToTimeAgo(dateObj) {
     dateString += months[dateObjSlices[2]]
     dateString += dateObjSlices[1]
     dateString += dateObjSlices[4]
-    console.log('*******', dateString)
     console.log(moment(dateString, "YYYYMMDDhh:mm:ss").fromNow())
 
 

@@ -119,7 +119,7 @@ export const updateBrew = (payload) => async (dispatch) => {
     method: "PUT",
     body: form
   });
-  
+
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
@@ -166,14 +166,16 @@ export const addReviewToBrew = (payload) => async (dispatch) => {
     method: "POST",
     body: form
   });
+
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
-      return;
+      console.log(data)
+      return data;
     }
 
     dispatch(creation(data));
-    return null
+    return data
   }
 }
 
@@ -200,11 +202,12 @@ export const updateReviewOnBrew = (payload) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
-      return;
+      console.log(data)
+      return data;
     }
 
     dispatch(creation(data));
-    return null
+    return data
   }
 }
 
