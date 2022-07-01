@@ -5,11 +5,9 @@ from app.forms.brew_form import CreateBrew, UpdateBrew
 from app.utils import upload, format_errors
 from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy.orm import joinedload
-# import pandas as pd
-# import numpy
-# import nltk
-# import plotly.express as px
-# from nltk.sentiment.vader import SentimentIntensityAnalyzer
+import pandas as pd
+import numpy
+
 
 
 brew_routes = Blueprint('brews', __name__)
@@ -138,7 +136,7 @@ def reccomend(id):
     data = pd.read_sql_query('''select b.id, b.title, t.name , r.rating, r.content, r.brew_id, r.user_id, t.id as tag
 from brews b
 inner join purchases p on p.brew_id = b.id
-inner join brewtags bt on bt."brewId" = b.id 
+inner join brewtags bt on bt."brewId" = b.id
 inner join tags t on t.id = bt."tagId"
 inner join reviews r on r.brew_id = p.brew_id
 where r.user_id = {id} AND r.rating > 4

@@ -7,8 +7,14 @@ import './ShoppingCart.css'
 
 function ShoppingCartPage() {
     const brews = useSelector(state => state.brews);
+    const sessionUser = useSelector(state => state.session.user);
+    const purchases = useSelector(state => state.purchases);
+
+    const brewsPurchased = Object.values(purchases);
+
     const [brewIds, updatebrewIds] = useState(JSON.parse(localStorage.getItem('cart')));
     const [isDeleted, setIsDeleted] = useState(false)
+    const [duplicates, setDuplicates] = useState([])
 
     const numItems = brewIds.length;
 
@@ -17,11 +23,27 @@ function ShoppingCartPage() {
         setIsDeleted(true);
     };
 
+    //function to check for duplicates in user's library and cart
+    const checkForDuplicates = () => {
+        return brewIds.filter((brewId) => {
+            return brews[brewId]?.user_id === sessionUser?.id ||
+            brewsPurchased.find(purchase => sessionUser?.id === purchase?.user_id && brewId === purchase?.brew_id)
+        })
+    }
+
     //re-rendering after remove button is clicked
     useEffect(() => {
         updatebrewIds(JSON.parse(localStorage.getItem('cart')));
         setIsDeleted(false)
     }, [isDeleted])
+
+    //re-rendering if a user logs in or cart is updated
+    useEffect(() => {
+        if (sessionUser) {
+            setDuplicates(checkForDuplicates());
+        }
+    }, [sessionUser, brewIds, purchases])
+
 
     //if the shopping cart is empty
     if (numItems === 0) {
@@ -35,7 +57,7 @@ function ShoppingCartPage() {
     //array methods to get the prices for the shopping cart items and total them
     const prices = brewIds.map((brewId) => brews[brewId]?.price)
     const sum = prices.reduce((prevPrice, currPrice) => prevPrice + currPrice)
-    const total = sum.toFixed(2)
+    const total = sum?.toFixed(2)
 
 
     return (
@@ -55,6 +77,9 @@ function ShoppingCartPage() {
                                         <li>{brew?.title}</li>
                                         <li>{brew?.description}</li>
                                         <li>${brew?.price}</li>
+                                        {duplicates?.includes(brew?.id) && (
+                                            <li className='duplicate-msg'>Already in library</li>
+                                        )}
                                         <RemoveItem brewIds={brewIds} brewId={brew?.id} deleteEnd={onDeleteEnd} />
                                     </ul>
                                 </div>
@@ -83,7 +108,7 @@ function ShoppingCartPage() {
                                 </tr>
                             </tbody>
                         </table>
-                        <Checkout brewIds={brewIds} />
+                        <Checkout duplicates={duplicates} brewIds={brewIds} />
                     </div>
                 </div>
             </div>
