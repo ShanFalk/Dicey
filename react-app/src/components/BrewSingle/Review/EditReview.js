@@ -76,6 +76,7 @@ function EditReview({review, setReviewEdit}) {
           <div>
               <StarsRating
                   classNamePrefix="star-rating"
+                  allowHalf={false}
                   value={rating}
                   onChange={value => {
                   setRating(value);
