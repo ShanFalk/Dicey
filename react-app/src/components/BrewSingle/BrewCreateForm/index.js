@@ -41,6 +41,11 @@ function BrewCreateForm() {
     console.log('HERE')
     console.log('IMGS', imgs)
 
+    if (title.length < 3 || title.length > 255) {
+      setErrors([...errors, 'Title length must be at least 3 and less than 255']);
+      return;
+    }
+
     const payload = {
       description,
       title,
@@ -85,9 +90,9 @@ const handleCancelClick = (e) => {
     <div className="create form">
     <h1>Add your Brew</h1>
       <form className='form' onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul>
+        {errors.length > 0 && <ul className='errors'>
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>}
       <input
         type="text"
         placeholder="Title"

@@ -39,6 +39,11 @@ function BrewUpdateForm({brew, setShowEditForm}) {
     e.preventDefault();
     setErrors([]);
 
+    if (title.length < 3 || title.length > 255) {
+      setErrors([...errors, 'Title length must be at least 3 and less than 255']);
+      return;
+    }
+
     const payload = {
         id: brew.id,
         description,
@@ -90,9 +95,9 @@ function BrewUpdateForm({brew, setShowEditForm}) {
     <div className="">
     <h1>Update your Brew</h1>
       <form className='' onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul>
+        {errors.length > 0 && <ul className='errors'>
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>}
         <input
           type="text"
           placeholder="Title"
