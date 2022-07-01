@@ -39,7 +39,6 @@ function EditReview({review, setReviewEdit}) {
         };
 
         let data = await dispatch(updateReviewOnBrew(payload));
-        console.log("********", data.errors)
         if (data && data.errors) {
             let modified_error_messages = []
             data.errors.forEach(error => {

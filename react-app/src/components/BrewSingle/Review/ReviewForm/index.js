@@ -40,9 +40,7 @@ function ReviewForm ({setCreateReviewField, brew_id}) {
             user_id,
         };
 
-<<<<<<< HEAD
         let data = await dispatch(addReviewToBrew(payload));
-        console.log("********", data.errors)
         if (data && data.errors) {
             let modified_error_messages = []
             data.errors.forEach(error => {

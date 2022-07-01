@@ -167,7 +167,6 @@ export const addReviewToBrew = (payload) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
-      console.log(data)
       return data;
     }
 
@@ -199,7 +198,6 @@ export const updateReviewOnBrew = (payload) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
-      console.log(data)
       return data;
     }
 
