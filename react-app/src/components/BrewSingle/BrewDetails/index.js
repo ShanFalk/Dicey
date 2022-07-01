@@ -1,4 +1,3 @@
-import BrewUpdateForm from "../BrewUpdateForm";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -68,22 +67,5 @@ function BrewDetails ({brew, setShowEditForm}) {
 
     )
 }
-
-{/* <div className="user-info">
-              <div>
-              <img className="profile-image" src={user?.image_url}
-        alt="" />
-            <h2>{user?.username}</h2>
-            <h4>Member Since: {monthDateYear}</h4>
-              </div>
-              <div>
-                <h3 className="profile-header">User Information</h3>
-              <p>Email: {user?.email}</p>
-              <p>Bio: {user?.bio}</p>
-              </div>
-
-
-        <button onClick={handleCreateClick} className="button purple">Add Brew</button>
-        </div> */}
 
 export default BrewDetails;

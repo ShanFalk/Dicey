@@ -1,7 +1,6 @@
 import FeaturedBrewsCollection from "./FeaturedBrewsCollection";
 import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllBrews} from '../../../store/brew';
 import { Link } from 'react-router-dom';
 import { recommendBrews } from "../../../store/recommend";
 import { getPurchases } from "../../../store/purchases";
@@ -15,8 +14,11 @@ function MainPageDisplay () {
     let content = null
     const brews = Object.values(useSelector(state => state.brews))
     const allPurchased = Object.values(useSelector(state => state.purchases))
-    const ids = allPurchased.filter(purchase => purchase.user_id === user.id).map(purchase => purchase.brew_id)
-    
+    let ids = ""
+
+    if(user) {
+       ids = allPurchased.filter(purchase => purchase.user_id === user.id).map(purchase => purchase.brew_id) 
+    }
 
     useEffect(() => {
       if(user) {

@@ -9,7 +9,6 @@ import pandas as pd
 import numpy
 
 
-
 brew_routes = Blueprint('brews', __name__)
 
 
