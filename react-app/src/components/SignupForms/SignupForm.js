@@ -9,13 +9,15 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [bio, setBio] = useState("")
+  const [img, setImg] = useState(null);
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onSignup = async (e) => {
     e.preventDefault();
     if(password === repeatPassword){
-    const data = await dispatch(signUp(username, email, password));
+    const data = await dispatch(signUp(username, email, password, bio, img));
     if (data) {
       setErrors(data);
     }
@@ -32,15 +34,23 @@ const LoginForm = () => {
       });
   }
 
+  const updateImage = (e) => {
+    const img = e.target.files[0]
+    setImg(img)
+  }
+
   if (user) {
     return <Redirect to='/' />;
   }
 
   return (
     <form onSubmit={onSignup}>
+      <h1>Sign Up</h1>
+      <div>
       {errors.length > 0 && <ul className='errors'>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>}
+      </div>
       <div>
         <label htmlFor='username'>Username:</label>
         <input
@@ -64,6 +74,28 @@ const LoginForm = () => {
         />
       </div>
       <div>
+      <label>Bio</label>
+        <input
+          type='text'
+          name='bio'
+          placeholder='Bio'
+          onChange={(e) => setBio(e.target.value)}
+          value={bio}
+          required
+        ></input>
+      </div>
+          <label for="img1">
+            Profile Picture
+          </label>
+          <input
+            type="file"
+            placeholder="Image Upload"
+            required
+            accept='image/*'
+            className='input'
+            name='img_url'
+            onChange={updateImage} />
+      <div>
         <label htmlFor='password'>Password:</label>
         <input
           name='password'
@@ -77,6 +109,7 @@ const LoginForm = () => {
         <label>Repeat Password</label>
         <input
           type='password'
+          placeholder='repeat password'
           name='repeat_password'
           onChange={(e) => setRepeatPassword(e.target.value)}
           value={repeatPassword}
