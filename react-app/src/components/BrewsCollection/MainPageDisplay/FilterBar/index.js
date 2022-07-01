@@ -22,7 +22,7 @@ function FilterBar({brews}) {
             
             return (
                 <div className='icon-block' key={tag.id}>
-                    <Link className='filter-icon-button purple' to={`/search?term=${tag.name}&tagId=${tag.id}`}>
+                    <Link className='filter-icon-button purple' key={tag.id} to={`/search?term=${tag.name}&tagId=${tag.id}`}>
                         <span className='filter-icon'>{content}</span>
                         <span className='filter-name'>{tag.name}</span>
                     </Link>
