@@ -78,7 +78,7 @@ function ShoppingCartPage() {
                                         <li>{brew?.description}</li>
                                         <li>${brew?.price}</li>
                                         {duplicates?.includes(brew?.id) && (
-                                            <li>Already in library</li>
+                                            <li className='duplicate-msg'>Already in library</li>
                                         )}
                                         <RemoveItem brewIds={brewIds} brewId={brew?.id} deleteEnd={onDeleteEnd} />
                                     </ul>
