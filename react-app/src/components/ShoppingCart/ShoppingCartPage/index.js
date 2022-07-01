@@ -8,6 +8,10 @@ import './ShoppingCart.css'
 function ShoppingCartPage() {
     const brews = useSelector(state => state.brews);
     const sessionUser = useSelector(state => state.session.user);
+    const purchases = useSelector(state => state.purchases);
+
+    const brewsPurchased = Object.values(purchases);
+    // const purchased = brewsPurchased.find(purchase => sessionUser.id === purchase.user_id && brew.id === purchase.brew_id)
 
     const [brewIds, updatebrewIds] = useState(JSON.parse(localStorage.getItem('cart')));
     const [isDeleted, setIsDeleted] = useState(false)
