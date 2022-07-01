@@ -26,16 +26,6 @@ function FilterBar({brews}) {
 
 
 
-
-
-
-
-
-
-
-
-
-
     return (
     <div className='filter-block' >
         <div className='filter-bar-icons'>
