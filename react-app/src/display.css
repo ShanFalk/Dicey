@@ -1,7 +1,11 @@
 .brew-image {
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
+    opacity: 0.8;
+    border: #97A9B4 1px solid;
 }
+
+
 .container {
     /* inline-size: min(100% - 2rem, 70rem); */
     margin-inline: auto;

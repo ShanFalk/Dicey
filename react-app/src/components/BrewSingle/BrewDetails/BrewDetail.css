@@ -1,3 +1,5 @@
+
+
 .brew-block {
     display: flex;
     flex-direction: row;
@@ -5,11 +7,19 @@
     margin-left: auto;
     margin-right: auto;
     justify-content: center;
+    gap: 20px;
 }
+
 
 .images-field {
     display: flex;
     flex-direction: row;
+    gap: 10px;
+}
+
+.img-button {
+    border: none;
+    color: white;
 }
 
 .listed-images {
@@ -26,4 +36,12 @@
 .brew-details-block {
     width: 33%;
     min-width: 33%;
+
+}
+
+.user-snippet {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
 }

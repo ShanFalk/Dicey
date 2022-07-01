@@ -17,7 +17,6 @@ function ReviewsSection ({brew}) {
     let numOfReviews;
     let sumOfRatings;
     let averageRating;
-    let user;
 
     //When/if a brew is threaded, this code block will set values the the above variables.
     if (brew)  {
@@ -38,10 +37,11 @@ function ReviewsSection ({brew}) {
 
     return (
         <div className="review-table">
-            <div className="review-section-header" >
-            <h3>{numOfReviews} Reviews ----- </h3> <StarsRating
+            <div className="review-section-header"><div className="header-details">
+            <h3>{numOfReviews} Reviews </h3> <StarsRating
+                  classNamePrefix="star-rating"
                   value={averageRating? averageRating : 5}
-                  disabled={true}/> -----
+                  disabled={true}/></div>
             {sessionUser && purchases[brew.id] &&
             <button className="purple button" onClick={() => setCreateReviewField(!showCreateReviewField)}>Add Review</button>
             }
