@@ -25,6 +25,7 @@ def seed_users():
         image_url='https://www.google.com/aclk?sa=L&ai=DChcSEwjMrcz2jcn4AhVqPK0GHcZJCTcYABAFGgJwdg&ae=2&sig=AOD64_3PaW4aFM7icZ8FH_aVIvqyb93eww&adurl&ctype=5&ved=2ahUKEwjG5bz2jcn4AhVBJX0KHWp2B_kQvhd6BAgBEHM',
         bio='Just a humble dude trying to make some great adventures' )
 
+
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)

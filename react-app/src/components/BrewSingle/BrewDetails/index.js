@@ -22,9 +22,8 @@ function BrewDetails ({brew, setShowEditForm}) {
    const ids = Object.values(useSelector(state => state.purchases)).filter(purchase => purchase.user_id === sessionUser.id).map(purchase => purchase.brew_id)
 
 
-
-
     if(!brew) return null
+    
 
     return (
         <div className="brew-block">
@@ -44,12 +43,15 @@ function BrewDetails ({brew, setShowEditForm}) {
             </div>
 
             <div className="brew-details-block">
-                <div>
-            <div className="user-snippet">{users && <img className="profile-image" src={users[brew.user_id]["image_url"]}
-            alt="" />} {users && users[brew.user_id]['username']}</div>
-            <h3 className="brew-title">{brew?.title}</h3>
-            </div>
-            <div><p>{brew?.description}</p>
+
+            <h3>{brew?.title}</h3>
+            <div className="user-snippet">{users && <img className="profile-image" src={users[brew.user_id]?.image_url}
+            alt="" />} {users && users[brew.user_id]?.username}</div>
+            <p>{brew?.description}</p>
+            {ids.includes(brew.id) && <a href={brew?.pdf_url} download="true">Download</a>}
+
+            <p><b>${brew?.price}</b></p>
+
             {brew.brew_tags.map(tag => {
                 <p>Tags: {tag?.name}</p>
             })}</div>
