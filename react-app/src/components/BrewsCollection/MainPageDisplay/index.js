@@ -43,7 +43,7 @@ function MainPageDisplay () {
           return (
             <> 
           <div className='brew-card-link' key={brew.id}>
-            <Link to={`/brews/${brew.id}`} brew={brew} className="room-nav-link">
+            <Link to={`/brews/${brew.id}`} brew={brew} className="no-decor">
               <FeaturedBrewsCollection key={brew.id} brew={brew} />
             </Link>
           </div>

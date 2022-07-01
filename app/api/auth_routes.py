@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, session, request
 from app.models import User, db, Purchase
 from app.forms import LoginForm
 from sqlalchemy.orm import joinedload
+from app.utils import upload, format_errors
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
 
@@ -61,13 +62,23 @@ def sign_up():
     """
     Creates a new user and logs them in
     """
+
+    print("EHEEHEHRREREKLJSDF")
+
+    print(request.files.keys())
+
+    img = request.files["img_url"]
+    img_url = upload(img)
+
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            bio=form.data['bio'],
+            image_url=img_url
         )
         db.session.add(user)
         db.session.commit()
@@ -76,7 +87,7 @@ def sign_up():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-@auth_routes.route('/unauthorized')
+@ auth_routes.route('/unauthorized')
 def unauthorized():
     """
     Returns unauthorized JSON when flask-login authentication fails
