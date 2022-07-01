@@ -1,0 +1,10 @@
+.about-display {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.about-display > a:hover {
+    color: #A589FB;
+}
