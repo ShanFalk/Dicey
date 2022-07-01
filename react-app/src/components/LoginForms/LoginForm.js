@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 import { getPurchases} from '../../store/purchases'
+import { recommendBrews } from '../../store/recommend';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -17,7 +18,8 @@ const LoginForm = () => {
     if (!user) {
       setErrors();
     }
-    dispatch(getPurchases(user.id))
+    await dispatch(getPurchases(user.id))
+    await dispatch(recommendBrews(user.id))
 
   };
 
@@ -28,8 +30,9 @@ const LoginForm = () => {
     if (data) {
       setErrors(data);
     }
-    dispatch(getPurchases(1))
-      
+    await dispatch(getPurchases(1))
+    await dispatch(recommendBrews(1))
+   
   }
 
   if (user) {

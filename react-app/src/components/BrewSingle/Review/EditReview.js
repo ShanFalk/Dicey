@@ -64,8 +64,6 @@ function EditReview({review, setReviewEdit}) {
           const data = await res.json();
           if (data && data.errors) setErrors(data.errors);
           });
-
-        console.log(deleteFeedback)
     }
 
   return (

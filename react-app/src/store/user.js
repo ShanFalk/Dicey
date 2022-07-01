@@ -14,7 +14,6 @@ export const getAllUsers = () => async (dispatch) => {
             return;
         }
 
-        console.log(data)
         dispatch(retrieveAll(data));
     }
 }

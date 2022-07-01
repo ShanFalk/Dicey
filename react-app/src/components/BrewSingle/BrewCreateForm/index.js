@@ -37,9 +37,6 @@ function BrewCreateForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors([]);
-    console.log('HERE', tags)
-    console.log('HERE')
-    console.log('IMGS', imgs)
 
     if (title.length < 3 || title.length > 255) {
       setErrors([...errors, 'Title length must be at least 3 and less than 255']);

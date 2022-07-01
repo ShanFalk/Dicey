@@ -30,7 +30,7 @@ class User(db.Model, UserMixin):
             "email": self.email,
             "image_url": self.image_url,
             "bio": self.bio,
-            "created_at": self.created_at
+            "created_at": self.created_at,
         }
 
         for key, collection in kwargs.items():
@@ -68,5 +68,6 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'bio': self.bio,
-            'image_url': self.image_url
+            'image_url': self.image_url,
+            "created_at": self.created_at,
         }

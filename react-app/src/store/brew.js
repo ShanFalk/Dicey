@@ -29,6 +29,8 @@ const deletion = (brewId) => ({
 
 
 
+
+
 export const createBrew = (payload) => async (dispatch) => {
     const {
       description,
@@ -40,13 +42,10 @@ export const createBrew = (payload) => async (dispatch) => {
       user_id
     } = payload
 
-    console.log(brew_tags)
-
     const form = new FormData();
     form.append('title', title);
     form.append('description', description);
     form.append('pdf_url', pdf_url);
-    console.log(imgs)
     for (let [key, img] of Object.entries(imgs)) {
       form.append(`img_${key}`, img);
     }
@@ -97,8 +96,6 @@ export const updateBrew = (payload) => async (dispatch) => {
     imgs,
     brew_tags
   } = payload
-
-  console.log(brew_tags);
 
   const form = new FormData();
   form.append('title', title)
@@ -226,6 +223,8 @@ export const deleteReview = (reviewId, brewId) => async dispatch => {
     return null
   }
 }
+
+
 
 
 const initialState = {  };
