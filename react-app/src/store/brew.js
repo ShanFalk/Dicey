@@ -29,6 +29,8 @@ const deletion = (brewId) => ({
 
 
 
+
+
 export const createBrew = (payload) => async (dispatch) => {
     const {
       description,
@@ -97,8 +99,6 @@ export const updateBrew = (payload) => async (dispatch) => {
     imgs,
     brew_tags
   } = payload
-
-  console.log(brew_tags);
 
   const form = new FormData();
   form.append('title', title)
@@ -223,6 +223,8 @@ export const deleteReview = (reviewId, brewId) => async dispatch => {
     return null
   }
 }
+
+
 
 
 const initialState = {  };

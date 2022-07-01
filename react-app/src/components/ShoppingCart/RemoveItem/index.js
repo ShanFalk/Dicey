@@ -8,7 +8,7 @@ function RemoveItem({ brewIds, brewId, deleteEnd}) {
         deleteEnd();
     }
     return (
-        <button onClick={remove}>Remove</button>
+        <button className="red button" onClick={remove}>Remove</button>
     )
 }
 

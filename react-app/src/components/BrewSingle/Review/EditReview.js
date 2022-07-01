@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState} from 'react'
 import { updateReviewOnBrew, deleteReview } from '../../../store/brew';
 import StarsRating from 'react-star-rate';
+import './reviews.css';
 
 
 function EditReview({review, setReviewEdit}) {
@@ -67,32 +68,25 @@ function EditReview({review, setReviewEdit}) {
           <ul>
               {errors.map((error, idx) => <li key={idx}>{error}</li>)}
           </ul>
-
+        <div className='review-content-display'>
           <div>
               <StarsRating
+                  classNamePrefix="star-rating"
                   value={rating}
                   onChange={value => {
                   setRating(value);
               }}/>
           </div>
 
-          {/* <input
-          type="number"
-          value={rating}
-          min="0"
-          max="5"
-          required
-          className='input rating-input'
-          onChange={updateRating} /> */}
 
           <textarea
           value={content}
           required
           className='input review-textarea'
           onChange={updateContent} />
-
+          </div>
           <div className='button-row'>
-            <button className="purple button" type="submit">Edit Review</button>
+            <button className="purple button" type="submit">Submit Edit</button>
             <button className="red button" type="button" onClick={handleDelete}>Delete Review</button>
           </div>
       </form>

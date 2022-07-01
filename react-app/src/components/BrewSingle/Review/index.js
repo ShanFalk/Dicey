@@ -16,9 +16,9 @@ function Review ({review, user }) {
         <div className="review-container">
 
             {showReviewEdit ? <EditReview review={review} setReviewEdit={setReviewEdit}/> :
-            <div>
-            <div>{(<StarsRating disabled={true} value={review?.rating} />)}</div>
-            <p>{review.content}</p>
+            <div className="review-content-display">
+            {(<StarsRating classNamePrefix="star-rating" disabled={true} value={review?.rating} />)}
+            <div className="comment-content-box">{review.content}</div>
             </div>}
 
             <div className="bottom-details"><div>{user?.username}{"----"}{convertToTimeAgo(review.created_at)}</div>

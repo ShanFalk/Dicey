@@ -36,7 +36,7 @@ function Checkout({ brewIds }) {
 
     return (
         <>
-            <button onClick={onClick}>
+            <button className="purple button" onClick={onClick}>
                 Checkout
             </button>
             {showModal && (
