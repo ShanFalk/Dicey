@@ -65,7 +65,6 @@ function BrewDetails ({brew, setShowEditForm}) {
             </div>
 
             </div>
-        </div>
 
     )
 }
