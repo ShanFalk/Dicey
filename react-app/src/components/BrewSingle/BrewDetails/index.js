@@ -59,12 +59,11 @@ function BrewDetails ({brew, setShowEditForm}) {
             <p><b>${brew?.price}</b></p>
             {brew?.for_sale ? <AddToCart brew={brew}/> : "No longer for Sale" }
             {(brew?.for_sale && sessionUser?.id === brew?.user_id) && (
-            <button onClick={() => setShowEditForm(true)}>Show Edit Form</button>
+            <button className="button purple" onClick={() => setShowEditForm(true)}>Show Edit Form</button>
             )}
             </div>
 
             </div>
-        </div>
 
     )
 }
