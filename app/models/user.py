@@ -39,18 +39,6 @@ class User(db.Model, UserMixin):
 
         return out
 
-    @validates('username')
-    def validate_username(self, key, username):
-        if len(username) <= 2:
-            raise ValueError('username is too short')
-        return username
-
-    @validates('email')
-    def validate_email(self, key, email):
-        if len(email) <= 2:
-            raise ValueError('email is too short')
-        return email
-
     @property
     def password(self):
         return self.hashed_password

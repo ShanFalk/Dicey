@@ -8,7 +8,7 @@ function AddToCart ({ brew }) {
     const purchases = useSelector(state => state.purchases);
     const brewsPurchased = Object.values(purchases);
 
-    const purchased = brewsPurchased.find(purchase => sessionUser.id === purchase.user_id && brew.id === purchase.brew_id)
+    const purchased = brewsPurchased.find(purchase => sessionUser?.id === purchase.user_id && brew.id === purchase.brew_id)
 
     const [cart, setCart] = useState(cartFromLocalStorage);
     const [showModal, setShowModal] = useState(false);
