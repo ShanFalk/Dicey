@@ -39,8 +39,6 @@ function BrewUpdateForm({brew, setShowEditForm}) {
     e.preventDefault();
     const errors = [];
 
-    console.log('THESE ARE THE ERRORS', errors)
-
     if (title.length < 3 || title.length > 255) {
       errors.push('Title length must be at least 3 and less than 255');
     }
