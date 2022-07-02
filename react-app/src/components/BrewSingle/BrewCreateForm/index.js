@@ -40,8 +40,13 @@ function BrewCreateForm() {
 
     if (title.length < 3 || title.length > 255) {
       setErrors([...errors, 'Title length must be at least 3 and less than 255']);
-      return;
     }
+
+    if (!tags.length) {
+      setErrors([...errors, 'Must select at least one tag']);
+    }
+
+    if (errors.length) return;
 
     const payload = {
       description,
