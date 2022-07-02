@@ -83,6 +83,8 @@ export const signUp = (username, email, password, bio, img) => async (dispatch) 
     method: 'POST',
     body: form,
   });
+
+  console.log(response.status)
   
   if (response.ok) {
     const data = await response.json();

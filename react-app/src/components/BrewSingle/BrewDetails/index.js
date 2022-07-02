@@ -18,7 +18,7 @@ function BrewDetails ({brew, setShowEditForm}) {
     }
    }, [dispatch])
 
-   const ids = Object.values(useSelector(state => state.purchases)).filter(purchase => purchase.user_id === sessionUser.id).map(purchase => purchase.brew_id)
+    const ids = Object.values(useSelector(state => state.purchases)).filter(purchase => purchase.user_id === sessionUser?.id).map(purchase => purchase.brew_id)
 
 
     if(!brew) return null

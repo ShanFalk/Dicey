@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, FileField
 from wtforms.validators import DataRequired, Email, ValidationError
 from app.models import User
+import re
 
 
 def user_exists(form, field):
@@ -20,9 +21,34 @@ def username_exists(form, field):
         raise ValidationError('Username is already in use.')
 
 
+def validate_username(form, field):
+    username = field.data
+    if len(username) <= 2:
+        return ValidationError('username is too short.')
+    return username
+
+
+def validate_email(form, field):
+    email = field.data
+    if len(email) <= 2:
+        raise ValidationError('email is too short.')
+    if not '@' in email:
+        raise ValidationError('email needs an @ symbol.')
+    return email
+
+
+def validate_password(form, field):
+    password = field.data
+    if not re.match(r"^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$])[\w\d@#$]{6,12}$", password):
+        raise ValidationError(
+            'Password needs at least one digit, uppercase letter, lowercase letter, and special character')
+
+
 class SignUpForm(FlaskForm):
     username = StringField('username', validators=[
-                           DataRequired(), username_exists])
-    email = StringField('email', validators=[DataRequired(), user_exists])
-    password = StringField('password', validators=[DataRequired()])
+                           DataRequired(), username_exists, validate_username])
+    email = StringField('email', validators=[
+                        DataRequired(), user_exists, validate_email])
+    password = StringField('password', validators=[
+                           DataRequired(), validate_password])
     bio = TextAreaField("bio", validators=[DataRequired()])
