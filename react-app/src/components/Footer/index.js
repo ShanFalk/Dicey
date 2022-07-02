@@ -19,22 +19,22 @@ function Footer() {
 
             <div className='col'>
                 <p className='col-header'> Backend Stack </p>
-                <a href="Python" className='footerlink cardo' target="https://docs.python.org/3/index.html">Python</a>
-                <a href="" className='footerlink cardo' target="https://flask.palletsprojects.com/en/1.1.x/">Flask</a>
-                <div className='col-item'><a href="" className='footerlink cardo' target="https://wtforms.readthedocs.io/en/2.3.x/">WTForms</a> / <a href="" className='footerlink cardo' target=" https://flask-wtf.readthedocs.io/en/stable/">FlaskWTF</a></div>
-                <a href="" className='footerlink cardo' target="https://flask-sqlalchemy.palletsprojects.com/en/2.x/">FlaskSQLAlchemy</a>
-                <a href="" className='footerlink cardo' target="https://alembic.sqlalchemy.org/en/latest/">Alembic</a>
+                <a href="https://docs.python.org/3/index.html" className='footerlink cardo' target="_blank">Python</a>
+                <a href="https://flask.palletsprojects.com/en/1.1.x/" className='footerlink cardo' target="_blank">Flask</a>
+                <div className='col-item'><a href="https://wtforms.readthedocs.io/en/2.3.x/" className='footerlink cardo' target="_blank">WTForms</a> / <a href="https://flask-wtf.readthedocs.io/en/stable/" className='footerlink cardo' target="">FlaskWTF</a></div>
+                <a href="https://flask-sqlalchemy.palletsprojects.com/en/2.x/" className='footerlink cardo' target="_blank">FlaskSQLAlchemy</a>
+                <a href="https://alembic.sqlalchemy.org/en/latest/" className='footerlink cardo' target="_blank">Alembic</a>
                 {/* <a href="" className='footerlink cardo' rel='noreferrer' target="https://numpy.org/">NumPy</a> */}
 
             </div>
 
             <div className='col'>
             <p className='col-header'> Frontend Stack </p>
-                <a href="" className='footerlink cardo' target="https://www.javascript.com/">Javascript</a>
-                <a href="" className='footerlink cardo' target="https://reactjs.org/docs/getting-started.html">React.js</a>
-                <a href="" className='footerlink cardo' target="https://nodejs.org/en/">Node.js</a>
-                <a href="" className='footerlink cardo' rel='noreferrer' target="https://github.com/raymon-zhang/react-star-rate#readme">React-Star-Rate</a>
-                <a href="" className='footerlink cardo' rel='noreferrer' target="https://momentjs.com/">Moment</a>
+                <a href="https://www.javascript.com/" className='footerlink cardo' target="_blank">Javascript</a>
+                <a href="https://reactjs.org/docs/getting-started.html" className='footerlink cardo' target="_blank">React.js</a>
+                <a href="https://nodejs.org/en/" className='footerlink cardo' target="_blank">Node.js</a>
+                <a href="https://github.com/raymon-zhang/react-star-rate#readme" className='footerlink cardo' rel='noreferrer' target="_blank">React-Star-Rate</a>
+                <a href="https://momentjs.com/" className='footerlink cardo' rel='noreferrer' target="_blank">Moment</a>
             </div>
 
             {/* <div className='col'>
