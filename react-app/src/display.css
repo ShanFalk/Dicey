@@ -121,3 +121,14 @@
         grid-template-columns: 1fr 1fr;
     }
 }
+
+@media screen and (max-width: 1400px) {
+    .thumbnail {
+        width: 250px;
+        height: 250px;
+    }
+
+    .thumbnail-image {
+        height: 150px;
+    }
+}

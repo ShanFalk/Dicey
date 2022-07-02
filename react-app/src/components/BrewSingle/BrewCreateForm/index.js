@@ -36,17 +36,21 @@ function BrewCreateForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors([]);
+    const errors = [];
+    console.log('THESE ARE THE ERRORS', errors)
 
     if (title.length < 3 || title.length > 255) {
-      setErrors([...errors, 'Title length must be at least 3 and less than 255']);
+      errors.push('Title length must be at least 3 and less than 255');
     }
 
     if (!tags.length) {
-      setErrors([...errors, 'Must select at least one tag']);
+      errors.push('Must select at least one tag');
     }
 
-    if (errors.length) return;
+    if (errors.length) {
+      setErrors([...errors]);
+      return;
+    }
 
     const payload = {
       description,
@@ -84,7 +88,7 @@ function BrewCreateForm() {
 const handleCancelClick = (e) => {
     e.preventDefault();
     history.push(`/`)
-    
+
   };
 
 
@@ -109,7 +113,7 @@ const handleCancelClick = (e) => {
         className='input'
         value={description}
         onChange={updateDescription} />
-      <label for="pdf">
+      <label htmlFor="pdf">
         PDF
       </label>
       <input
@@ -120,7 +124,7 @@ const handleCancelClick = (e) => {
         className='input'
         name='pdf'
         onChange={updatePdf} />
-      <label for="img1">
+      <label htmlFor="img1">
         Image 1
       </label>
       <input
@@ -131,7 +135,7 @@ const handleCancelClick = (e) => {
         className='input'
         name='img1'
         onChange={(e) => updateImages(e, 1)} />
-      <label for="img2">
+      <label htmlFor="img2">
         Image 2
       </label>
       <input
@@ -142,7 +146,7 @@ const handleCancelClick = (e) => {
         className='input'
         name='img2'
         onChange={(e) => updateImages(e, 2)} />
-      <label for="img3">
+      <label htmlFor="img3">
         Image 3
       </label>
       <input
@@ -168,8 +172,8 @@ const handleCancelClick = (e) => {
       {allTags.map((tag) => {
         return (
           <div className='tagholder' key={tag.id}>
-            <label for={tag.name}>{tag.name}</label>
-            <input 
+            <label htmlFor={tag.name}>{tag.name}</label>
+            <input
               value={tag.id}
               type="checkbox"
               name={tag.name}
