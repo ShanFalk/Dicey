@@ -37,14 +37,19 @@ function BrewUpdateForm({brew, setShowEditForm}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors([]);
+    const errors = [];
 
     if (title.length < 3 || title.length > 255) {
-      setErrors([...errors, 'Title length must be at least 3 and less than 255']);
+      errors.push('Title length must be at least 3 and less than 255');
     }
 
     if (!tags.length) {
-      setErrors([...errors, 'Must select at least one tag']);
+      errors.push('Must select at least one tag');
+    }
+
+    if (errors.length) {
+      setErrors([...errors]);
+      return;
     }
 
     const payload = {

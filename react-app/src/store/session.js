@@ -24,7 +24,7 @@ export const authenticate = () => async (dispatch) => {
     if (data.errors) {
       return;
     }
-  
+
     dispatch(setUser(data));
   }
 }
@@ -40,8 +40,8 @@ export const login = (email, password) => async (dispatch) => {
       password
     })
   });
-  
-  
+
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
@@ -71,7 +71,7 @@ export const logout = () => async (dispatch) => {
 
 
 export const signUp = (username, email, password, bio, img) => async (dispatch) => {
-  
+
   const form = new FormData()
   form.append('username', username)
   form.append("email", email)
@@ -84,8 +84,8 @@ export const signUp = (username, email, password, bio, img) => async (dispatch) 
     body: form,
   });
 
-  console.log(response.status)
-  
+
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
