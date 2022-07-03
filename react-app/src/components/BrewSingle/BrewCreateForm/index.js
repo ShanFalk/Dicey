@@ -163,6 +163,7 @@ const handleCancelClick = (e) => {
         value={price}
         min="0.01"
         max="9.99"
+        onWheel={e => e.currentTarget.blur()}
         required
         className='input'
         onChange={updatePrice} />
