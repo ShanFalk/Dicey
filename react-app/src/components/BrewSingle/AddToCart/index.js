@@ -8,7 +8,9 @@ function AddToCart ({ brew }) {
     const purchases = useSelector(state => state.purchases);
     const brewsPurchased = Object.values(purchases);
 
+
     const purchased = brewsPurchased.find(purchase => sessionUser?.id === purchase.user_id && brew.id === purchase.brew_id)
+
 
     const [cart, setCart] = useState(cartFromLocalStorage);
     const [showModal, setShowModal] = useState(false);
@@ -22,7 +24,7 @@ function AddToCart ({ brew }) {
         if (JSON.parse(localStorage.getItem('cart')).includes(brew?.id)) setIsDisabled(true);
         else if (sessionUser?.id === brew?.user_id) setIsOwned(true);
         else if (purchased) setIsOwned(true);
-    }, [cart, isDisabled]);
+    }, [cart, isDisabled, purchases]);
 
     const addToCart = () => {
         setCart([...cart, brew?.id]);

@@ -22,7 +22,7 @@ function BrewDetails ({brew, setShowEditForm}) {
 
 
     if(!brew) return null
-    
+
 
     return (
         <div className="brew-block">
@@ -55,8 +55,9 @@ function BrewDetails ({brew, setShowEditForm}) {
                 <p>Tags: {tag?.name}</p>
             })}</div>
 
-            <div>{ids.includes(brew.id) && <a href={brew?.pdf_url} download="true">Download</a>}
-            <p><b>${brew?.price}</b></p>
+            <div>
+            {/* {ids.includes(brew.id) && <a href={brew?.pdf_url} download="true">Download</a>} */}
+            {/* <p><b>${brew?.price}</b></p> */}
             {brew?.for_sale ? <AddToCart brew={brew}/> : "No longer for Sale" }
             {(brew?.for_sale && sessionUser?.id === brew?.user_id) && (
             <button className="button purple" onClick={() => setShowEditForm(true)}>Show Edit Form</button>
