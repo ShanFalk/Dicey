@@ -47,7 +47,7 @@ function ReviewForm ({setCreateReviewField, brew_id}) {
                 let splitError = error.split(": ")
                 modified_error_messages.push(splitError[1])
             });
-            console.log(modified_error_messages)
+
             setErrors(modified_error_messages)
         } else {
             setRating("")
