@@ -29,7 +29,6 @@ def add_review():
         brew = Brew.query.options(joinedload('reviews'), joinedload(
             'images'), joinedload('brew_tags')).get(id)
         return brew.to_dict(reviews=brew.reviews, images=brew.images, brew_tags=brew.brew_tags)
-    print({'errors': format_errors(form.errors)})
     return {'errors': format_errors(form.errors)}
 
 

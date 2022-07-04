@@ -16,6 +16,7 @@ brew_routes = Blueprint('brews', __name__)
 @brew_routes.route("", methods=["POST"])
 def add_brew():
 
+
     image_urls = []
 
     for key in request.files.keys():

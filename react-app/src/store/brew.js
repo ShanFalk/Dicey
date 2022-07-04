@@ -53,7 +53,6 @@ export const createBrew = (payload) => async (dispatch) => {
     form.append('brew_tags', brew_tags);
     form.append('user_id', user_id)
 
-
   const response = await fetch('/api/brews', {
     method: "POST",
     body: form
