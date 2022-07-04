@@ -90,5 +90,21 @@ Dicey is a clone of Etsy that focuses on selling homebrew content for Dungeons a
 
 
 
-### Highlighted Code
+### Installation Instructions
+  1. Clone the repository in your terminal with the following command
+  `git clone git@github.com:ShanFalk/Dicey.git`
+  
+  2. Install all packages for the backend: `cd app` and `pipenv install`
+  
+  3. Open a new terminal for the frontend and install all packages: `cd react-app` and `npm install`
+  
+  4. Create a new .env file in the root directory of this project, following the conventions of the .env.example file. 
+  
+  5. Create and configure a PSQL user to match your .env file.
+  
+  6. Migrate and seed the database in the backend with `flask db migrate`, `flask db upgrade`, `flask seed all`.
+  
+  7. Run `pipenv shell` then `flask run` in the backend terminal and `npm start` in the frontend terminal. 
+  
+  7. Navigate your browser to `localhost:3000`
 
