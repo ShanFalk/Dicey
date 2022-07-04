@@ -14,29 +14,29 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const user = await dispatch(login(email, password));
-    if (!user) {
-      setErrors();
+    const data = await dispatch(login(email, password))
+    if (data.errors) {
+      return setErrors(data.errors)
+    } else {
+      await dispatch(getPurchases(data.id))
+      await dispatch(recommendBrews(data.id))
     }
-    await dispatch(getPurchases(user.id))
-    await dispatch(recommendBrews(user.id))
-
   };
 
   const handleDemo = async (e) => {
     e.preventDefault();
-    
+
     const data = await dispatch(login("demo@aa.io", "password"));
     if (data) {
       setErrors(data);
     }
     await dispatch(getPurchases(1))
     await dispatch(recommendBrews(1))
-   
+
   }
 
   if (user) {
-   
+
     return <Redirect to='/' />;
   }
 
@@ -44,9 +44,9 @@ const LoginForm = () => {
     <form onSubmit={onLogin}>
       <h1>Login</h1>
       <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
+      {errors.length > 0 && <ul className='errors'>
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>}
       </div>
       <div>
         <label htmlFor='email'>Email:</label>

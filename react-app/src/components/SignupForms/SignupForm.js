@@ -17,10 +17,11 @@ const LoginForm = () => {
   const onSignup = async (e) => {
     e.preventDefault();
     if(password === repeatPassword){
-    const data = await dispatch(signUp(username, email, password, bio, img));
-    if (data) {
-      setErrors(data);
-    }
+    const data = await dispatch(signUp(username, email, password, bio, img))
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) setErrors(data.errors);
+      });
   } else {
       return setErrors(['Repeat Password field must match the Password field']);
   }
