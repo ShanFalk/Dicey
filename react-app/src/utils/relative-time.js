@@ -25,5 +25,5 @@ export default function convertToTimeAgo(dateObj) {
     dateString += dateObjSlices[4]
 
 
-    return moment.utc(dateString, "YYYYMMDDhh:mm:ss").fromNow()
+    return moment(moment(dateString, "YYYYMMDDhh:mm:ss").local()).fromNow()
 };
