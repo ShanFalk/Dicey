@@ -17,7 +17,7 @@ function MainPageDisplay () {
     let ids = ""
 
     if(user) {
-       ids = allPurchased.filter(purchase => purchase.user_id === user.id).map(purchase => purchase.brew_id) 
+       ids = allPurchased.filter(purchase => purchase.user_id === user.id).map(purchase => purchase.brew_id)
     }
 
     useEffect(() => {
@@ -28,8 +28,8 @@ function MainPageDisplay () {
 
     }, [dispatch])
 
-    
-    const recommend = Object.values(useSelector(state => state.recommended)).filter(brew => !ids.includes(brew.id))
+
+    const recommend = Object.values(useSelector(state => state.recommended)).filter(brew => !ids.includes(brew?.id))
 
     const firstHalf = brews.slice(0, Math.ceil(brews.length / 2))
     const secondHalf = brews.slice(-(Math.ceil(brews.length / 2)))
@@ -48,7 +48,7 @@ function MainPageDisplay () {
           if(brew.title === title) return null
          else {
           return (
-             
+
           <div className='brew-card-link' key={brew.id}>
             <Link to={`/brews/${brew.id}`} brew={brew} className="no-decor">
               <FeaturedBrewsCollection key={brew.id} brew={brew} />
