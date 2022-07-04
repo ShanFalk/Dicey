@@ -25,7 +25,54 @@ Dicey is a clone of Etsy that focuses on selling homebrew content for Dungeons a
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 
-### Screenshots
+<h3>Usage</h3>
+
+<h4>Log in, Sign up, Demo</h4>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/99137811/177155950-72c6976e-d9d0-460f-91b0-8d54169048bb.gif" width=800>
+</p>
+
+<h4>Create Brew</h4>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/99137811/177157152-053bb171-e086-431e-8050-434154921687.gif" width=800>
+</p>
+
+<h4>Update Brew</h4>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/99137811/177158162-223088ec-19ec-4f11-b426-ab967d22482f.gif" width=800>
+</p>
+
+<h4>Delete Brew</h4>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/99137811/177159026-772ca41c-1a68-4863-a7a1-43721f54b281.gif" width=800>
+</p>
+
+<h4>Add to Cart</h4>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/99137811/177160811-0a746882-f4a5-4667-a81a-b01139d77d16.gif" width=800>
+</p>
+
+<h4>Remove from Cart</h4>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/99137811/177161535-0532e656-ae4b-430d-b79d-26d588563e41.gif" width=800>
+</p>
+
+<h4>Checkout</h4>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/99137811/177162964-4c692c0b-fcfd-48d1-9a81-5e77e5ca5d88.gif" width=800>
+</p>
+
+<h4>Download</h4>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/99137811/177163826-08f56acd-c946-4637-9db6-dc8d8a9c3b82.gif" width=800>
+</p>
+
+<h4>Log out</h4>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/99137811/177164625-d31638f0-a0df-41c9-8b51-32e6a46ad866.gif" width=800>
+</p>
+
+
 
 
 ### Highlighted Code
