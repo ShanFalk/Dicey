@@ -34,7 +34,7 @@ def seed_purchases():
             ),
             Purchase(
                 user_id=1,
-                brew_id=4,
+                brew_id=14,
             ),
             Purchase(
                 user_id=3,

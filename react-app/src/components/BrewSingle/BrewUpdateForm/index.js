@@ -171,6 +171,7 @@ function BrewUpdateForm({brew, setShowEditForm}) {
           step="0.01"
           placeholder="Price"
           value={price}
+          onWheel={e => e.currentTarget.blur()}
           min="0.01"
           max="9.99"
           required

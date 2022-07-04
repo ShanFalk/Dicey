@@ -22,4 +22,4 @@ def user(id):
 @user_routes.route('/<int:id>/purchases')
 def user_purchases(id):
     purchases = Purchase.query.filter(Purchase.user_id == id).all()
-    return {purchase.id: purchase.to_dict() for purchase in purchases}
+    return {purchase.brew_id: purchase.to_dict() for purchase in purchases}
