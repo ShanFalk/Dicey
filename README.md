@@ -47,6 +47,12 @@ Dicey is a clone of Etsy that focuses on selling homebrew content for Dungeons a
   <img src="https://user-images.githubusercontent.com/99137811/177159026-772ca41c-1a68-4863-a7a1-43721f54b281.gif" width=800>
 </p>
 
+<h4>Add to Cart</h4>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/99137811/177160811-0a746882-f4a5-4667-a81a-b01139d77d16.gif" width=800>
+</p>
+
+
 
 
 
