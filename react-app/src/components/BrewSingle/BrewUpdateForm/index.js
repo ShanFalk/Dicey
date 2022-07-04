@@ -122,7 +122,7 @@ function BrewUpdateForm({brew, setShowEditForm}) {
           onChange={updateDescription} />
 
         <label htmlFor="pdf">
-          PDF
+          PDF - Note: AWS contraints limits uploads to 15MB
         </label>
         <input
           type="file"

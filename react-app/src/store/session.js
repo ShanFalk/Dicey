@@ -41,7 +41,6 @@ export const login = (email, password) => async (dispatch) => {
       password
     })
   });
-  console.log("*********After response, in thunk AC >", response)
 
   if (response.ok) {
     const data = await response.json();
@@ -51,7 +50,6 @@ export const login = (email, password) => async (dispatch) => {
     const data = await response.json();
 
     if (data.errors) {
-      console.log("!!!!!!!!Store data - bad response, >", data.errors)
       return data;
     }
   } else {
