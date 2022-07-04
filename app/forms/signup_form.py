@@ -39,9 +39,12 @@ def validate_email(form, field):
 
 def validate_password(form, field):
     password = field.data
+    print('------------', password, '------------')
     if not re.match(r"^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$])[\w\d@#$]{6,12}$", password):
+        print("********************************************************************************")
         raise ValidationError(
             'Password needs at least one digit, uppercase letter, lowercase letter, and special character')
+    return password
 
 
 class SignUpForm(FlaskForm):

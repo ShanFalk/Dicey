@@ -64,7 +64,7 @@ def sign_up():
 
     img = request.files["img_url"]
     img_url = upload(img)
-
+    print('**** >> AWS IMG Upload:', img_url, '****')
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -75,10 +75,13 @@ def sign_up():
             bio=form.data['bio'],
             image_url=img_url
         )
+        print('**** >> After form validation:', user, '****')
         db.session.add(user)
         db.session.commit()
         login_user(user)
+        print('**** >> Before successful return','****')
         return user.to_dict()
+        print('**** >> Hits Errors','****')
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 

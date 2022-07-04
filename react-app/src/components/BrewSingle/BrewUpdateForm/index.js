@@ -121,7 +121,7 @@ function BrewUpdateForm({brew, setShowEditForm}) {
           value={description}
           onChange={updateDescription} />
 
-        <label for="pdf">
+        <label htmlFor="pdf">
           PDF
         </label>
         <input
@@ -132,7 +132,7 @@ function BrewUpdateForm({brew, setShowEditForm}) {
           className='input'
           name='pdf'
           onChange={updatePdf} />
-        <label for="img1">
+        <label htmlFor="img1">
           Image 1
         </label>
         <input
@@ -143,7 +143,7 @@ function BrewUpdateForm({brew, setShowEditForm}) {
           className='input'
           name="img1"
           onChange={(e) => updateImages(e, 1)} />
-        <label for="img2">
+        <label htmlFor="img2">
           Image 2
         </label>
         <input
@@ -154,7 +154,7 @@ function BrewUpdateForm({brew, setShowEditForm}) {
           className='input'
           name='img2'
           onChange={(e) => updateImages(e, 2)} />
-        <label for="img3">
+        <label htmlFor="img3">
           Image 3
         </label>
         <input
@@ -182,7 +182,7 @@ function BrewUpdateForm({brew, setShowEditForm}) {
         {allTags.map((tag) => {
           return (
             <div className='tagholder' key={tag.id}>
-              <label for={tag.name}>{tag.name}</label>
+              <label htmlFor={tag.name}>{tag.name}</label>
               <input
                 value={tag.id}
                 type="checkbox"

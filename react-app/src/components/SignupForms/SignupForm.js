@@ -21,12 +21,14 @@ const LoginForm = () => {
     if (data) {
       setErrors(data);
     }
+  } else {
+      return setErrors(['Repeat Password field must match the Password field']);
   }
   };
 
   const handleDemo = (e) => {
     e.preventDefault();
-    
+
     return dispatch(login("demo@aa.io",'password'))
       .catch(async (res) => {
         const data = await res.json();
@@ -84,7 +86,7 @@ const LoginForm = () => {
           required
         ></input>
       </div>
-          <label for="img1">
+          <label htmlFor="img1">
             Profile Picture
           </label>
           <input
@@ -116,7 +118,7 @@ const LoginForm = () => {
           required={true}
         ></input>
       </div>
-        <button className='button purple' type='submit'>Sign Up</button>
+        <button className='button purple' type='button' onClick={onSignup}>Sign Up</button>
         <button className='button purple' type="button" onClick={handleDemo}>Demo User</button>
       </div>
     </form>

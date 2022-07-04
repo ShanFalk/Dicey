@@ -21,6 +21,7 @@ export const authenticate = () => async (dispatch) => {
   });
   if (response.ok) {
     const data = await response.json();
+
     if (data.errors) {
       return;
     }
@@ -83,8 +84,6 @@ export const signUp = (username, email, password, bio, img) => async (dispatch) 
     method: 'POST',
     body: form,
   });
-
-
 
   if (response.ok) {
     const data = await response.json();
