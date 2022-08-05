@@ -16,7 +16,8 @@ function ShoppingCartPage() {
     const [isDeleted, setIsDeleted] = useState(false)
     const [duplicates, setDuplicates] = useState([])
 
-    const numItems = brewIds.length;
+    const numItems = brewIds?.length;
+
 
     //function to pass as props
     const onDeleteEnd = () => {
@@ -46,7 +47,7 @@ function ShoppingCartPage() {
 
 
     //if the shopping cart is empty
-    if (numItems === 0) {
+    if (numItems === 0 || !numItems) {
         return (
             <div>
                 Your cart is empty!
